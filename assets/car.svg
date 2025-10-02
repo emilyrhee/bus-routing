@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="14.503007mm"
+   height="9.2512598mm"
+   viewBox="0 0 14.503006 9.2512597"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename=".\business.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-12.068988,-49.498473)">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="m 12.568988,57.37891 h 13.503008 v -1.984891 l -2.021475,-0.978467 -0.563693,-4.417079 h -7.654355 l -0.741701,3.997737 -2.521784,0.615036 z"
+       id="path12858" />
+    <circle
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="path12912"
+       cx="16.02504"
+       cy="57.37891"
+       r="0.87082243" />
+    <circle
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="path12912-7"
+       cx="22.120798"
+       cy="57.37891"
+       r="0.87082243" />
+  </g>
+</svg>
