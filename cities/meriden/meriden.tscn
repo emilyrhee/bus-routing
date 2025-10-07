@@ -1,18 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=7 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://bqy7p17dq5185" path="res://building/Building.tscn" id="1_der4t"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://components/residence/residence-component.tscn" id="2_kfep7"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://components/business/business-component.tscn" id="3_5jsud"]
+[ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road.tscn" id="4_5jsud"]
 
 [sub_resource type="Curve2D" id="Curve2D_5jsud"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 497, 153, 0, 0, 0, 0, 58, 162)
+"points": PackedVector2Array(0, 0, 0, 0, 73, 163, 0, 0, 0, 0, 528, 153)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_dhnnd"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 59, 174, 0, 0, 0, 0, 503, 165)
+"points": PackedVector2Array(0, 0, 0, 0, 401, -11, 0, 0, 0, 0, -57, 1)
 }
 point_count = 2
 
@@ -20,11 +23,12 @@ point_count = 2
 
 [node name="E Main St" type="Node2D" parent="."]
 
-[node name="Westbound" type="Path2D" parent="E Main St"]
+[node name="Eastbound" parent="E Main St" instance=ExtResource("4_5jsud")]
+position = Vector2(-6, 2)
 curve = SubResource("Curve2D_5jsud")
 
-[node name="Eastbound" type="Path2D" parent="E Main St"]
-position = Vector2(5, 14)
+[node name="Westbound" parent="E Main St" instance=ExtResource("4_5jsud")]
+position = Vector2(121, 183)
 curve = SubResource("Curve2D_dhnnd")
 
 [node name="House1" parent="." instance=ExtResource("1_der4t")]
