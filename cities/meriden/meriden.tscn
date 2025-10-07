@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=6 format=3 uid="uid://b57fjtbl22yus"]
 
-[ext_resource type="PackedScene" uid="uid://bqy7p17dq5185" path="res://buildings/house/house.tscn" id="1_der4t"]
-[ext_resource type="PackedScene" uid="uid://b0ugenpchip56" path="res://buildings/business/business.tscn" id="2_kfep7"]
+[ext_resource type="PackedScene" uid="uid://bqy7p17dq5185" path="res://building/Building.tscn" id="1_der4t"]
+[ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://components/residence/residence-component.tscn" id="2_kfep7"]
+[ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://components/business/business-component.tscn" id="3_5jsud"]
 
 [sub_resource type="Curve2D" id="Curve2D_5jsud"]
 _data = {
@@ -26,8 +27,12 @@ curve = SubResource("Curve2D_5jsud")
 position = Vector2(5, 14)
 curve = SubResource("Curve2D_dhnnd")
 
-[node name="House" parent="." instance=ExtResource("1_der4t")]
-position = Vector2(469, 106)
+[node name="House1" parent="." instance=ExtResource("1_der4t")]
+position = Vector2(461, 114)
 
-[node name="Business" parent="." instance=ExtResource("2_kfep7")]
-position = Vector2(102, 115)
+[node name="ResidenceComponent" parent="House1" instance=ExtResource("2_kfep7")]
+
+[node name="Business1" parent="." instance=ExtResource("1_der4t")]
+position = Vector2(114, 121)
+
+[node name="BusinessComponent" parent="Business1" instance=ExtResource("3_5jsud")]
