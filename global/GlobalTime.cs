@@ -3,23 +3,48 @@ using System;
 
 public partial class GlobalTime : Node
 {
-    public int Hours = 0;
-    public int Minutes = 0;
+    [Signal] public delegate void TimeChangedEventHandler();
 
-    public void IncrementTime()
+    private Timer _timer;
+
+    public int MinutesElapsedInDay = 0; 
+    private const int TOTAL_MINUTES_IN_DAY = 1440; 
+    
+    public override void _Ready()
     {
-        Minutes++;
-        if (Minutes >= 60)
+        _timer = new Timer
         {
-            Minutes = 0;
-            Hours++;
-            if (Hours >= 24)
-                Hours = 0;
-        }
+            WaitTime = 1.0f,
+            OneShot = false,
+            Autostart = true
+        };
+        AddChild(_timer);
+        _timer.Timeout += OnTimerTimeout;
     }
 
+    private void OnTimerTimeout()
+    {
+        IncrementTime();
+    }
+
+    /// <summary>
+    /// Advances the game time by one minute (by default) and handles the daily wrap-around.
+    /// Emits TimeChanged after updating.
+    /// </summary>
+    public void IncrementTime(int minutesToAdd = 1)
+    {
+        MinutesElapsedInDay = (MinutesElapsedInDay + minutesToAdd) % TOTAL_MINUTES_IN_DAY;
+        EmitSignal(nameof(TimeChanged));
+    }   
+
+    /// <summary>
+    /// Retrieves the current time in HH:mm format. Useful for displaying time in the UI.
+    /// </summary>
     public string GetFormattedTimeString()
     {
-        return $"{Hours:D2}:{Minutes:D2}";
+        int hours = MinutesElapsedInDay / 60;
+        int minutes = MinutesElapsedInDay % 60;
+        
+        return $"{hours:D2}:{minutes:D2}";
     }
 }
