@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Manages in-game time by incrementing minutes
+/// </summary>
 public partial class GlobalTime : Node
 {
     [Signal] public delegate void TimeChangedEventHandler();
