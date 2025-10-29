@@ -6,15 +6,23 @@ using System;
 /// </summary>
 public partial class Time : Node
 {
+    private const uint MINUTES_PER_DAY = 1440;
+
     private uint _minutesElapsedInDay;
+    public uint MinutesElapsedInDay
+    {
+        get { return _minutesElapsedInDay; }
+        set { _minutesElapsedInDay = value % MINUTES_PER_DAY; }
+    }
+    
     public Time(uint minutesElapsedInDay)
     {
-        _minutesElapsedInDay = minutesElapsedInDay % 1440;
+        _minutesElapsedInDay = minutesElapsedInDay % MINUTES_PER_DAY;
     }
 
     public void AddMinutes(uint minutesToAdd)
     {
-        _minutesElapsedInDay = (_minutesElapsedInDay + minutesToAdd) % 1440;
+        _minutesElapsedInDay = (_minutesElapsedInDay + minutesToAdd) % MINUTES_PER_DAY;
     }
 
     /// <summary>
