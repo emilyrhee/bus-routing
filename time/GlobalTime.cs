@@ -3,6 +3,7 @@ using System;
 
 /// <summary>
 /// Updates and manages the global in-game time.
+/// </summary>
 public partial class GlobalTime : Node
 {
     [Signal] public delegate void TimeChangedEventHandler();
@@ -10,8 +11,6 @@ public partial class GlobalTime : Node
     private Timer _timer;
 
     public Time GameTime = new Time(0);
-    private const int TOTAL_MINUTES_IN_DAY = 1440; 
-    
     public override void _Ready()
     {
         _timer = new Timer
