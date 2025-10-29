@@ -2,15 +2,15 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="14.481236mm"
-   height="12.844246mm"
-   viewBox="0 0 14.481236 12.844246"
+   width="12.775075mm"
+   height="12.775075mm"
+   viewBox="0 0 12.775074 12.775075"
    version="1.1"
    id="svg5"
-   inkscape:export-filename=".\business.svg"
+   inkscape:export-filename=".\circle.svg"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
-   sodipodi:docname="business.svg"
+   sodipodi:docname="house.svg"
    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -28,9 +28,9 @@
      inkscape:document-units="mm"
      showgrid="false"
      showguides="true"
-     inkscape:zoom="17.076875"
-     inkscape:cx="27.376203"
-     inkscape:cy="24.30187"
+     inkscape:zoom="17.168791"
+     inkscape:cx="30.025411"
+     inkscape:cy="25.860877"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -43,13 +43,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-12.079874,-49.509357)">
-    <rect
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-dasharray:none;paint-order:markers stroke fill;fill-opacity:1"
-       id="rect9799"
-       width="13.481236"
-       height="11.844245"
-       x="12.579874"
-       y="50.009357" />
+     transform="translate(-13.09519,-49.543943)">
+    <circle
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.927;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="path475"
+       cx="19.482727"
+       cy="55.93148"
+       r="5.9240375" />
   </g>
 </svg>
