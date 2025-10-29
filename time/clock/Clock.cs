@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Deals with the display of in-game time to the UI.
+/// </summary>
 public partial class Clock : Node
 {
     private RichTextLabel _label;
@@ -21,6 +24,6 @@ public partial class Clock : Node
 
     private void UpdateLabel()
     {
-        _label.Text = _globalTime.GetFormattedTimeString();
+        _label.Text = _globalTime.GameTime.GetFormattedTimeString();
     }
 }

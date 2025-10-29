@@ -2,15 +2,14 @@ using Godot;
 using System;
 
 /// <summary>
-/// Manages in-game time by incrementing minutes
-/// </summary>
+/// Updates and manages the global in-game time.
 public partial class GlobalTime : Node
 {
     [Signal] public delegate void TimeChangedEventHandler();
 
     private Timer _timer;
 
-    public int MinutesElapsedInDay = 0; 
+    public Time GameTime = new Time(0);
     private const int TOTAL_MINUTES_IN_DAY = 1440; 
     
     public override void _Ready()
@@ -27,27 +26,15 @@ public partial class GlobalTime : Node
 
     private void OnTimerTimeout()
     {
-        IncrementTime();
+        IncrementGameTime();
     }
 
     /// <summary>
     /// Advances the game time by one minute (by default) and handles the daily wrap-around.
-    /// Emits TimeChanged after updating.
     /// </summary>
-    public void IncrementTime(int minutesToAdd = 1)
+    public void IncrementGameTime(uint minutesToAdd = 1)
     {
-        MinutesElapsedInDay = (MinutesElapsedInDay + minutesToAdd) % TOTAL_MINUTES_IN_DAY;
+        GameTime.AddMinutes(minutesToAdd);
         EmitSignal(nameof(TimeChanged));
-    }   
-
-    /// <summary>
-    /// Retrieves the current time in HH:mm format. Useful for displaying time in the UI.
-    /// </summary>
-    public string GetFormattedTimeString()
-    {
-        int hours = MinutesElapsedInDay / 60;
-        int minutes = MinutesElapsedInDay % 60;
-        
-        return $"{hours:D2}:{minutes:D2}";
     }
 }
