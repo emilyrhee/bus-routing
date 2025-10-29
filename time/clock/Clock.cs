@@ -13,11 +13,11 @@ public partial class Clock : Node
     {
         _label = GetNode<RichTextLabel>("RichTextLabel");
         _globalTime = GetNode<GlobalTime>("/root/GlobalTime");
-        _globalTime.TimeChanged += OnGlobalTimeChanged;
+        _globalTime.TimeAdvanced += OnGlobalTimeAdvanced;
         UpdateLabel();
     }
 
-    private void OnGlobalTimeChanged()
+    private void OnGlobalTimeAdvanced()
     {
         UpdateLabel();
     }

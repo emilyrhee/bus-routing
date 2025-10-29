@@ -32,7 +32,12 @@ public partial class Time : Node
     {
         uint hours = _minutesElapsedInDay / 60;
         uint minutes = _minutesElapsedInDay % 60;
-        
+
         return $"{hours:D2}:{minutes:D2}";
+    }
+
+    public bool Equals(Time other)
+    {
+        return other != null && _minutesElapsedInDay == other.MinutesElapsedInDay;
     }
 }

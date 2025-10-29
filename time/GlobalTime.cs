@@ -6,7 +6,7 @@ using System;
 /// </summary>
 public partial class GlobalTime : Node
 {
-    [Signal] public delegate void TimeChangedEventHandler();
+    [Signal] public delegate void TimeAdvancedEventHandler();
 
     private Timer _timer;
 
@@ -34,6 +34,6 @@ public partial class GlobalTime : Node
     public void IncrementGameTime(uint minutesToAdd = 1)
     {
         GameTime.AddMinutes(minutesToAdd);
-        EmitSignal(nameof(TimeChanged));
+        EmitSignal(nameof(TimeAdvanced));
     }
 }

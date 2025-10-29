@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalTime="*res://time/GlobalTime.cs"
+RouteScheduler="*res://route/RouteScheduler.cs"
 
 [dotnet]
 

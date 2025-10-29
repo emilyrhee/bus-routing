@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://b57fjtbl22yus"]
+
+[ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road-edge.tscn" id="1_m366e"]
+[ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://business/business.tscn" id="2_qhn2g"]
+[ext_resource type="PackedScene" uid="uid://pkmhht26hfvg" path="res://bus-stop/bus-stop.tscn" id="3_g36xt"]
+[ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="4_jp4ve"]
+[ext_resource type="PackedScene" uid="uid://cmaymypicygr5" path="res://bus-depot/bus-depot.tscn" id="5_jampr"]
+[ext_resource type="PackedScene" uid="uid://ht6y7au8vb2" path="res://time/clock/clock.tscn" id="6_uyudo"]
+[ext_resource type="PackedScene" uid="uid://dakeoixxjm1l8" path="res://road/road-node.tscn" id="7_7lggt"]
+
+[sub_resource type="Curve2D" id="Curve2D_5jsud"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 164, 0, 0, 0, 0, 269, 165)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_q0bdf"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -6, 7, 0, 0, 0, 0, 195, 2)
+}
+point_count = 2
+
+[node name="Meriden" type="Node2D"]
+
+[node name="E Main St" type="Node2D" parent="."]
+
+[node name="Eastbound1" parent="E Main St" instance=ExtResource("1_m366e")]
+position = Vector2(12, -4)
+curve = SubResource("Curve2D_5jsud")
+
+[node name="Eastbound2" parent="E Main St" instance=ExtResource("1_m366e")]
+position = Vector2(289, 155)
+curve = SubResource("Curve2D_q0bdf")
+
+[node name="Business1" parent="." instance=ExtResource("2_qhn2g")]
+position = Vector2(265, 124)
+
+[node name="BusStop" parent="Business1" instance=ExtResource("3_g36xt")]
+position = Vector2(46, 1)
+
+[node name="House1" parent="." instance=ExtResource("4_jp4ve")]
+position = Vector2(490, 121)
+
+[node name="BusDepot" parent="." instance=ExtResource("5_jampr")]
+position = Vector2(95, 128)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Clock" parent="CanvasLayer" instance=ExtResource("6_uyudo")]
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 4.0
+offset_bottom = 2.0
+
+[node name="BusDepotNode" parent="." node_paths=PackedStringArray("OutgoingEdges") instance=ExtResource("7_7lggt")]
+position = Vector2(83, 162)
+OutgoingEdges = [NodePath("../E Main St/Eastbound1")]
+
+[node name="BusinessNode" parent="." node_paths=PackedStringArray("IncomingEdges", "OutgoingEdges") instance=ExtResource("7_7lggt")]
+position = Vector2(283, 162)
+IncomingEdges = [NodePath("../E Main St/Eastbound1")]
+OutgoingEdges = [NodePath("../E Main St/Eastbound2")]
+
+[node name="RoadNode" parent="." node_paths=PackedStringArray("IncomingEdges") instance=ExtResource("7_7lggt")]
+position = Vector2(486, 158)
+IncomingEdges = [NodePath("../E Main St/Eastbound2")]
