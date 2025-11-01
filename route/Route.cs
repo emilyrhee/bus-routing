@@ -4,25 +4,25 @@ using System;
 public partial class Route : Node
 {
     private ulong _routeID;
-    private Godot.Collections.Array<RoadNode> _stops = [];
-    public Godot.Collections.Array<RoadNode> Stops
+    private Godot.Collections.Array<RoadNode> _waypoints = new Godot.Collections.Array<RoadNode>();
+    public Godot.Collections.Array<RoadNode> Waypoints
     {
-        get => _stops;
-        set => _stops = value;
+        get => _waypoints;
+        set => _waypoints = value;
     }
-    private Godot.Collections.Array<RoadEdge> _pathToTravel = [];
-    private Time _startTime;
-    public Time StartTime
+
+    // make path edges publicly settable so scheduler can assign edges to follow
+    private Godot.Collections.Array<RoadEdge> _pathToTravel = new Godot.Collections.Array<RoadEdge>();
+    public Godot.Collections.Array<RoadEdge> PathToTravel
     {
-        get => _startTime;
-        set => _startTime = value;
+        get => _pathToTravel;
+        set => _pathToTravel = value;
     }
+
     private uint _frequencyMinutes;
 
-    public Route(Time startTime, uint frequencyMinutes)
+    public Route()
     {
         _routeID = GetInstanceId();
-        _startTime = startTime;
-        _frequencyMinutes = frequencyMinutes;
     }
 }
