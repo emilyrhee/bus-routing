@@ -10,8 +10,6 @@ public partial class BusStopPlacementArea : Area2D
     public override void _Ready()
     {
         _busStopPacked = GD.Load<PackedScene>("res://bus-stop/bus-stop.tscn");
-        if (_busStopPacked == null)
-            GD.PushError("Failed to load bus-stop.tscn in BusStopPlacementArea._Ready()");
     }
 
     public override void _Process(double delta)
@@ -23,13 +21,13 @@ public partial class BusStopPlacementArea : Area2D
     private void _on_mouse_entered()
     {
         var busStopInstance = _busStopPacked.Instantiate();
-        if (busStopInstance is Node2D node)
+        if (busStopInstance is Node2D busStop)
         {
-            var parent = GetTree().CurrentScene as Node ?? GetParent();
-            parent.AddChild(node);
-            node.GlobalPosition = GetGlobalMousePosition();
+            var level = GetTree().CurrentScene as Node ?? GetParent();
+            level.AddChild(busStop);
+            busStop.GlobalPosition = GetGlobalMousePosition();
 
-            _previewBusStop = node;
+            _previewBusStop = busStop;
             SetProcess(true);
         }
     }
@@ -44,22 +42,29 @@ public partial class BusStopPlacementArea : Area2D
         }        
     }
 
+    private bool IsEventIsLeftMouseClick(InputEvent @event)
+    {
+        return
+            @event is InputEventMouseButton mouseEvent
+            && mouseEvent.Pressed
+            && mouseEvent.ButtonIndex == MouseButton.Left;
+    }
+
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (@event is InputEventMouseButton mouseEvent
-            && mouseEvent.Pressed
-            && mouseEvent.ButtonIndex == MouseButton.Left)
+        if (IsEventIsLeftMouseClick(@event))
         {
-            if (_busStopPacked == null)
-                return;
-
             var busStopInstance = _busStopPacked.Instantiate();
 
-            var parent = GetTree().CurrentScene as Node ?? GetParent();
+            var level = GetTree().CurrentScene as Node ?? GetParent();
 
-            if (busStopInstance is Node2D busStop) // this condition is needed because Nodes do not have positions, but Node2Ds do.
+            var previewBusStop = _previewBusStop.FindChild("Area2D");
+
+            if (busStopInstance is Node2D busStop
+                && previewBusStop is Area2D previewBusStopArea
+                && previewBusStopArea.HasOverlappingAreas())
             {
-                parent.AddChild(busStop);
+                level.AddChild(busStop);
                 busStop.GlobalPosition = GetGlobalMousePosition();
 
                 _lastPlacedBusStop = busStop;
