@@ -1,55 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=7 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road-edge.tscn" id="1_m366e"]
-[ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://business/business.tscn" id="2_qhn2g"]
-[ext_resource type="PackedScene" uid="uid://pkmhht26hfvg" path="res://bus-stop/bus-stop.tscn" id="3_g36xt"]
+[ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_qhn2g"]
+[ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement-area.tscn" id="3_um2er"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="4_jp4ve"]
-[ext_resource type="PackedScene" uid="uid://dakeoixxjm1l8" path="res://road/road-node.tscn" id="7_7lggt"]
 
-[sub_resource type="Curve2D" id="Curve2D_5jsud"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
+resource_local_to_scene = true
+size = Vector2(336, 99)
+
+[sub_resource type="Curve2D" id="Curve2D_ho4bh"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 72, 164, 0, 0, 0, 0, 269, 165)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_q0bdf"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -6, 7, 0, 0, 0, 0, 195, 2)
+"points": PackedVector2Array(0, 0, 0, 0, 254, -21, 0, 0, 0, 0, 18, -21)
 }
 point_count = 2
 
 [node name="Meriden" type="Node2D"]
 
-[node name="MainSt" type="Node2D" parent="."]
-
-[node name="Eastbound1" parent="MainSt" instance=ExtResource("1_m366e")]
-position = Vector2(12, -4)
-curve = SubResource("Curve2D_5jsud")
-
-[node name="Eastbound2" parent="MainSt" instance=ExtResource("1_m366e")]
-position = Vector2(289, 155)
-curve = SubResource("Curve2D_q0bdf")
-
 [node name="Business1" parent="." instance=ExtResource("2_qhn2g")]
 position = Vector2(265, 124)
-
-[node name="BusStop" parent="Business1" instance=ExtResource("3_g36xt")]
-position = Vector2(46, 1)
 
 [node name="House1" parent="." instance=ExtResource("4_jp4ve")]
 position = Vector2(490, 121)
 
-[node name="BusDepotNode" parent="." node_paths=PackedStringArray("OutgoingEdges") instance=ExtResource("7_7lggt")]
-position = Vector2(83, 162)
-OutgoingEdges = [NodePath("../MainSt/Eastbound1")]
+[node name="BusStopPlacementArea" parent="." instance=ExtResource("3_um2er")]
+position = Vector2(278, 173)
 
-[node name="BusinessNode" parent="." node_paths=PackedStringArray("IncomingEdges", "OutgoingEdges") instance=ExtResource("7_7lggt")]
-position = Vector2(283, 162)
-IncomingEdges = [NodePath("../MainSt/Eastbound1")]
-OutgoingEdges = [NodePath("../MainSt/Eastbound2")]
+[node name="CollisionShape2D" parent="BusStopPlacementArea" index="0"]
+position = Vector2(99, 15)
+shape = SubResource("RectangleShape2D_um2er")
 
-[node name="RoadNode" parent="." node_paths=PackedStringArray("IncomingEdges") instance=ExtResource("7_7lggt")]
-position = Vector2(486, 158)
-IncomingEdges = [NodePath("../MainSt/Eastbound2")]
+[node name="RoadEdge" parent="." instance=ExtResource("1_m366e")]
+position = Vector2(238, 182)
+curve = SubResource("Curve2D_ho4bh")
+
+[editable path="BusStopPlacementArea"]

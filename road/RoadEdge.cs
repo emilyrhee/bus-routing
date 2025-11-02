@@ -3,9 +3,9 @@ using System;
 
 public partial class RoadEdge: Path2D
 {
-    [Export] public NodePath RoadStroke = "RoadStroke";
+    [Export] private NodePath _roadStrokePath = "RoadStroke";
 
-    private Line2D roadStroke;
+    private Line2D _roadStroke;
 
     private void DrawLine(Line2D stroke)
     {
@@ -15,7 +15,7 @@ public partial class RoadEdge: Path2D
     
     public override void _Ready()
     {
-        roadStroke = GetNode<Line2D>(RoadStroke);
-        DrawLine(roadStroke);
+        _roadStroke = GetNode<Line2D>(_roadStrokePath);
+        DrawLine(_roadStroke);
     }
 }
