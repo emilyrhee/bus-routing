@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class RoadEdge: Path2D
+public partial class RoadEdge: Area2D
 {
     [Export] private NodePath _roadStrokePath = "RoadStroke";
 
@@ -9,8 +9,8 @@ public partial class RoadEdge: Path2D
 
     private void DrawLine(Line2D stroke)
     {
-        Vector2[] points = Curve.GetBakedPoints();
-        stroke.Points = points;
+        // Vector2[] points = Curve.GetBakedPoints();
+        // stroke.Points = points;
     }
     
     public override void _Ready()

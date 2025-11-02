@@ -9,12 +9,10 @@
 resource_local_to_scene = true
 size = Vector2(336, 99)
 
-[sub_resource type="Curve2D" id="Curve2D_ho4bh"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ho4bh"]
 resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 254, -21, 0, 0, 0, 0, 18, -21)
-}
-point_count = 2
+a = Vector2(272, 1)
+b = Vector2(0, 0)
 
 [node name="Meriden" type="Node2D"]
 
@@ -32,7 +30,11 @@ position = Vector2(99, 15)
 shape = SubResource("RectangleShape2D_um2er")
 
 [node name="RoadEdge" parent="." instance=ExtResource("1_m366e")]
-position = Vector2(238, 182)
-curve = SubResource("Curve2D_ho4bh")
+position = Vector2(92, 317)
+
+[node name="CollisionShape2D" parent="RoadEdge" index="0"]
+position = Vector2(148, -156)
+shape = SubResource("SegmentShape2D_ho4bh")
 
 [editable path="BusStopPlacementArea"]
+[editable path="RoadEdge"]
