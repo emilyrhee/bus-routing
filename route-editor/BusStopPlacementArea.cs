@@ -58,7 +58,7 @@ public partial class BusStopPlacementArea : Area2D
 
             var level = GetTree().CurrentScene as Node ?? GetParent();
 
-            var previewBusStop = _previewBusStop.FindChild("Area2D");
+            var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
 
             if (busStopInstance is Node2D busStop
                 && previewBusStop is Area2D previewBusStopArea
