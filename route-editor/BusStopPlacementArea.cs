@@ -10,6 +10,7 @@ public partial class BusStopPlacementArea : Area2D
     public override void _Ready()
     {
         _busStopPacked = GD.Load<PackedScene>("res://bus-stop/bus-stop.tscn");
+        Visible = false;
     }
 
     public override void _Process(double delta)

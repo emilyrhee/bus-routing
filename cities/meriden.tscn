@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=8 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road-edge.tscn" id="1_m366e"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_qhn2g"]
 [ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement-area.tscn" id="3_um2er"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="4_jp4ve"]
+[ext_resource type="PackedScene" uid="uid://dcesf8eg85u8h" path="res://route-editor/buttons/add-stops/add-stops.tscn" id="5_1yr3d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
 resource_local_to_scene = true
@@ -15,6 +16,10 @@ a = Vector2(272, 1)
 b = Vector2(0, 0)
 
 [node name="Meriden" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AddStops" parent="CanvasLayer" instance=ExtResource("5_1yr3d")]
 
 [node name="Business1" parent="." instance=ExtResource("2_qhn2g")]
 position = Vector2(265, 124)
@@ -30,10 +35,9 @@ position = Vector2(99, 15)
 shape = SubResource("RectangleShape2D_um2er")
 
 [node name="RoadEdge" parent="." instance=ExtResource("1_m366e")]
-position = Vector2(92, 317)
+position = Vector2(242, 162)
 
 [node name="CollisionShape2D" parent="RoadEdge" index="0"]
-position = Vector2(148, -156)
 shape = SubResource("SegmentShape2D_ho4bh")
 
 [editable path="BusStopPlacementArea"]
