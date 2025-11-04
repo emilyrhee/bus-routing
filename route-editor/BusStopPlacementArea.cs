@@ -7,9 +7,11 @@ public partial class BusStopPlacementArea : Area2D
     private Node2D _lastPlacedBusStop;
 
     private Node2D _previewBusStop;
+    private Node _currentLevel;
     public override void _Ready()
     {
         _busStopPacked = GD.Load<PackedScene>("res://bus-stop/bus-stop.tscn");
+        _currentLevel = GetTree().CurrentScene as Node ?? GetParent();
         Visible = false;
     }
 
@@ -24,8 +26,7 @@ public partial class BusStopPlacementArea : Area2D
         var busStopInstance = _busStopPacked.Instantiate();
         if (busStopInstance is Node2D busStop)
         {
-            var level = GetTree().CurrentScene as Node ?? GetParent();
-            level.AddChild(busStop);
+            _currentLevel.AddChild(busStop);
             busStop.GlobalPosition = GetGlobalMousePosition();
 
             _previewBusStop = busStop;
@@ -56,16 +57,13 @@ public partial class BusStopPlacementArea : Area2D
         if (IsEventIsLeftMouseClick(@event))
         {
             var busStopInstance = _busStopPacked.Instantiate();
-
-            var level = GetTree().CurrentScene as Node ?? GetParent();
-
             var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
 
             if (busStopInstance is Node2D busStop
                 && previewBusStop is Area2D previewBusStopArea
                 && previewBusStopArea.HasOverlappingAreas())
             {
-                level.AddChild(busStop);
+                _currentLevel.AddChild(busStop);
                 busStop.GlobalPosition = GetGlobalMousePosition();
 
                 _lastPlacedBusStop = busStop;
