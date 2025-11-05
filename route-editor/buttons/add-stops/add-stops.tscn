@@ -1,16 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://dcesf8eg85u8h"]
 
-[ext_resource type="Script" uid="uid://dvk1euugpks7k" path="res://route-editor/buttons/add-stops/AddStops.cs" id="1_53nlx"]
+[ext_resource type="Script" uid="uid://c3f3qmbfoepam" path="res://route-editor/buttons/add-stops/AddDeleteStopsButton.cs" id="1_pq1yv"]
 
 [node name="AddStops" type="Control"]
 layout_mode = 3
-anchor_right = 0.109000005
-anchor_bottom = 0.508
-offset_right = 0.43199158
-offset_bottom = -0.184021
+anchor_right = 0.074
+anchor_bottom = 0.048
+offset_right = -0.2480011
+offset_bottom = -0.10400009
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_53nlx")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -18,5 +17,6 @@ offset_right = 8.0
 offset_bottom = 8.0
 toggle_mode = true
 text = "Add stops"
+script = ExtResource("1_pq1yv")
 
-[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="Button" to="Button" method="_on_toggled"]

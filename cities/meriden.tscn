@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=11 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road-edge.tscn" id="1_m366e"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_qhn2g"]
 [ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement-area.tscn" id="3_um2er"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="4_jp4ve"]
 [ext_resource type="PackedScene" uid="uid://dcesf8eg85u8h" path="res://route-editor/buttons/add-stops/add-stops.tscn" id="5_1yr3d"]
+[ext_resource type="PackedScene" uid="uid://b4in4patn7min" path="res://route-editor/RouteCreationArea.tscn" id="6_ohihq"]
+[ext_resource type="PackedScene" uid="uid://nyajcka4kxgk" path="res://route-editor/buttons/new-route/new-route.tscn" id="7_m366e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
 resource_local_to_scene = true
@@ -15,11 +17,22 @@ resource_local_to_scene = true
 a = Vector2(272, 1)
 b = Vector2(0, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m366e"]
+resource_local_to_scene = true
+size = Vector2(330.5, 93.5)
+
 [node name="Meriden" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AddStops" parent="CanvasLayer" instance=ExtResource("5_1yr3d")]
+metadata/_edit_use_anchors_ = true
+
+[node name="NewRoute" parent="CanvasLayer" instance=ExtResource("7_m366e")]
+anchor_left = 0.093
+anchor_right = 0.17400001
+offset_left = -0.13600159
+offset_right = 0.5519867
 
 [node name="Business1" parent="." instance=ExtResource("2_qhn2g")]
 position = Vector2(265, 124)
@@ -40,5 +53,13 @@ position = Vector2(242, 162)
 [node name="CollisionShape2D" parent="RoadEdge" index="0"]
 shape = SubResource("SegmentShape2D_ho4bh")
 
+[node name="RouteCreationArea" parent="." instance=ExtResource("6_ohihq")]
+position = Vector2(141, 144)
+
+[node name="CollisionShape2D" parent="RouteCreationArea" index="0"]
+position = Vector2(235.75, 43.25)
+shape = SubResource("RectangleShape2D_m366e")
+
 [editable path="BusStopPlacementArea"]
 [editable path="RoadEdge"]
+[editable path="RouteCreationArea"]

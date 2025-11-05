@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://nyajcka4kxgk"]
+
+[ext_resource type="Script" uid="uid://3fu8vl11tjbw" path="res://route-editor/buttons/new-route/NewRouteButton.cs" id="1_kbmjo"]
+
+[node name="NewRoute" type="Control"]
+layout_mode = 3
+anchor_right = 0.082
+anchor_bottom = 0.049000002
+offset_right = -0.46400452
+offset_bottom = 0.24799919
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.989
+anchor_bottom = 0.96900004
+offset_right = -84.966
+offset_bottom = -23.008001
+toggle_mode = true
+text = "New Route"
+script = ExtResource("1_kbmjo")
+
+[connection signal="toggled" from="Button" to="Button" method="_on_toggled"]

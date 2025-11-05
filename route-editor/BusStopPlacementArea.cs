@@ -36,12 +36,8 @@ public partial class BusStopPlacementArea : Area2D
 
     private void _on_mouse_exited()
     {
-        if (_previewBusStop != null)
-        {
-            _previewBusStop.QueueFree();
-            _previewBusStop = null;
-            SetProcess(false);
-        }        
+        _previewBusStop.QueueFree();
+        SetProcess(false);
     }
 
     private bool IsEventIsLeftMouseClick(InputEvent @event)
