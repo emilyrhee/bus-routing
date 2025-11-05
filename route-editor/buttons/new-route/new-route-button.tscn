@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck1xf4e8qrx3s"]
+
+[ext_resource type="Script" uid="uid://3fu8vl11tjbw" path="res://route-editor/buttons/new-route/NewRouteButton.cs" id="1_cto6y"]
+
+[node name="NewRouteButton" type="Button"]
+toggle_mode = true
+text = "New Route"
+script = ExtResource("1_cto6y")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

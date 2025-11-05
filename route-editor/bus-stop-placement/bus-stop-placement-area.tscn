@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1ubwvvx2qebc"]
 
-[ext_resource type="Script" uid="uid://dsf66sgjrs5uc" path="res://route-editor/BusStopPlacementArea.cs" id="1_lmuta"]
+[ext_resource type="Script" uid="uid://dsf66sgjrs5uc" path="res://route-editor/bus-stop-placement/BusStopPlacementArea.cs" id="1_lmuta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmuta"]
 resource_local_to_scene = true

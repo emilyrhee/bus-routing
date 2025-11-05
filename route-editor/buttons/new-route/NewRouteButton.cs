@@ -7,10 +7,12 @@ public partial class NewRouteButton : Button
     {
         var level = GetTree().CurrentScene as Node ?? GetParent();
         var routeCreationArea = level.GetNode<RouteCreationArea>("RouteCreationArea");
+        var busStopPlacementArea = level.GetNode<BusStopPlacementArea>("BusStopPlacementArea");
 
         if (toggledOn)
         {
             routeCreationArea.Visible = true;
+            busStopPlacementArea.Visible = false;
         }
         else
         {

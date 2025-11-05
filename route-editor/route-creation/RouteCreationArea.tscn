@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4in4patn7min"]
 
-[ext_resource type="Script" uid="uid://c0wwtpygaj5fu" path="res://route-editor/RouteCreationArea.cs" id="1_08afb"]
+[ext_resource type="Script" uid="uid://c0wwtpygaj5fu" path="res://route-editor/route-creation/RouteCreationArea.cs" id="1_08afb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vm1no"]
 resource_local_to_scene = true

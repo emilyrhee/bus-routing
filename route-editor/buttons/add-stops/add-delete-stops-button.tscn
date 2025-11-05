@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbnu4oj3bmb3i"]
+
+[ext_resource type="Script" uid="uid://c3f3qmbfoepam" path="res://route-editor/buttons/add-stops/AddDeleteStopsButton.cs" id="1_fr7yc"]
+
+[node name="AddDeleteStopsButton" type="Button"]
+toggle_mode = true
+text = "Add/Delete Stops"
+script = ExtResource("1_fr7yc")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]
