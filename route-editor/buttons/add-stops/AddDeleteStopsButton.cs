@@ -12,7 +12,6 @@ public partial class AddDeleteStopsButton : Button
         if (toggledOn)
         {
             busStopPlacementArea.Visible = true;
-            routeCreationArea.Visible = false;
         }
         else
         {

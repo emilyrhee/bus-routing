@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://censkicv071fe"]
+[gd_scene load_steps=4 format=3 uid="uid://censkicv071fe"]
 
 [ext_resource type="PackedScene" uid="uid://ck1xf4e8qrx3s" path="res://route-editor/buttons/new-route/new-route-button.tscn" id="1_nof2m"]
+[ext_resource type="ButtonGroup" uid="uid://c3roiluad2p6i" path="res://route-editor/buttons/ToolbarButtons.tres" id="2_rntkk"]
 [ext_resource type="PackedScene" uid="uid://cbnu4oj3bmb3i" path="res://route-editor/buttons/add-stops/add-delete-stops-button.tscn" id="2_vogl7"]
 
 [node name="Toolbar" type="Control"]
@@ -12,8 +13,10 @@ layout_mode = 0
 offset_left = 151.0
 offset_right = 244.0
 offset_bottom = 31.0
+button_group = ExtResource("2_rntkk")
 
 [node name="AddDeleteStopsButton" parent="." instance=ExtResource("2_vogl7")]
 layout_mode = 0
 offset_right = 142.0
 offset_bottom = 31.0
+button_group = ExtResource("2_rntkk")

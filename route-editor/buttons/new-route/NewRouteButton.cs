@@ -12,7 +12,6 @@ public partial class NewRouteButton : Button
         if (toggledOn)
         {
             routeCreationArea.Visible = true;
-            busStopPlacementArea.Visible = false;
         }
         else
         {
