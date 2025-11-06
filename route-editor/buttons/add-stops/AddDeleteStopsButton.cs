@@ -7,15 +7,16 @@ public partial class AddDeleteStopsButton : Button
     {
         var level = GetTree().CurrentScene as Node ?? GetParent();
         var busStopPlacementArea = level.GetNode<BusStopPlacementArea>("BusStopPlacementArea");
-        var routeCreationArea = level.GetNode<RouteCreationArea>("RouteCreationArea");
 
         if (toggledOn)
         {
             busStopPlacementArea.Visible = true;
+            RouteEditorState.ActiveTool = EditorState.AddDeleteBusStop;
         }
         else
         {
             busStopPlacementArea.Visible = false;
+            RouteEditorState.ActiveTool = EditorState.None;
         }
     }
 }

@@ -7,6 +7,4 @@ public partial class RouteCreationArea : Area2D
     {
         Visible = false;
     }
-
-    
 }
