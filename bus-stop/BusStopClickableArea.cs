@@ -4,23 +4,18 @@ using System;
 public partial class BusStopClickableArea : Area2D
 {
     private int test = 0;
-    private bool IsNotLeftMouseClick(InputEvent @event)
-    {
-        return !(@event is InputEventMouseButton mouseEvent
-              && mouseEvent.Pressed
-              && mouseEvent.ButtonIndex == MouseButton.Left);
-    }
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (IsNotLeftMouseClick(@event))
+        if (!@event.IsLeftMouseClick())
             return;
 
         if (RouteEditorState.ActiveTool == EditorState.NewRoute)
         {
             RouteEditorState.Routes[^1].PathToTravel.Add(GetParent());
+            GD.Print("Added bus stop to route. Current path:");
             foreach (var node in RouteEditorState.Routes[^1].PathToTravel)
             {
-                GD.Print("Node in path: " + node);
+                GD.Print(node);
             }
         }
     }
