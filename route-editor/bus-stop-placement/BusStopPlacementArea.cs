@@ -40,30 +40,22 @@ public partial class BusStopPlacementArea : Area2D
         SetProcess(false);
     }
 
-    private bool IsEventIsLeftMouseClick(InputEvent @event)
-    {
-        return
-            @event is InputEventMouseButton mouseEvent
-            && mouseEvent.Pressed
-            && mouseEvent.ButtonIndex == MouseButton.Left;
-    }
-
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (IsEventIsLeftMouseClick(@event))
+        if (!@event.IsLeftMouseClick())
+            return;
+
+        var busStopInstance = _busStopPacked.Instantiate();
+        var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
+
+        if (busStopInstance is Node2D busStop
+            && previewBusStop is Area2D previewBusStopArea
+            && previewBusStopArea.HasOverlappingAreas())
         {
-            var busStopInstance = _busStopPacked.Instantiate();
-            var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
+            _currentLevel.AddChild(busStop);
+            busStop.GlobalPosition = GetGlobalMousePosition();
 
-            if (busStopInstance is Node2D busStop
-                && previewBusStop is Area2D previewBusStopArea
-                && previewBusStopArea.HasOverlappingAreas())
-            {
-                _currentLevel.AddChild(busStop);
-                busStop.GlobalPosition = GetGlobalMousePosition();
-
-                _lastPlacedBusStop = busStop;
-            }
+            _lastPlacedBusStop = busStop;
         }
     }
 }
