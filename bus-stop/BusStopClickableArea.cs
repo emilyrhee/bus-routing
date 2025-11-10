@@ -25,21 +25,21 @@ public partial class BusStopClickableArea : Area2D
 
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (!@event.IsLeftMouseClick())
+        if (!@event.IsLeftMouseClick()
+            || RouteEditorState.ActiveTool != EditorTool.NewRoute)
             return;
 
-        if (RouteEditorState.ActiveTool == EditorState.NewRoute)
+        LevelState.Routes[^1].PathToTravel.Add(GetParent());
+        GD.Print("Added bus stop to route. Current path:");
+        foreach (var node in LevelState.Routes[^1].PathToTravel)
         {
-            RouteEditorState.Routes[^1].PathToTravel.Add(GetParent());
-            GD.Print("Added bus stop to route. Current path:");
-            foreach (var node in RouteEditorState.Routes[^1].PathToTravel)
-            {
-                GD.Print(node);
-            }
-
-            _previewLine = new Line2D();
-            _previewLine.AddPoint(GetGlobalMousePosition());
-            _currentLevel.AddChild(_previewLine);
+            GD.Print(node);
         }
+
+        _previewLine = new Line2D();
+        _previewLine.AddPoint(GetGlobalMousePosition());
+        _currentLevel.AddChild(_previewLine);
+        // make states for each of the possible new route states?
+        // like "adding first bus stop", "adding subsequent bus stops", "finished route"
     }
 }
