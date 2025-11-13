@@ -7,12 +7,12 @@ public partial class NewRouteButton : Button
     {
         if (toggledOn)
         {
-            RouteEditorState.ActiveTool = EditorTool.NewRoute;
+            EditorState.ActiveTool = EditorTool.NewRoute;
             LevelState.Routes.Add(new Route());
         }
         else
         {
-            RouteEditorState.ActiveTool = EditorTool.None;
+            EditorState.ActiveTool = EditorTool.None;
         }
     }
 }

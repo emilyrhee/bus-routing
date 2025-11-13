@@ -11,12 +11,12 @@ public partial class AddDeleteStopsButton : Button
         if (toggledOn)
         {
             busStopPlacementArea.Visible = true;
-            RouteEditorState.ActiveTool = EditorTool.AddDeleteBusStop;
+            EditorState.ActiveTool = EditorTool.AddDeleteBusStop;
         }
         else
         {
             busStopPlacementArea.Visible = false;
-            RouteEditorState.ActiveTool = EditorTool.None;
+            EditorState.ActiveTool = EditorTool.None;
         }
     }
 }

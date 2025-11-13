@@ -1,11 +1,10 @@
 using Godot;
-using System;
+using static LineFactory;
+using static EditorState;
 
 public partial class BusStopClickableArea : Area2D
 {
-    private int test = 0;
     private Node2D _currentLevel;
-    private Line2D _previewLine;
 
     public override void _Ready()
     {
@@ -14,32 +13,45 @@ public partial class BusStopClickableArea : Area2D
 
     public override void _Process(double delta)
     {
-        if (_previewLine == null)
+        if (RoutePreviewLine == null)
             return;
 
-        if (_previewLine.GetPointCount() < 2)
-            _previewLine.AddPoint(GetGlobalMousePosition());
+        if (RoutePreviewLine.GetPointCount() < 2)
+            RoutePreviewLine.AddPoint(GetGlobalMousePosition());
         else
-            _previewLine.SetPointPosition(1, GetGlobalMousePosition());
+            RoutePreviewLine.SetPointPosition(1, GetGlobalMousePosition());
     }
 
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
         if (!@event.IsLeftMouseClick()
-            || RouteEditorState.ActiveTool != EditorTool.NewRoute)
+            || ActiveTool != EditorTool.NewRoute)
             return;
 
-        LevelState.Routes[^1].PathToTravel.Add(GetParent());
-        GD.Print("Added bus stop to route. Current path:");
-        foreach (var node in LevelState.Routes[^1].PathToTravel)
-        {
-            GD.Print(node);
-        }
+        var currentRoute = LevelState.Routes[^1];
+        currentRoute.PathToTravel.Add(GetParent());
 
-        _previewLine = new Line2D();
-        _previewLine.AddPoint(GetGlobalMousePosition());
-        _currentLevel.AddChild(_previewLine);
-        // make states for each of the possible new route states?
-        // like "adding first bus stop", "adding subsequent bus stops", "finished route"
+        var clickedBusStopPosition = ((Node2D)GetParent()).GlobalPosition;
+
+        switch (CurrentRouteCreationStep)
+        {
+            case RouteCreationStep.AddingFirstStop:
+                currentRoute.PathVisual = CreateLineAt(clickedBusStopPosition);
+                _currentLevel.AddChild(currentRoute.PathVisual);
+
+                RoutePreviewLine = CreateLineAt(clickedBusStopPosition);
+                _currentLevel.AddChild(RoutePreviewLine);
+
+                CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
+                break;
+            case RouteCreationStep.AddingSubsequentStops:
+                currentRoute.PathVisual.AddPoint(clickedBusStopPosition);
+
+                // Repositions temporary preview line to start from this new stop.
+                RoutePreviewLine.ClearPoints();
+                RoutePreviewLine.AddPoint(clickedBusStopPosition);
+
+                break;
+        }
     }
 }
