@@ -30,6 +30,7 @@ shape = SubResource("CircleShape2D_ey4ng")
 
 [node name="WalkRadius" type="Area2D" parent="."]
 editor_description = "This area determines whether or not people will want to walk to a bus stop instance. It also determines how far bus stops can be away from each other."
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkRadius"]
 shape = SubResource("CircleShape2D_gslyg")
