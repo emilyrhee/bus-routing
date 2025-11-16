@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://7sg83f1kmn6m"]
+[gd_scene load_steps=4 format=3 uid="uid://7sg83f1kmn6m"]
 
+[ext_resource type="Script" uid="uid://cyb77mad3a4ns" path="res://destination/Destination.cs" id="1_5asxf"]
 [ext_resource type="Texture2D" uid="uid://djeeplkc1q7w0" path="res://assets/business.svg" id="1_mv2wm"]
 [ext_resource type="PackedScene" uid="uid://d3qg57hamhtvr" path="res://bus-stop-detector/bus-stop-detector.tscn" id="2_p3ua0"]
 
 [node name="Business" type="Node2D"]
+script = ExtResource("1_5asxf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mv2wm")

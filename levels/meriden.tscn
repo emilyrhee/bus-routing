@@ -42,9 +42,5 @@ position = Vector2(242, 162)
 [node name="CollisionShape2D" parent="RoadEdge" index="0"]
 shape = SubResource("SegmentShape2D_ho4bh")
 
-[node name="House" parent="." instance=ExtResource("3_udqdq")]
-modulate = Color(0.8862745, 0.52156866, 0.32941177, 1)
-position = Vector2(374, 122)
-
 [editable path="BusStopPlacementArea"]
 [editable path="RoadEdge"]

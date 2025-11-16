@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Holds the state of the level, including all routes.
@@ -10,4 +11,19 @@ public partial class LevelState : Node
 {
     public static List<Route> Routes { get; set; } = [];
     public static List<House> AllHouses { get; set; } = [];
+    public static List<Destination> AllDestinations { get; set; } = [];
+    public static List<Node> AllBusStops { get; set; } = [];
+
+    public static bool IsLevelComplete()
+    {
+        return AllHouses.All(house => house.IsChecked);
+    }
+    
+    public static void UpdateAllHouseStatuses()
+    {
+        foreach (var house in AllHouses)
+        {
+            house.UpdateCheckStatus();
+        }
+    }
 }

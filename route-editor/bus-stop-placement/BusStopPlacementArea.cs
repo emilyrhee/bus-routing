@@ -53,6 +53,7 @@ public partial class BusStopPlacementArea : Area2D
             && previewBusStopArea.HasOverlappingAreas())
         {
             _currentLevel.AddChild(busStop);
+            LevelState.AllBusStops.Add(busStop);
             busStop.GlobalPosition = GetGlobalMousePosition();
 
             _lastPlacedBusStop = busStop;

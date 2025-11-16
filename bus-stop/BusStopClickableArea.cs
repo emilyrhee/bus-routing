@@ -50,8 +50,8 @@ public partial class BusStopClickableArea : Area2D
                 // Repositions temporary preview line to start from this new stop.
                 RoutePreviewLine.ClearPoints();
                 RoutePreviewLine.AddPoint(clickedBusStopPosition);
-
                 break;
         }
+        LevelState.UpdateAllHouseStatuses();
     }
 }

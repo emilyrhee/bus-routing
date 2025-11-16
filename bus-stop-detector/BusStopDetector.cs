@@ -10,6 +10,7 @@ public partial class BusStopDetector : RayCast2D
     /// <summary>
     /// Gets the bus stop node that this detector can reach.
     /// Returns null if no bus stop is currently in range.
+    /// Preview bus stops are ignored.
     /// </summary>
     public Node ReachableBusStop
     {
@@ -18,8 +19,10 @@ public partial class BusStopDetector : RayCast2D
             ForceRaycastUpdate();
             if (IsColliding())
             {
-                var busStop = GetCollider() as Node;
-                return busStop?.GetParent();
+                var busStopArea = GetCollider() as Node;
+                var busStop = busStopArea.GetParent();
+                if (LevelState.AllBusStops.Contains(busStop)) // ensures preview bus stops are ignored
+                    return busStop;
             }
             return null;
         }
@@ -31,7 +34,7 @@ public partial class BusStopDetector : RayCast2D
         _originalColor = _buildingSprite.Modulate;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (ReachableBusStop != null
         && EditorState.ActiveTool == EditorTool.AddDeleteBusStop)
