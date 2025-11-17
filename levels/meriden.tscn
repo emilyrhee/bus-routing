@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=11 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://censkicv071fe" path="res://route-editor/buttons/toolbar.tscn" id="1_tdoqb"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_q4dte"]
+[ext_resource type="PackedScene" uid="uid://bxwma46h0s4jq" path="res://route-editor/route-list/route-list.tscn" id="3_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
 [ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement/bus-stop-placement-area.tscn" id="4_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road-edge.tscn" id="5_cbuuc"]
@@ -38,9 +39,19 @@ position = Vector2(242, 162)
 [node name="CollisionShape2D" parent="Roads/RoadEdge" index="0"]
 shape = SubResource("SegmentShape2D_ho4bh")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="EditorUI" type="CanvasLayer" parent="."]
 
-[node name="Toolbar" parent="CanvasLayer" instance=ExtResource("1_tdoqb")]
+[node name="Toolbar" parent="EditorUI" instance=ExtResource("1_tdoqb")]
+
+[node name="RouteList" parent="EditorUI" instance=ExtResource("3_8iv2f")]
+anchor_left = 0.82400006
+anchor_top = 0.19900002
+anchor_right = 0.882
+anchor_bottom = 0.33800003
+offset_left = -4.248047
+offset_top = -3.952011
+offset_right = -71.064026
+offset_bottom = -94.02402
 
 [node name="Business1" parent="." instance=ExtResource("2_q4dte")]
 modulate = Color(0.28235295, 0.41568628, 0.95686275, 1)

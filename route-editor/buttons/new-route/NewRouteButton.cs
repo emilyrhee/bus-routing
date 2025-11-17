@@ -16,8 +16,9 @@ public partial class NewRouteButton : Button
         if (toggledOn)
         {
             EditorState.ActiveTool = EditorTool.NewRoute;
-            LevelState.Routes.Add(new Route());
-            _routeList.AddItem("Route " + LevelState.Routes.Count);
+            var newRoute = new Route();
+            LevelState.Routes.Add(newRoute);
+            _routeList.AddItem("Route " + newRoute.ID);
         }
         else
         {

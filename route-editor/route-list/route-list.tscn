@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxwma46h0s4jq"]
+
+[ext_resource type="Script" uid="uid://bgix2u8pqxx7u" path="res://route-editor/route-list/RouteList.cs" id="1_07liv"]
+
+[node name="RouteList" type="Control"]
+layout_mode = 3
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RouteList" type="ItemList" parent="."]
+layout_mode = 0
+offset_right = 71.0
+offset_bottom = 90.0
+script = ExtResource("1_07liv")
+
+[connection signal="item_selected" from="RouteList" to="RouteList" method="_on_item_selected"]

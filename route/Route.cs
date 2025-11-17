@@ -8,7 +8,17 @@ using System.Collections.Generic;
 /// </summary>
 public partial class Route : Node
 {
-    private ulong _routeID;
+    /// <summary>
+    /// A static counter to ensure every new route gets a unique ID.
+    /// </summary>
+    private static uint _nextId = 1;
+
+    private uint _ID;
+    public uint ID
+    { 
+        get => _ID;
+        private set => _ID = value;
+    }
 
     /// <summary>
     /// List of bus stops that make up the route.
@@ -22,7 +32,7 @@ public partial class Route : Node
 
     public Route()
     {
-        _routeID = GetInstanceId();
+        ID = _nextId++;
         PathToTravel = [];
     }
 }
