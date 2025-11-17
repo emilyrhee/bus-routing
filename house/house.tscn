@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwiepcsny2a7m"]
+[gd_scene load_steps=5 format=3 uid="uid://cwiepcsny2a7m"]
 
 [ext_resource type="Script" uid="uid://byktl3yiod0js" path="res://house/House.cs" id="1_05tlr"]
 [ext_resource type="Texture2D" uid="uid://2ifwkvevah66" path="res://assets/house.svg" id="1_tdwit"]
 [ext_resource type="PackedScene" uid="uid://d3qg57hamhtvr" path="res://bus-stop-detector/bus-stop-detector.tscn" id="3_t6m4b"]
+[ext_resource type="Texture2D" uid="uid://b00hifirxyl02" path="res://assets/check.svg" id="4_nxes2"]
 
 [node name="House" type="Node2D"]
 script = ExtResource("1_05tlr")
@@ -11,3 +12,8 @@ script = ExtResource("1_05tlr")
 texture = ExtResource("1_tdwit")
 
 [node name="BusStopDetector" parent="." instance=ExtResource("3_t6m4b")]
+
+[node name="Check" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(18, 17)
+texture = ExtResource("4_nxes2")
