@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 /// <summary>
@@ -25,14 +24,30 @@ public partial class Route : Node
     /// </summary>
     public List<Node> PathToTravel { get; set; }
 
+    public Color Color { get; private set; }
+
+    private Line2D _pathVisual;
     /// <summary>
     /// A single Line2D node that represents the entire visual path of the route.
     /// </summary>
-    public Line2D PathVisual { get; set; }
+    public Line2D PathVisual
+    {
+        get => _pathVisual;
+        set
+        {
+            _pathVisual = value;
+            _pathVisual.Width = 8.0f;
+            _pathVisual.DefaultColor = Color;
+        }
+    }
 
+    /// <summary>
+    /// Automatically assigns a unique ID and initializes the path list.
+    /// </summary>
     public Route()
     {
         ID = _nextId++;
         PathToTravel = [];
+        Color = LevelState.GetNextRouteColor();
     }
 }

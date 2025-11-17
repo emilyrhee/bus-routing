@@ -9,8 +9,8 @@ grow_vertical = 2
 
 [node name="RouteList" type="ItemList" parent="."]
 layout_mode = 0
-offset_right = 71.0
-offset_bottom = 90.0
+offset_right = 111.0
+offset_bottom = 99.0
 script = ExtResource("1_07liv")
 
 [connection signal="item_selected" from="RouteList" to="RouteList" method="_on_item_selected"]
