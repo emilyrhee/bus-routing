@@ -3,12 +3,21 @@ using System;
 
 public partial class NewRouteButton : Button
 {
+    private Node _level;
+    private ItemList _routeList;
+    public override void _Ready()
+    {
+        _level = GetTree().CurrentScene as Node ?? GetParent();
+        _routeList = _level.GetNode<ItemList>("EditorUI/RouteList/RouteList");
+    }
+
     private void _on_toggled(bool toggledOn)
     {
         if (toggledOn)
         {
             EditorState.ActiveTool = EditorTool.NewRoute;
             LevelState.Routes.Add(new Route());
+            _routeList.AddItem("Route " + LevelState.Routes.Count);
         }
         else
         {
