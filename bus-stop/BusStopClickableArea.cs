@@ -40,6 +40,7 @@ public partial class BusStopClickableArea : Area2D
                 _currentLevel.AddChild(currentRoute.PathVisual);
 
                 RoutePreviewLine = CreateLineAt(clickedBusStopPosition);
+                RoutePreviewLine.DefaultColor = currentRoute.Color;
                 _currentLevel.AddChild(RoutePreviewLine);
 
                 CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
