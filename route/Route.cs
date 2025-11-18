@@ -43,6 +43,18 @@ public partial class Route : Node
     }
 
     /// <summary>
+    /// Appends a new node to the end of the route's path and visual line.
+    /// </summary>
+    /// <param name="node">The Node2D to add to the path.</param>
+    public void AppendNode(Node2D node)
+    {
+        if (node == null) return;
+
+        PathToTravel.Add(node);
+        PathVisual?.AddPoint(node.GlobalPosition);
+    }
+
+    /// <summary>
     /// Automatically assigns a unique ID initializes the path list, and
     /// assigns a color.
     /// </summary>
@@ -61,7 +73,7 @@ public partial class Route : Node
             // Fallback if no colors are left. TODO: make it so players cannot
             // create more routes.
             ColorName = "Default";
-            Color = Godot.Colors.White;
+            Color = Colors.White;
         }
     }
 }

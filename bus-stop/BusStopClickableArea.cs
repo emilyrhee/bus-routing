@@ -32,6 +32,7 @@ public partial class BusStopClickableArea : Area2D
         currentRoute.PathToTravel.Add(GetParent());
 
         var clickedBusStopPosition = ((Node2D)GetParent()).GlobalPosition;
+        var clickedBusStop = (Node2D)GetParent();
 
         switch (CurrentRouteCreationStep)
         {
@@ -46,11 +47,14 @@ public partial class BusStopClickableArea : Area2D
                 CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
                 break;
             case RouteCreationStep.AddingSubsequentStops:
-                currentRoute.PathVisual.AddPoint(clickedBusStopPosition);
+                currentRoute = LevelState.Routes[^1];
+                currentRoute.AppendNode(clickedBusStop);
 
-                // Repositions temporary preview line to start from this new stop.
-                RoutePreviewLine.ClearPoints();
-                RoutePreviewLine.AddPoint(clickedBusStopPosition);
+                if (RoutePreviewLine != null)
+                {
+                    RoutePreviewLine.ClearPoints();
+                    RoutePreviewLine.AddPoint(clickedBusStop.GlobalPosition);
+                }
                 break;
         }
         LevelState.UpdateAllHouseStatuses();

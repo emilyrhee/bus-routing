@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dakeoixxjm1l8"]
+[gd_scene load_steps=4 format=3 uid="uid://dakeoixxjm1l8"]
 
 [ext_resource type="Script" uid="uid://d0hvmrwu5j8v1" path="res://road/RoadNode.cs" id="1_ffehu"]
 [ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="1_yhkpg"]
 
-[node name="RoadNode" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffehu"]
+radius = 6.0
+
+[node name="RoadNode" type="Area2D"]
 script = ExtResource("1_ffehu")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ffehu")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.585062, 0.585062, 0.5850621, 1)
+modulate = Color(0.851769, 0.8517689, 0.85176885, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_yhkpg")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

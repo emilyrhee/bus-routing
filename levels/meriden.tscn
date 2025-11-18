@@ -20,7 +20,7 @@ b = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
 resource_local_to_scene = true
-size = Vector2(336, 99)
+size = Vector2(336, 161.5)
 
 [node name="Meriden" type="Node2D"]
 
@@ -65,7 +65,7 @@ position = Vector2(490, 125)
 position = Vector2(278, 173)
 
 [node name="CollisionShape2D" parent="BusStopPlacementArea" index="0"]
-position = Vector2(99, 15)
+position = Vector2(99, 46.25)
 shape = SubResource("RectangleShape2D_um2er")
 
 [node name="House" parent="." instance=ExtResource("3_udqdq")]
