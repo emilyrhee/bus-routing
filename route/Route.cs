@@ -24,6 +24,7 @@ public partial class Route : Node
     /// </summary>
     public List<Node> PathToTravel { get; set; }
 
+    public string ColorName { get; private set; }
     public Color Color { get; private set; }
 
     private Line2D _pathVisual;
@@ -42,12 +43,25 @@ public partial class Route : Node
     }
 
     /// <summary>
-    /// Automatically assigns a unique ID and initializes the path list.
+    /// Automatically assigns a unique ID initializes the path list, and
+    /// assigns a color.
     /// </summary>
     public Route()
     {
         ID = _nextId++;
         PathToTravel = [];
-        Color = LevelState.GetNextRouteColor();
+        var colorInfo = LevelState.GetNextRouteColor();
+        if (colorInfo.HasValue)
+        {
+            ColorName = colorInfo.Value.Key;
+            Color = colorInfo.Value.Value;
+        }
+        else
+        {
+            // Fallback if no colors are left. TODO: make it so players cannot
+            // create more routes.
+            ColorName = "Default";
+            Color = Godot.Colors.White;
+        }
     }
 }

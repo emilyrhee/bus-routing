@@ -18,7 +18,7 @@ public partial class NewRouteButton : Button
             EditorState.ActiveTool = EditorTool.NewRoute;
             var newRoute = new Route();
             LevelState.Routes.Add(newRoute);
-            _routeList.AddItem("Route " + newRoute.ID);
+            _routeList.AddItem(newRoute.ColorName + " line");
         }
         else
         {

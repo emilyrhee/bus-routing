@@ -13,25 +13,19 @@ public partial class LevelState : Node
     public static List<House> AllHouses { get; set; } = [];
     public static List<Destination> AllDestinations { get; set; } = [];
     public static List<Node> AllBusStops { get; set; } = [];
-    private static Color[] _routeColors;
+
     private static int _nextColorIndex = 0;
 
-    static LevelState()
+    public static KeyValuePair<string, Color>? GetNextRouteColor()
     {
-        var colorPalette = GD.Load<Resource>("res://assets/color-palette.tres");
-        _routeColors = (Color[])colorPalette.Get("colors");
-    }
-
-    public static Color GetNextRouteColor()
-    {
-        if (_routeColors == null || _routeColors.Length == 0)
+        if (_nextColorIndex >= RouteColors.ColorList.Count)
         {
-            GD.PrintErr("Ran out of colors in the palette.");
-            return new Color(1, 1, 1);
+            GD.PrintErr("All available route colors have been used.");
+            return null;
         }
-        Color color = _routeColors[_nextColorIndex];
-        _nextColorIndex = (_nextColorIndex + 1) % _routeColors.Length;
-        return color;
+        var colorInfo = RouteColors.ColorList[_nextColorIndex];
+        _nextColorIndex++;
+        return colorInfo;
     }
 
     public static bool IsLevelComplete()
