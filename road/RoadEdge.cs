@@ -8,7 +8,7 @@ public partial class RoadEdge: Area2D
 
     [Export] private NodePath _roadShapePath = "CollisionShape2D";
     private CollisionShape2D _roadShape;
-    [Export] private Godot.Collections.Array<Node> _nodesOnEdge;
+    private Godot.Collections.Array<Node2D> _nodesOnEdge;
 
     private void DrawLine(Line2D stroke)
     {
@@ -22,7 +22,20 @@ public partial class RoadEdge: Area2D
             stroke.AddPoint(to);
         }
     }
-    
+
+    private void _on_area_entered(Area2D area)
+    {
+        var roadNode = area.GetParent<Node2D>();
+        _nodesOnEdge.Add(roadNode);
+
+        GD.Print($"--- Nodes on Edge: {Name} ---");
+        foreach (var node in _nodesOnEdge)
+        {
+            GD.Print($"- {node.Name}");
+        }
+        GD.Print("--------------------");
+    }
+
     public override void _Ready()
     {
         _roadStroke = GetNode<Line2D>(_roadStrokePath);
@@ -30,4 +43,6 @@ public partial class RoadEdge: Area2D
 
         DrawLine(_roadStroke);
     }
+
+
 }

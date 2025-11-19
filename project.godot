@@ -22,4 +22,5 @@ project/assembly_name="bus-routing"
 
 2d_physics/layer_1="RouteEditor"
 2d_physics/layer_2="BusStop"
-2d_physics/layer_3="Road"
+2d_physics/layer_3="RoadEdge"
+2d_physics/layer_4="RoadNode"
