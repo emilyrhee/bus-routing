@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 public partial class RoadEdge: Area2D
 {
@@ -8,6 +8,7 @@ public partial class RoadEdge: Area2D
 
     [Export] private NodePath _roadShapePath = "CollisionShape2D";
     private CollisionShape2D _roadShape;
+    [Export] private Godot.Collections.Array<Node> _nodesOnEdge;
 
     private void DrawLine(Line2D stroke)
     {
