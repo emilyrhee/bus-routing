@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://sqsjlmlyneb6"]
+[gd_scene load_steps=6 format=3 uid="uid://sqsjlmlyneb6"]
 
+[ext_resource type="Script" uid="uid://d0hvmrwu5j8v1" path="res://road/RoadNode.cs" id="1_cbitm"]
 [ext_resource type="Script" uid="uid://cxp1xtpi1rnje" path="res://road/RoadNodeClickableArea.cs" id="1_ffehu"]
 [ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="1_yhkpg"]
 
@@ -9,7 +10,9 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ffehu"]
 radius = 5.0
 
-[node name="RoadNode" type="Node2D"]
+[node name="RoadNode" type="Node2D" node_paths=PackedStringArray("Neighbors")]
+script = ExtResource("1_cbitm")
+Neighbors = []
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

@@ -14,6 +14,10 @@ config/name="bus-routing"
 run/main_scene="uid://b57fjtbl22yus"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 
+[autoload]
+
+LevelState="*res://levels/LevelState.cs"
+
 [dotnet]
 
 project/assembly_name="bus-routing"

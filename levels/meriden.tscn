@@ -44,17 +44,21 @@ shape = SubResource("SegmentShape2D_ho4bh")
 
 [node name="Nodes" type="Node2D" parent="Roads"]
 
-[node name="RoadNode" parent="Roads/Nodes" instance=ExtResource("6_q4dte")]
+[node name="A" parent="Roads/Nodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(242, 161)
+Neighbors = [NodePath("../B")]
 
-[node name="RoadNode2" parent="Roads/Nodes" instance=ExtResource("6_q4dte")]
+[node name="B" parent="Roads/Nodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(376, 162)
+Neighbors = [NodePath("../A"), NodePath("../C"), NodePath("../D")]
 
-[node name="RoadNode3" parent="Roads/Nodes" instance=ExtResource("6_q4dte")]
+[node name="C" parent="Roads/Nodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(513, 162)
+Neighbors = [NodePath("../B")]
 
-[node name="RoadNode4" parent="Roads/Nodes" instance=ExtResource("6_q4dte")]
+[node name="D" parent="Roads/Nodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(376, 295)
+Neighbors = [NodePath("../B")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
 

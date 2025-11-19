@@ -32,12 +32,12 @@ public partial class RoadEdge: Area2D
             NodesOnEdge.Add(roadNode);
         }
 
-        GD.Print($"--- Nodes on Edge: {Name} ---");
-        foreach (var node in NodesOnEdge)
-        {
-            GD.Print($"- {node.Name}");
-        }
-        GD.Print("--------------------");
+        // GD.Print($"--- Nodes on Edge: {Name} ---");
+        // foreach (var node in NodesOnEdge)
+        // {
+        //     GD.Print($"- {node.Name}");
+        // }
+        // GD.Print("--------------------");
     }
 
     public override void _Ready()

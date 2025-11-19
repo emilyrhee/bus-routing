@@ -12,8 +12,21 @@ public partial class LevelState : Node
     public static List<House> AllHouses { get; set; } = [];
     public static List<Destination> AllDestinations { get; set; } = [];
     public static List<Node> AllBusStops { get; set; } = [];
-
     private static int _nextColorIndex = 0;
+    public RoadNetwork RoadNetwork { get; private set; }
+
+    public override void _Ready()
+    {
+        var roadNodeContainer = GetNodeOrNull<Node>("/root/Meriden/Roads/Nodes");
+        if (roadNodeContainer == null)
+        {
+            GD.PrintErr("Could not find the 'Roads/Nodes' container. Please check the node path.");
+            return;
+        }
+
+        RoadNetwork = new RoadNetwork(roadNodeContainer);
+        RoadNetwork.PrintAdjacencyMatrix();
+    }
 
     public static KeyValuePair<string, Color>? GetNextRouteColor()
     {
