@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 public partial class BusStopPlacementArea : Area2D
 {
@@ -23,15 +24,12 @@ public partial class BusStopPlacementArea : Area2D
 
     private void _on_mouse_entered()
     {
-        var busStopInstance = _busStopPacked.Instantiate();
-        if (busStopInstance is Node2D busStop)
-        {
-            _currentLevel.AddChild(busStop);
-            busStop.GlobalPosition = GetGlobalMousePosition();
+        var busStop = (Node2D)_busStopPacked.Instantiate();
+        _currentLevel.AddChild(busStop);
+        busStop.GlobalPosition = GetGlobalMousePosition();
 
-            _previewBusStop = busStop;
-            SetProcess(true);
-        }
+        _previewBusStop = busStop;
+        SetProcess(true);
     }
 
     private void _on_mouse_exited()
@@ -45,18 +43,22 @@ public partial class BusStopPlacementArea : Area2D
         if (!@event.IsLeftMouseClick())
             return;
 
-        var busStopInstance = _busStopPacked.Instantiate();
-        var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
+        var busStop = (Node2D)_busStopPacked.Instantiate();
+        var previewBusStopArea = _previewBusStop.GetChild<Area2D>(1); // RoadPlacementArea
 
-        if (busStopInstance is Node2D busStop
-            && previewBusStop is Area2D previewBusStopArea
-            && previewBusStopArea.HasOverlappingAreas())
+        if (previewBusStopArea.HasOverlappingAreas())
         {
-            _currentLevel.AddChild(busStop);
-            LevelState.AllBusStops.Add(busStop);
-            busStop.GlobalPosition = GetGlobalMousePosition();
+            //if (valid placement)
+            //{
+                //GD.Print("valid placement");
+                _currentLevel.AddChild(busStop);
+                LevelState.AllBusStops.Add(busStop);
+                busStop.GlobalPosition = GetGlobalMousePosition();
 
-            _lastPlacedBusStop = busStop;
+                _lastPlacedBusStop = busStop;
+            //}
+            //else
+                //GD.Print("invalid placement");
         }
     }
 }

@@ -29,18 +29,17 @@ z_index = -1
 
 [node name="Edges" type="Node2D" parent="Roads"]
 
-[node name="RoadEdge2" parent="Roads/Edges" node_paths=PackedStringArray("_nodesOnEdge") instance=ExtResource("5_cbuuc")]
+[node name="RoadEdge2" parent="Roads/Edges" instance=ExtResource("5_cbuuc")]
 position = Vector2(376, 297)
-_nodesOnEdge = []
 
 [node name="CollisionShape2D" parent="Roads/Edges/RoadEdge2" index="0"]
 shape = SubResource("SegmentShape2D_tdoqb")
 
-[node name="RoadEdge" parent="Roads/Edges" node_paths=PackedStringArray("_nodesOnEdge") instance=ExtResource("5_cbuuc")]
+[node name="RoadEdge" parent="Roads/Edges" instance=ExtResource("5_cbuuc")]
 position = Vector2(242, 162)
-_nodesOnEdge = []
 
 [node name="CollisionShape2D" parent="Roads/Edges/RoadEdge" index="0"]
+position = Vector2(-1, 0)
 shape = SubResource("SegmentShape2D_ho4bh")
 
 [node name="Nodes" type="Node2D" parent="Roads"]
