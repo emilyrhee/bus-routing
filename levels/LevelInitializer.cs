@@ -24,8 +24,7 @@ public partial class LevelInitializer : Node2D
             {
                 foreach (RoadNode neighbor in roadNode.Neighbors)
                 {
-                    // // Only draw edge once per pair (avoid duplicates)
-                    if (roadNode.GetInstanceId() < neighbor.GetInstanceId())
+                    if (roadNode.GetInstanceId() < neighbor.GetInstanceId()) // Only draw edge once per pair (avoid duplicates)
                     {
                         var edge = roadEdgeScene.Instantiate<RoadEdge>();
                         AddChild(edge);
@@ -41,5 +40,15 @@ public partial class LevelInitializer : Node2D
         AddChild(levelState); // unsure if this is necessary. check back later.
 
         DrawRoadEdges();
+        int count = 0;
+        foreach (Node child in GetChildren())
+        {
+            if (child is RoadEdge edge)
+            {
+                count++;
+                GD.Print($"RoadEdge {count}: A={edge.NodeA.Name} B={edge.NodeB.Name}");
+            }
+        }
+        GD.Print($"Total RoadEdges: {count}");
     }
 }

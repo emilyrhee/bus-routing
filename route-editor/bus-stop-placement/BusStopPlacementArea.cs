@@ -3,14 +3,15 @@ using System;
 
 public partial class BusStopPlacementArea : Area2D
 {
-    private PackedScene _busStopPacked;
-    private Node2D _lastPlacedBusStop;
+    private PackedScene _busStopScene;
+    private PackedScene _roadEdgeScene;
 
     private Node2D _previewBusStop;
     private Node _currentLevel;
     public override void _Ready()
     {
-        _busStopPacked = GD.Load<PackedScene>("res://bus-stop/bus-stop.tscn");
+        _busStopScene = GD.Load<PackedScene>("res://bus-stop/bus-stop.tscn");
+        _roadEdgeScene = GD.Load<PackedScene>("res://road/road-edge.tscn");
         _currentLevel = GetTree().CurrentScene as Node ?? GetParent();
         Visible = false;
     }
@@ -23,7 +24,7 @@ public partial class BusStopPlacementArea : Area2D
 
     private void _on_mouse_entered()
     {
-        var busStopInstance = _busStopPacked.Instantiate();
+        var busStopInstance = _busStopScene.Instantiate();
         if (busStopInstance is Node2D busStop)
         {
             _currentLevel.AddChild(busStop);
@@ -40,23 +41,39 @@ public partial class BusStopPlacementArea : Area2D
         SetProcess(false);
     }
 
+    private void SplitEdge(RoadEdge roadEdge, Node2D busStop)
+    {
+        var edge1 = _roadEdgeScene.Instantiate<RoadEdge>();
+        var edge2 = _roadEdgeScene.Instantiate<RoadEdge>();
+        _currentLevel.AddChild(edge1);
+        _currentLevel.AddChild(edge2);
+        edge1.SetEndpoints(roadEdge.NodeA, busStop);
+        edge2.SetEndpoints(busStop, roadEdge.NodeB);
+        roadEdge.QueueFree();
+    }
+
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
         if (!@event.IsLeftMouseClick())
             return;
 
-        var busStopInstance = _busStopPacked.Instantiate();
+        var busStopInstance = _busStopScene.Instantiate();
         var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
 
         if (busStopInstance is Node2D busStop
             && previewBusStop is Area2D previewBusStopArea
             && previewBusStopArea.HasOverlappingAreas())
         {
+            // TODO: Make the bus stop placement exactly on the road edge for cleaner visual
             _currentLevel.AddChild(busStop);
             LevelState.AllBusStops.Add(busStop);
             busStop.GlobalPosition = GetGlobalMousePosition();
 
-            _lastPlacedBusStop = busStop;
+            var overlappingArea = previewBusStopArea.GetOverlappingAreas()[0];
+            if (overlappingArea is RoadEdge roadEdge)
+            {
+                SplitEdge(roadEdge, busStop);
+            }
         }
     }
 }
