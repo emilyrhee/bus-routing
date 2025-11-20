@@ -3,31 +3,39 @@ using System.Collections.Generic;
 
 public partial class RoadEdge: Area2D
 {
-    [Export] private NodePath _roadStrokePath = "RoadStroke";
-    private Line2D _roadStroke;
+    private CollisionShape2D _collisionShape;
+    public CollisionShape2D CollisionShape => _collisionShape;
+    private SegmentShape2D _segmentShape;
 
-    [Export] private NodePath _roadShapePath = "CollisionShape2D";
-    private CollisionShape2D _roadShape;
-    [Export] private Godot.Collections.Array<Node> _nodesOnEdge;
-
-    private void DrawLine(Line2D stroke)
+    public Vector2 A
     {
-        if (_roadShape.Shape is SegmentShape2D segment)
+        get => _segmentShape?.A ?? Vector2.Zero;
+        set
         {
-            var from = segment.A;
-            var to = segment.B;
-
-            stroke.ClearPoints();
-            stroke.AddPoint(from);
-            stroke.AddPoint(to);
+            if (_segmentShape != null)
+                _segmentShape.A = value;
         }
     }
-    
+
+    public Vector2 B
+    {
+        get => _segmentShape?.B ?? Vector2.Zero;
+        set
+        {
+            if (_segmentShape != null)
+                _segmentShape.B = value;
+        }
+    }
+
+    public void SetEndpoints(Node2D nodeA, Node2D nodeB)
+    {
+        A = nodeA.GlobalPosition;
+        B = nodeB.GlobalPosition;
+    }
+
     public override void _Ready()
     {
-        _roadStroke = GetNode<Line2D>(_roadStrokePath);
-        _roadShape = GetNode<CollisionShape2D>(_roadShapePath);
-
-        DrawLine(_roadStroke);
+        _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+        _segmentShape = _collisionShape.Shape as SegmentShape2D;
     }
 }

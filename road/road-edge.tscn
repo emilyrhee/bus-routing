@@ -4,7 +4,6 @@
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oywp8"]
 resource_local_to_scene = true
-b = Vector2(0, 0)
 
 [node name="RoadEdge" type="Area2D"]
 collision_layer = 4
@@ -14,8 +13,5 @@ script = ExtResource("1_n4xnl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_oywp8")
 debug_color = Color(0.04185638, 0.06497215, 0.22861353, 0.41960785)
-
-[node name="RoadStroke" type="Line2D" parent="."]
-default_color = Color(0.5409905, 0.5409905, 0.5409905, 1)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

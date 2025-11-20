@@ -5,7 +5,6 @@ using static EditorState;
 public partial class BusStopClickableArea : Area2D
 {
     private Node2D _currentLevel;
-
     public override void _Ready()
     {
         _currentLevel = GetTree().CurrentScene as Node2D ?? GetParent() as Node2D;

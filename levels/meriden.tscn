@@ -1,45 +1,38 @@
-[gd_scene load_steps=11 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=9 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://censkicv071fe" path="res://route-editor/buttons/toolbar.tscn" id="1_tdoqb"]
+[ext_resource type="Script" uid="uid://c555l6jijlp43" path="res://levels/LevelInitializer.cs" id="1_udqdq"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_q4dte"]
 [ext_resource type="PackedScene" uid="uid://bxwma46h0s4jq" path="res://route-editor/route-list/route-list.tscn" id="3_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
 [ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement/bus-stop-placement-area.tscn" id="4_8iv2f"]
-[ext_resource type="PackedScene" uid="uid://bolfgfcj8sywr" path="res://road/road-edge.tscn" id="5_cbuuc"]
 [ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/road-node.tscn" id="6_q4dte"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_tdoqb"]
-resource_local_to_scene = true
-a = Vector2(0, -134)
-b = Vector2(0, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ho4bh"]
-resource_local_to_scene = true
-a = Vector2(272, 1)
-b = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
 resource_local_to_scene = true
 size = Vector2(336, 161.5)
 
 [node name="Meriden" type="Node2D"]
+script = ExtResource("1_udqdq")
 
-[node name="Roads" type="Node2D" parent="."]
+[node name="RoadNodes" type="Node2D" parent="."]
 z_index = -1
 
-[node name="RoadEdge2" parent="Roads" node_paths=PackedStringArray("_nodesOnEdge") instance=ExtResource("5_cbuuc")]
-position = Vector2(376, 297)
-_nodesOnEdge = []
+[node name="RoadNode" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+position = Vector2(242, 161)
+Neighbors = [NodePath("../RoadNode2")]
 
-[node name="CollisionShape2D" parent="Roads/RoadEdge2" index="0"]
-shape = SubResource("SegmentShape2D_tdoqb")
+[node name="RoadNode2" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+position = Vector2(376, 164)
+Neighbors = [NodePath("../RoadNode"), NodePath("../RoadNode3"), NodePath("../RoadNode4")]
 
-[node name="RoadEdge" parent="Roads" node_paths=PackedStringArray("_nodesOnEdge") instance=ExtResource("5_cbuuc")]
-position = Vector2(242, 162)
-_nodesOnEdge = []
+[node name="RoadNode3" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+position = Vector2(513, 165)
+Neighbors = [NodePath("../RoadNode2")]
 
-[node name="CollisionShape2D" parent="Roads/RoadEdge" index="0"]
-shape = SubResource("SegmentShape2D_ho4bh")
+[node name="RoadNode4" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+position = Vector2(376, 295)
+Neighbors = [NodePath("../RoadNode2")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
 
@@ -75,18 +68,4 @@ shape = SubResource("RectangleShape2D_um2er")
 modulate = Color(0.8862745, 0.52156866, 0.32941177, 1)
 position = Vector2(376, 125)
 
-[node name="RoadNode" parent="." instance=ExtResource("6_q4dte")]
-position = Vector2(242, 161)
-
-[node name="RoadNode2" parent="." instance=ExtResource("6_q4dte")]
-position = Vector2(376, 164)
-
-[node name="RoadNode3" parent="." instance=ExtResource("6_q4dte")]
-position = Vector2(513, 165)
-
-[node name="RoadNode4" parent="." instance=ExtResource("6_q4dte")]
-position = Vector2(376, 295)
-
-[editable path="Roads/RoadEdge2"]
-[editable path="Roads/RoadEdge"]
 [editable path="BusStopPlacementArea"]
