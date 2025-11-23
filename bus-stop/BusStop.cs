@@ -13,6 +13,14 @@ public partial class BusStop : Node2D
         }
     }
 
+    public void RemoveNeighbor(Node2D neighbor)
+    {
+        if (Neighbors.Contains(neighbor))
+        {
+            Neighbors.Remove(neighbor);
+        }
+    }
+
     public override void _Ready()
     {
     }

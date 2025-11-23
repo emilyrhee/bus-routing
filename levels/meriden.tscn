@@ -15,8 +15,7 @@ size = Vector2(336, 161.5)
 [node name="Meriden" type="Node2D"]
 script = ExtResource("1_udqdq")
 
-[node name="RoadNodes" type="Node2D" parent="."]
-z_index = -1
+[node name="RoadNodes" type="Node" parent="."]
 
 [node name="RoadNode" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(242, 161)
@@ -52,10 +51,6 @@ offset_bottom = -94.02402
 modulate = Color(0.28235295, 0.41568628, 0.95686275, 1)
 position = Vector2(265, 124)
 
-[node name="BlueHouse" parent="." instance=ExtResource("3_udqdq")]
-modulate = Color(0.28235295, 0.41568628, 0.95686275, 1)
-position = Vector2(490, 125)
-
 [node name="BusStopPlacementArea" parent="." instance=ExtResource("4_8iv2f")]
 visible = false
 position = Vector2(278, 173)
@@ -64,8 +59,14 @@ position = Vector2(278, 173)
 position = Vector2(99, 46.25)
 shape = SubResource("RectangleShape2D_um2er")
 
-[node name="House" parent="." instance=ExtResource("3_udqdq")]
+[node name="Houses" type="Node" parent="."]
+
+[node name="House" parent="Houses" instance=ExtResource("3_udqdq")]
 modulate = Color(0.8862745, 0.52156866, 0.32941177, 1)
 position = Vector2(376, 125)
+
+[node name="BlueHouse" parent="Houses" instance=ExtResource("3_udqdq")]
+modulate = Color(0.28235295, 0.41568628, 0.95686275, 1)
+position = Vector2(490, 125)
 
 [editable path="BusStopPlacementArea"]

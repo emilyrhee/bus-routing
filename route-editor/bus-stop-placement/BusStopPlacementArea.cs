@@ -83,19 +83,21 @@ public partial class BusStopPlacementArea : Area2D
             busStop.GlobalPosition = GetGlobalMousePosition();
 
             var overlappingArea = previewBusStopArea.GetOverlappingAreas()[0];
-            if (overlappingArea is RoadEdge roadEdge)
+            if (overlappingArea is RoadEdge roadEdge && roadEdge.NodeA is RoadNode nodeA && roadEdge.NodeB is RoadNode nodeB)
             {
                 SplitEdge(roadEdge, busStop);
-                ReassignNeighbors(roadEdge.NodeA, busStop);
-                ReassignNeighbors(roadEdge.NodeB, busStop);
-                // busStop.AddNeighbor(roadEdge.NodeA);
-                // busStop.AddNeighbor(roadEdge.NodeB);
-                if (roadEdge.NodeA is RoadNode nodeA && roadEdge.NodeB is RoadNode nodeB)
-                {
-                    GD.Print($"NodeA neighbors ({nodeA.Neighbors.Count}): {string.Join(", ", nodeA.Neighbors.Select(n => n.Name))}");
-                    GD.Print($"NodeB neighbors ({nodeB.Neighbors.Count}): {string.Join(", ", nodeB.Neighbors.Select(n => n.Name))}");
 
-                }
+                nodeA.RemoveNeighbor(nodeB);
+                nodeB.RemoveNeighbor(nodeA);
+
+                nodeA.AddNeighbor(busStop);
+                busStop.AddNeighbor(nodeA);
+                nodeB.AddNeighbor(busStop);
+                busStop.AddNeighbor(nodeB);
+
+                GD.Print($"NodeA neighbors ({nodeA.Neighbors.Count}): {string.Join(", ", nodeA.Neighbors.Select(n => n.Name))}");
+                GD.Print($"NodeB neighbors ({nodeB.Neighbors.Count}): {string.Join(", ", nodeB.Neighbors.Select(n => n.Name))}");
+                GD.Print($"BusStop neighbors ({busStop.Neighbors.Count}): {string.Join(", ", busStop.Neighbors.Select(n => n.Name))}");
             }
         }
     }
