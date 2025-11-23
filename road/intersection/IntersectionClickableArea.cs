@@ -1,7 +1,7 @@
 using Godot;
 using static EditorState;
 
-public partial class RoadNodeClickableArea : Area2D
+public partial class IntersectionClickableArea : Area2D
 {
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {

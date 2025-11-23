@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bolfgfcj8sywr"]
 
-[ext_resource type="Script" uid="uid://bkc76p7a83lfj" path="res://road/RoadEdge.cs" id="1_n4xnl"]
+[ext_resource type="Script" uid="uid://bkc76p7a83lfj" path="res://road/edge/RoadEdge.cs" id="1_n4xnl"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oywp8"]
 resource_local_to_scene = true

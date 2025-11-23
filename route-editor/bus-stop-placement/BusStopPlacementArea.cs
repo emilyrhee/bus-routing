@@ -11,8 +11,8 @@ public partial class BusStopPlacementArea : Area2D
     private Node _currentLevel;
     public override void _Ready()
     {
-        _busStopScene = GD.Load<PackedScene>("res://bus-stop/bus-stop.tscn");
-        _roadEdgeScene = GD.Load<PackedScene>("res://road/road-edge.tscn");
+        _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
+        _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
         _currentLevel = GetTree().CurrentScene as Node ?? GetParent();
         Visible = false;
     }
@@ -40,18 +40,6 @@ public partial class BusStopPlacementArea : Area2D
     {
         _previewBusStop.QueueFree();
         SetProcess(false);
-    }
-
-    private void ReassignNeighbors(Node2D oldNode, Node2D newNode)
-    {
-        foreach (var node in LevelState.AllRoadNodes)
-        {
-            if (node.Neighbors.Contains(oldNode))
-            {
-                node.Neighbors.Remove(oldNode);
-                node.Neighbors.Add(newNode);
-            }
-        }
     }
 
     private void SplitEdge(RoadEdge roadEdge, Node2D busStop)

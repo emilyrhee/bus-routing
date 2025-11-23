@@ -9,26 +9,26 @@ public partial class LevelInitializer : Node2D
 {
     private void DrawRoadEdges()
     {
-        var roadNodes = GetNode("RoadNodes").GetChildren();
-        if (roadNodes == null)
+        var intersectionNodes = GetNode("IntersectionNodes").GetChildren();
+        if (intersectionNodes == null)
         {
             GD.PrintErr("No RoadNodes found. Check if RoadNodes Node exists.");
             return;
         }
 
-        var roadEdgeScene = GD.Load<PackedScene>("res://road/road-edge.tscn");
+        var roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
         
-        foreach (Node node in roadNodes)
+        foreach (Node node in intersectionNodes)
         {
-            if (node is RoadNode roadNode)
+            if (node is IntersectionNode intersectionNode)
             {
-                foreach (RoadNode neighbor in roadNode.Neighbors)
+                foreach (IntersectionNode neighbor in intersectionNode.Neighbors)
                 {
-                    if (roadNode.GetInstanceId() < neighbor.GetInstanceId()) // Only draw edge once per pair (avoid duplicates)
+                    if (intersectionNode.GetInstanceId() < neighbor.GetInstanceId()) // Only draw edge once per pair (avoid duplicates)
                     {
                         var edge = roadEdgeScene.Instantiate<RoadEdge>();
                         AddChild(edge);
-                        edge.SetEndpoints(roadNode, neighbor);
+                        edge.SetEndpoints(intersectionNode, neighbor);
                     }
                 }
             }

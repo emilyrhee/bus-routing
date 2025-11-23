@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxwma46h0s4jq" path="res://route-editor/route-list/route-list.tscn" id="3_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
 [ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement/bus-stop-placement-area.tscn" id="4_8iv2f"]
-[ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/road-node.tscn" id="6_q4dte"]
+[ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/intersection/intersection-node.tscn" id="6_q4dte"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
 resource_local_to_scene = true
@@ -15,21 +15,21 @@ size = Vector2(336, 161.5)
 [node name="Meriden" type="Node2D"]
 script = ExtResource("1_udqdq")
 
-[node name="RoadNodes" type="Node" parent="."]
+[node name="IntersectionNodes" type="Node" parent="."]
 
-[node name="RoadNode" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+[node name="RoadNode" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(242, 161)
 Neighbors = [NodePath("../RoadNode2")]
 
-[node name="RoadNode2" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+[node name="RoadNode2" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(376, 164)
 Neighbors = [NodePath("../RoadNode"), NodePath("../RoadNode3"), NodePath("../RoadNode4")]
 
-[node name="RoadNode3" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+[node name="RoadNode3" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(513, 165)
 Neighbors = [NodePath("../RoadNode2")]
 
-[node name="RoadNode4" parent="RoadNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+[node name="RoadNode4" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(376, 295)
 Neighbors = [NodePath("../RoadNode2")]
 
