@@ -8,7 +8,7 @@ public partial class NewRouteButton : Button
     public override void _Ready()
     {
         _level = GetTree().CurrentScene as Node ?? GetParent();
-        _routeList = _level.GetNode<ItemList>("EditorUI/RouteList/RouteList");
+        _routeList = _level.GetNode<ItemList>(Path.RouteListNode);
     }
 
     private void _on_toggled(bool toggledOn)

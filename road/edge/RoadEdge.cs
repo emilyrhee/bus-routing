@@ -7,8 +7,8 @@ public partial class RoadEdge: Area2D
     public CollisionShape2D CollisionShape => _collisionShape;
     private SegmentShape2D _segmentShape;
 
-    public Node2D NodeA { get; private set; }
-    public Node2D NodeB { get; private set; }
+    public RoadNode NodeA { get; private set; }
+    public RoadNode NodeB { get; private set; }
 
     public Vector2 A
     {
@@ -34,7 +34,7 @@ public partial class RoadEdge: Area2D
     /// Sets the endpoints of the road edge, both in terms of position and
     /// associated nodes.
     /// </summary>
-    public void SetEndpoints(Node2D nodeA, Node2D nodeB)
+    public void SetEndpoints(RoadNode nodeA, RoadNode nodeB)
     {
         NodeA = nodeA;
         NodeB = nodeB;

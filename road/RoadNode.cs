@@ -3,9 +3,9 @@ using System;
 
 public partial class RoadNode : Node2D
 {
-    [Export] public Godot.Collections.Array<Node2D> Neighbors = [];
+    [Export] public Godot.Collections.Array<RoadNode> Neighbors = [];
 
-    public void AddNeighbor(Node2D neighbor)
+    public void AddNeighbor(RoadNode neighbor)
     {
         if (!Neighbors.Contains(neighbor))
         {
@@ -13,12 +13,9 @@ public partial class RoadNode : Node2D
         }
     }
 
-    public void RemoveNeighbor(Node2D neighbor)
+    public void RemoveNeighbor(RoadNode neighbor)
     {
-        if (Neighbors.Contains(neighbor))
-        {
-            Neighbors.Remove(neighbor);
-        }
+        Neighbors.Remove(neighbor);
     }
 
     public override void _Ready()

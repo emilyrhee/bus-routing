@@ -42,7 +42,7 @@ public partial class BusStopPlacementArea : Area2D
         SetProcess(false);
     }
 
-    private void SplitEdge(RoadEdge roadEdge, Node2D busStop)
+    private void SplitEdge(RoadEdge roadEdge, BusStop busStop)
     {
         var edge1 = _roadEdgeScene.Instantiate<RoadEdge>();
         var edge2 = _roadEdgeScene.Instantiate<RoadEdge>();
