@@ -10,7 +10,7 @@ public partial class Route : Node
     /// <summary>
     /// A static counter to ensure every new route gets a unique ID.
     /// </summary>
-    private static uint _nextId = 1;
+    private static uint _nextID = 1;
 
     private uint _ID;
     public uint ID
@@ -22,9 +22,16 @@ public partial class Route : Node
     /// <summary>
     /// List of bus stops that make up the route.
     /// </summary>
-    public List<Node> PathToTravel { get; set; }
+    public List<RoadNode> PathToTravel { get; set; }
 
+    /// <summary>
+    /// The name of the color assigned to this route opposed to the hex value.
+    /// </summary>
     public string ColorName { get; private set; }
+
+    /// <summary>
+    /// The color assigned to this route. Set by hex value or Godot Color constants.
+    /// </summary>
     public Color Color { get; private set; }
 
     private Line2D _pathVisual;
@@ -46,7 +53,7 @@ public partial class Route : Node
     /// Appends a new node to the end of the route's path and visual line.
     /// </summary>
     /// <param name="node">The Node2D to add to the path.</param>
-    public void AppendNode(Node2D node)
+    public void AppendNode(RoadNode node)
     {
         if (node == null) return;
 
@@ -60,7 +67,7 @@ public partial class Route : Node
     /// </summary>
     public Route()
     {
-        ID = _nextId++;
+        ID = _nextID++;
         PathToTravel = [];
         var colorInfo = LevelState.GetNextRouteColor();
         if (colorInfo.HasValue)

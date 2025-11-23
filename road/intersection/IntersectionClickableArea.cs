@@ -13,7 +13,7 @@ public partial class IntersectionClickableArea : Area2D
         }
 
         var currentRoute = LevelState.Routes[^1];
-        currentRoute.AppendNode(this);
+        currentRoute.AppendNode(GetParent<RoadNode>());
 
         if (RoutePreviewLine != null)
         {

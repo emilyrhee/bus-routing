@@ -28,10 +28,10 @@ public partial class BusStopClickableArea : Area2D
             return;
 
         var currentRoute = LevelState.Routes[^1];
-        currentRoute.PathToTravel.Add(GetParent());
+        currentRoute.AppendNode(GetParent<RoadNode>());
 
-        var clickedBusStopPosition = ((Node2D)GetParent()).GlobalPosition;
-        var clickedBusStop = (Node2D)GetParent();
+        var clickedBusStopPosition = GetParent<RoadNode>().GlobalPosition;
+        var clickedBusStop = GetParent<RoadNode>();
 
         switch (CurrentRouteCreationStep)
         {
