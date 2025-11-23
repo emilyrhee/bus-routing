@@ -12,6 +12,7 @@ public partial class LevelState : Node
     public static List<House> AllHouses { get; set; } = [];
     public static List<Destination> AllDestinations { get; set; } = [];
     public static List<Node> AllBusStops { get; set; } = [];
+    public static List<RoadNode> AllRoadNodes { get; set; } = [];
 
     private static int _nextColorIndex = 0;
 

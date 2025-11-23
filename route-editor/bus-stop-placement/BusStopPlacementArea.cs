@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class BusStopPlacementArea : Area2D
 {
@@ -41,6 +42,18 @@ public partial class BusStopPlacementArea : Area2D
         SetProcess(false);
     }
 
+    private void ReassignNeighbors(Node2D oldNode, Node2D newNode)
+    {
+        foreach (var node in LevelState.AllRoadNodes)
+        {
+            if (node.Neighbors.Contains(oldNode))
+            {
+                node.Neighbors.Remove(oldNode);
+                node.Neighbors.Add(newNode);
+            }
+        }
+    }
+
     private void SplitEdge(RoadEdge roadEdge, Node2D busStop)
     {
         var edge1 = _roadEdgeScene.Instantiate<RoadEdge>();
@@ -60,7 +73,7 @@ public partial class BusStopPlacementArea : Area2D
         var busStopInstance = _busStopScene.Instantiate();
         var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
 
-        if (busStopInstance is Node2D busStop
+        if (busStopInstance is BusStop busStop
             && previewBusStop is Area2D previewBusStopArea
             && previewBusStopArea.HasOverlappingAreas())
         {
@@ -73,6 +86,16 @@ public partial class BusStopPlacementArea : Area2D
             if (overlappingArea is RoadEdge roadEdge)
             {
                 SplitEdge(roadEdge, busStop);
+                ReassignNeighbors(roadEdge.NodeA, busStop);
+                ReassignNeighbors(roadEdge.NodeB, busStop);
+                // busStop.AddNeighbor(roadEdge.NodeA);
+                // busStop.AddNeighbor(roadEdge.NodeB);
+                if (roadEdge.NodeA is RoadNode nodeA && roadEdge.NodeB is RoadNode nodeB)
+                {
+                    GD.Print($"NodeA neighbors ({nodeA.Neighbors.Count}): {string.Join(", ", nodeA.Neighbors.Select(n => n.Name))}");
+                    GD.Print($"NodeB neighbors ({nodeB.Neighbors.Count}): {string.Join(", ", nodeB.Neighbors.Select(n => n.Name))}");
+
+                }
             }
         }
     }
