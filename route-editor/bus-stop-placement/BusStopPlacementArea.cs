@@ -53,6 +53,39 @@ public partial class BusStopPlacementArea : Area2D
         roadEdge.QueueFree();
     }
 
+    private void CreateBusStopOnEdge(RoadEdge roadEdge, BusStop busStop)
+    {
+        // Calculate the closest point on the road edge to the mouse
+        Vector2 p1 = roadEdge.NodeA.GlobalPosition;
+        Vector2 p2 = roadEdge.NodeB.GlobalPosition;
+        Vector2 mousePosition = GetGlobalMousePosition();
+        Vector2 projectedPoint = Geometry2D.GetClosestPointToSegment
+        (
+            mousePosition, p1, p2
+        );
+
+        _currentLevel.AddChild(busStop);
+        LevelState.AllBusStops.Add(busStop);
+        busStop.GlobalPosition = projectedPoint;
+
+        var nodeA = roadEdge.NodeA;
+        var nodeB = roadEdge.NodeB;
+
+        SplitEdge(roadEdge, busStop);
+
+        nodeA.RemoveNeighbor(nodeB);
+        nodeB.RemoveNeighbor(nodeA);
+
+        nodeA.AddNeighbor(busStop);
+        busStop.AddNeighbor(nodeA);
+        nodeB.AddNeighbor(busStop);
+        busStop.AddNeighbor(nodeB);
+
+        GD.Print($"NodeA neighbors ({nodeA.Neighbors.Count}): {string.Join(", ", nodeA.Neighbors.Select(n => n.Name))}");
+        GD.Print($"NodeB neighbors ({nodeB.Neighbors.Count}): {string.Join(", ", nodeB.Neighbors.Select(n => n.Name))}");
+        GD.Print($"BusStop neighbors ({busStop.Neighbors.Count}): {string.Join(", ", busStop.Neighbors.Select(n => n.Name))}");
+    }
+
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
         if (!@event.IsLeftMouseClick())
@@ -64,29 +97,10 @@ public partial class BusStopPlacementArea : Area2D
         if (busStopInstance is BusStop busStop
             && roadPlacementArea.HasOverlappingAreas())
         {
-            // TODO: Make the bus stop placement exactly on the road edge for cleaner visual
-            _currentLevel.AddChild(busStop);
-            LevelState.AllBusStops.Add(busStop);
-            busStop.GlobalPosition = GetGlobalMousePosition();
-
             var overlappingArea = roadPlacementArea.GetOverlappingAreas()[0];
-            if (overlappingArea is RoadEdge roadEdge
-            && roadEdge.NodeA is RoadNode nodeA
-            && roadEdge.NodeB is RoadNode nodeB)
+            if (overlappingArea is RoadEdge roadEdge)
             {
-                SplitEdge(roadEdge, busStop);
-
-                nodeA.RemoveNeighbor(nodeB);
-                nodeB.RemoveNeighbor(nodeA);
-
-                nodeA.AddNeighbor(busStop);
-                busStop.AddNeighbor(nodeA);
-                nodeB.AddNeighbor(busStop);
-                busStop.AddNeighbor(nodeB);
-
-                GD.Print($"NodeA neighbors ({nodeA.Neighbors.Count}): {string.Join(", ", nodeA.Neighbors.Select(n => n.Name))}");
-                GD.Print($"NodeB neighbors ({nodeB.Neighbors.Count}): {string.Join(", ", nodeB.Neighbors.Select(n => n.Name))}");
-                GD.Print($"BusStop neighbors ({busStop.Neighbors.Count}): {string.Join(", ", busStop.Neighbors.Select(n => n.Name))}");
+                CreateBusStopOnEdge(roadEdge, busStop);
             }
         }
     }
