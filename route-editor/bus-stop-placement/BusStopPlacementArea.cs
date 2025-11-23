@@ -59,18 +59,17 @@ public partial class BusStopPlacementArea : Area2D
             return;
 
         var busStopInstance = _busStopScene.Instantiate();
-        var previewBusStop = _previewBusStop.GetChild<Area2D>(1);
+        var roadPlacementArea = _previewBusStop.GetChild<Area2D>(1);
 
         if (busStopInstance is BusStop busStop
-            && previewBusStop is Area2D previewBusStopArea
-            && previewBusStopArea.HasOverlappingAreas())
+            && roadPlacementArea.HasOverlappingAreas())
         {
             // TODO: Make the bus stop placement exactly on the road edge for cleaner visual
             _currentLevel.AddChild(busStop);
             LevelState.AllBusStops.Add(busStop);
             busStop.GlobalPosition = GetGlobalMousePosition();
 
-            var overlappingArea = previewBusStopArea.GetOverlappingAreas()[0];
+            var overlappingArea = roadPlacementArea.GetOverlappingAreas()[0];
             if (overlappingArea is RoadEdge roadEdge
             && roadEdge.NodeA is RoadNode nodeA
             && roadEdge.NodeB is RoadNode nodeB)
