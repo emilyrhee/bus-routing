@@ -28,25 +28,33 @@ public partial class BusStopClickableArea : Area2D
             return;
 
         var currentRoute = LevelState.Routes[^1];
-        currentRoute.AppendNode(GetParent<RoadNode>());
-
-        var clickedBusStopPosition = GetParent<RoadNode>().GlobalPosition;
         var clickedBusStop = GetParent<RoadNode>();
 
         switch (CurrentRouteCreationStep)
         {
             case RouteCreationStep.AddingFirstStop:
-                currentRoute.PathVisual = CreateLineAt(clickedBusStopPosition);
+                currentRoute.AppendNode(clickedBusStop);
+                currentRoute.PathVisual = CreateLineAt(clickedBusStop.GlobalPosition);
                 _currentLevel.AddChild(currentRoute.PathVisual);
 
-                RoutePreviewLine = CreateLineAt(clickedBusStopPosition);
+                RoutePreviewLine = CreateLineAt(clickedBusStop.GlobalPosition);
                 RoutePreviewLine.DefaultColor = currentRoute.Color;
                 _currentLevel.AddChild(RoutePreviewLine);
 
                 CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
                 break;
+
             case RouteCreationStep.AddingSubsequentStops:
-                currentRoute = LevelState.Routes[^1];
+                var lastStop = currentRoute.PathToTravel[^1];
+                if (!lastStop.Neighbors.Contains(clickedBusStop))
+                {
+                    GD.PrintErr
+                    (
+                        "Cannot add stop: Not a neighbor of the previous stop."
+                    );
+                    return;
+                }
+
                 currentRoute.AppendNode(clickedBusStop);
 
                 if (RoutePreviewLine != null)
