@@ -65,5 +65,9 @@ public partial class BusStopClickableArea : Area2D
                 break;
         }
         LevelState.UpdateAllHouseStatuses();
+        if (LevelState.IsLevelComplete())
+        {
+            GD.Print("Level Complete!");
+        }
     }
 }

@@ -71,7 +71,9 @@ public partial class BusStopPlacementArea : Area2D
             busStop.GlobalPosition = GetGlobalMousePosition();
 
             var overlappingArea = previewBusStopArea.GetOverlappingAreas()[0];
-            if (overlappingArea is RoadEdge roadEdge && roadEdge.NodeA is RoadNode nodeA && roadEdge.NodeB is RoadNode nodeB)
+            if (overlappingArea is RoadEdge roadEdge
+            && roadEdge.NodeA is RoadNode nodeA
+            && roadEdge.NodeB is RoadNode nodeB)
             {
                 SplitEdge(roadEdge, busStop);
 
