@@ -8,6 +8,7 @@ public static class Path
     // Scenes
     public const string RoadEdgeScene = "res://road/edge/road-edge.tscn";
     public const string BusStopScene = "res://bus-stop/bus-stop.tscn";
+    public const string PreviewBusStopScene = "res://bus-stop/preview/preview-bus-stop.tscn";
 
     // Nodes
     public const string RouteListNode = "EditorUI/RouteList/RouteList";

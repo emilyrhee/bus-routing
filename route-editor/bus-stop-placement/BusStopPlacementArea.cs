@@ -4,6 +4,7 @@ using System.Linq;
 
 public partial class BusStopPlacementArea : Area2D
 {
+    private PackedScene _previewBusStopScene;
     private PackedScene _busStopScene;
     private PackedScene _roadEdgeScene;
 
@@ -11,6 +12,7 @@ public partial class BusStopPlacementArea : Area2D
     private Node _currentLevel;
     public override void _Ready()
     {
+        _previewBusStopScene = GD.Load<PackedScene>(Path.PreviewBusStopScene);
         _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
         _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
         _currentLevel = GetTree().CurrentScene as Node ?? GetParent();
@@ -25,13 +27,13 @@ public partial class BusStopPlacementArea : Area2D
 
     private void _on_mouse_entered()
     {
-        var busStopInstance = _busStopScene.Instantiate();
-        if (busStopInstance is Node2D busStop)
+        var previewBusStopInstance = _previewBusStopScene.Instantiate();
+        if (previewBusStopInstance is Node2D previewBusStop)
         {
-            _currentLevel.AddChild(busStop);
-            busStop.GlobalPosition = GetGlobalMousePosition();
+            _currentLevel.AddChild(previewBusStop);
+            previewBusStop.GlobalPosition = GetGlobalMousePosition();
 
-            _previewBusStop = busStop;
+            _previewBusStop = previewBusStop;
             SetProcess(true);
         }
     }
@@ -53,7 +55,7 @@ public partial class BusStopPlacementArea : Area2D
         roadEdge.QueueFree();
     }
 
-    private void CreateBusStopOnEdge(RoadEdge roadEdge, BusStop busStop)
+    private void CreateBusStopOnEdge(RoadEdge roadEdge, BusStop busStop) // CONSIDER breaking this up further.
     {
         // Calculate the closest point on the road edge to the mouse
         Vector2 p1 = roadEdge.NodeA.GlobalPosition;
@@ -92,7 +94,7 @@ public partial class BusStopPlacementArea : Area2D
             return;
 
         var busStopInstance = _busStopScene.Instantiate();
-        var roadPlacementArea = _previewBusStop.GetChild<Area2D>(1);
+        var roadPlacementArea = _previewBusStop.GetChild<Area2D>(0);
 
         if (busStopInstance is BusStop busStop
             && roadPlacementArea.HasOverlappingAreas())

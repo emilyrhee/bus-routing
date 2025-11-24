@@ -2,15 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="6.2678452mm"
-   height="12.228702mm"
-   viewBox="0 0 6.267845 12.228702"
+   width="12.775075mm"
+   height="12.775075mm"
+   viewBox="0 0 12.775074 12.775075"
    version="1.1"
    id="svg5"
-   inkscape:export-filename=".\bus-depot.svg"
+   inkscape:export-filename=".\bus-stop.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
-   sodipodi:docname="business.svg"
+   sodipodi:docname="circle.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -26,24 +27,80 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     showguides="true" />
+     showguides="true"
+     inkscape:zoom="17.168791"
+     inkscape:cx="30.025411"
+     inkscape:cy="25.860877"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs2" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-16.186569,-50.124901)">
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;paint-order:markers stroke fill"
-       d="m 19.320492,54.839176 v 7.514427"
-       id="path9042" />
+     transform="translate(-13.09519,-49.543943)">
+    <circle
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.927;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="path475"
+       cx="19.482727"
+       cy="55.93148"
+       r="5.9240375" />
     <rect
-       style="fill:#0b3387;fill-opacity:1;fill-rule:evenodd;stroke:#eeeeee;stroke-width:1;stroke-opacity:1;paint-order:markers stroke fill"
-       id="rect9040"
-       width="5.2678452"
-       height="4.2142763"
-       x="16.686569"
-       y="50.624901" />
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.945649;paint-order:markers stroke fill"
+       id="rect417"
+       width="5.7861834"
+       height="5.241333"
+       x="16.589636"
+       y="53.310814"
+       ry="0.021794042" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.466301;paint-order:markers stroke fill"
+       id="rect473"
+       width="2.5499024"
+       height="2.9185178"
+       x="16.758472"
+       y="53.872887"
+       ry="0.013969977" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.466301;paint-order:markers stroke fill"
+       id="rect473-5"
+       width="2.5499024"
+       height="2.9185178"
+       x="19.548109"
+       y="53.872887"
+       ry="0.013969977" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;paint-order:markers stroke fill"
+       id="path2561"
+       cx="17.052692"
+       cy="57.662224"
+       r="0.29421955" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;paint-order:markers stroke fill"
+       id="path2561-3"
+       cx="21.84738"
+       cy="57.662224"
+       r="0.29421955" />
+    <rect
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.860547;paint-order:markers stroke fill"
+       id="rect3365"
+       width="0.8499676"
+       height="0.99526089"
+       x="16.968418"
+       y="58.495804"
+       ry="0.016139369" />
+    <rect
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.860547;paint-order:markers stroke fill"
+       id="rect3365-6"
+       width="0.8499676"
+       height="0.99526089"
+       x="20.927244"
+       y="58.495804"
+       ry="0.016139369" />
   </g>
 </svg>
