@@ -94,7 +94,7 @@ public partial class BusStopPlacementArea : Area2D
             return;
 
         var busStopInstance = _busStopScene.Instantiate();
-        var roadPlacementArea = _previewBusStop.GetChild<Area2D>(0);
+        var roadPlacementArea = _previewBusStop.GetChild<Area2D>(1);
 
         if (busStopInstance is BusStop busStop
             && roadPlacementArea.HasOverlappingAreas())
