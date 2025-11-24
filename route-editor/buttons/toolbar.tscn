@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck1xf4e8qrx3s" path="res://route-editor/buttons/new-route/new-route-button.tscn" id="1_nof2m"]
 [ext_resource type="ButtonGroup" uid="uid://c3roiluad2p6i" path="res://route-editor/buttons/ToolbarButtons.tres" id="2_rntkk"]
-[ext_resource type="PackedScene" uid="uid://cbnu4oj3bmb3i" path="res://route-editor/buttons/add-stops/add-delete-stops-button.tscn" id="2_vogl7"]
+[ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://route-editor/buttons/add-stops/add-stop.tscn" id="4_bidoq"]
 
 [node name="Toolbar" type="Control"]
 layout_mode = 3
@@ -10,13 +10,13 @@ anchors_preset = 0
 
 [node name="NewRouteButton" parent="." instance=ExtResource("1_nof2m")]
 layout_mode = 0
-offset_left = 151.0
-offset_right = 244.0
-offset_bottom = 31.0
+offset_left = 67.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 39.0
 button_group = ExtResource("2_rntkk")
 
-[node name="AddDeleteStopsButton" parent="." instance=ExtResource("2_vogl7")]
-layout_mode = 0
-offset_right = 142.0
-offset_bottom = 31.0
-button_group = ExtResource("2_rntkk")
+[node name="AddStop" parent="." instance=ExtResource("4_bidoq")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0

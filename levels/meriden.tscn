@@ -1,16 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=8 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://censkicv071fe" path="res://route-editor/buttons/toolbar.tscn" id="1_tdoqb"]
 [ext_resource type="Script" uid="uid://c555l6jijlp43" path="res://levels/LevelInitializer.cs" id="1_udqdq"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_q4dte"]
 [ext_resource type="PackedScene" uid="uid://bxwma46h0s4jq" path="res://route-editor/route-list/route-list.tscn" id="3_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
-[ext_resource type="PackedScene" uid="uid://d1ubwvvx2qebc" path="res://route-editor/bus-stop-placement/bus-stop-placement-area.tscn" id="4_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/intersection/intersection-node.tscn" id="6_q4dte"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_um2er"]
-resource_local_to_scene = true
-size = Vector2(336, 161.5)
+[ext_resource type="PackedScene" uid="uid://dc2wfu8lyap4i" path="res://route-editor/bus-stop-placement/bus-stop-placement.tscn" id="8_8iv2f"]
 
 [node name="Meriden" type="Node2D"]
 script = ExtResource("1_udqdq")
@@ -44,6 +40,10 @@ Neighbors = [NodePath("../RoadNode2")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
 
+[node name="BusStopPlacement" parent="EditorUI" instance=ExtResource("8_8iv2f")]
+offset_right = 1151.0
+offset_bottom = 649.0
+
 [node name="Toolbar" parent="EditorUI" instance=ExtResource("1_tdoqb")]
 offset_left = 10.0
 offset_top = 10.0
@@ -59,14 +59,6 @@ offset_left = -4.248047
 offset_top = -3.952011
 offset_right = -71.064026
 offset_bottom = -94.02402
-
-[node name="BusStopPlacementArea" parent="." instance=ExtResource("4_8iv2f")]
-visible = false
-position = Vector2(278, 173)
-
-[node name="CollisionShape2D" parent="BusStopPlacementArea" index="0"]
-position = Vector2(99, 46.25)
-shape = SubResource("RectangleShape2D_um2er")
 
 [node name="Houses" type="Node" parent="."]
 
@@ -88,5 +80,3 @@ position = Vector2(265, 124)
 modulate = Color(0.8862745, 0.52156866, 0.32941177, 1)
 position = Vector2(414, 274)
 rotation = 1.5707964
-
-[editable path="BusStopPlacementArea"]

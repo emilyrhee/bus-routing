@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkglf58b8n1vu"]
+
+[ext_resource type="Script" uid="uid://7r3ra74yrcan" path="res://route-editor/buttons/add-stops/AddStop.cs" id="1_dmrtr"]
+[ext_resource type="Texture2D" uid="uid://uhvh86snav6" path="res://assets/bus-stop.svg" id="1_m0v6u"]
+
+[node name="AddStop" type="Control"]
+layout_mode = 3
+anchor_right = 0.042000003
+anchor_bottom = 0.074
+offset_right = -48.384003
+offset_bottom = -47.952
+script = ExtResource("1_dmrtr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_m0v6u")
