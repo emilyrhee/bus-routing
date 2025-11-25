@@ -13,92 +13,92 @@ public partial class RouteCreationHandler : Area2D
         if (RoutePreviewLine.GetPointCount() < 2)
             RoutePreviewLine.AddPoint(GetGlobalMousePosition());
         else
-            RoutePreviewLine.SetPointPosition(1, GetGlobalMousePosition());
+            RoutePreviewLine.SetPointPosition(RoutePreviewLine.GetPointCount() - 1, GetGlobalMousePosition());
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.Pressed && CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
+        {
+            FinalizeRoute();
+        }
     }
 
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (!@event.IsLeftMouseClick() || ActiveTool != EditorTool.NewRoute)
-        {
-            return;
-        }
-
         var clickedRoadNode = GetParent<RoadNode>();
 
-        if (clickedRoadNode is BusStop)
+        if (@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.Pressed)
         {
-            HandleBusStopClick(clickedRoadNode);
+            if (clickedRoadNode is BusStop && CurrentRouteCreationStep == RouteCreationStep.NotCreating)
+            {
+                StartRouteCreation(clickedRoadNode);
+            }
+        }
+        else if (@event is InputEventMouseMotion && CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
+        {
+            GD.Print("Continuing route creation.");
+            ContinueRoute(clickedRoadNode);
+        }
+    }
+
+    private void StartRouteCreation(RoadNode startNode)
+    {
+        CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
+
+        var newRoute = new Route();
+        LevelState.Routes.Add(newRoute);
+        newRoute.AppendNode(startNode);
+
+        newRoute.PathVisual = CreateLineAt(startNode.GlobalPosition);
+        CurrentLevel.AddChild(newRoute.PathVisual);
+
+        RoutePreviewLine = CreateLineAt(startNode.GlobalPosition);
+        RoutePreviewLine.DefaultColor = newRoute.Color;
+        CurrentLevel.AddChild(RoutePreviewLine);
+    }
+
+    private void ContinueRoute(RoadNode nextNode)
+    {
+        var currentRoute = LevelState.Routes[^1];
+        var lastNode = currentRoute.PathToTravel[^1];
+
+        if (nextNode != lastNode && lastNode.Neighbors.Contains(nextNode))
+        {
+            currentRoute.AppendNode(nextNode);
+            RoutePreviewLine.SetPointPosition(RoutePreviewLine.GetPointCount() - 1, nextNode.GlobalPosition);
+            RoutePreviewLine.AddPoint(nextNode.GlobalPosition);
+        }
+    }
+
+    private void FinalizeRoute()
+    {
+        var currentRoute = LevelState.Routes[^1];
+        var lastNode = currentRoute.PathToTravel[^1];
+
+        // Check if the route is valid (e.g., ends at a bus stop)
+        if (currentRoute.PathToTravel.Count < 2 || !(lastNode is BusStop))
+        {
+            GD.Print("Route must start and end at a bus stop.");
+            currentRoute.PathVisual?.QueueFree();
+            LevelState.Routes.Remove(currentRoute);
         }
         else
         {
-            HandleIntersectionClick(clickedRoadNode);
-        }
-    }
-
-    private void HandleBusStopClick(RoadNode clickedBusStop)
-    {
-        var currentRoute = LevelState.Routes[^1];
-
-        switch (CurrentRouteCreationStep)
-        {
-            case RouteCreationStep.AddingFirstStop:
-                currentRoute.AppendNode(clickedBusStop);
-                currentRoute.PathVisual = CreateLineAt(clickedBusStop.GlobalPosition);
-                CurrentLevel.AddChild(currentRoute.PathVisual);
-
-                RoutePreviewLine = CreateLineAt(clickedBusStop.GlobalPosition);
-                RoutePreviewLine.DefaultColor = currentRoute.Color;
-                CurrentLevel.AddChild(RoutePreviewLine);
-
-                CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
-                break;
-
-            case RouteCreationStep.AddingSubsequentStops:
-                var lastStop = currentRoute.PathToTravel[^1];
-                if (!lastStop.Neighbors.Contains(clickedBusStop))
-                {
-                    GD.PrintErr("Cannot add stop: Not a neighbor of the previous stop.");
-                    return;
-                }
-
-                currentRoute.AppendNode(clickedBusStop);
-
-                if (RoutePreviewLine != null)
-                {
-                    RoutePreviewLine.ClearPoints();
-                    RoutePreviewLine.AddPoint(clickedBusStop.GlobalPosition);
-                }
-                break;
-        }
-        LevelState.UpdateAllHouseStatuses();
-        if (LevelState.IsLevelComplete())
-        {
-            GD.Print("Level Complete!");
-        }
-    }
-
-    private void HandleIntersectionClick(RoadNode clickedIntersection)
-    {
-        if (CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
-        {
-            return;
+            // Valid route, update visuals and state
+            var routeList = GetTree().CurrentScene.GetNode<ItemList>(Path.RouteListNode);
+            routeList.AddItem(currentRoute.ColorName + " line");
+            LevelState.UpdateAllHouseStatuses();
+            if (LevelState.IsLevelComplete())
+            {
+                GD.Print("Level Complete!");
+            }
         }
 
-        var currentRoute = LevelState.Routes[^1];
-        var lastRoadNode = currentRoute.PathToTravel[^1];
-
-        if (!lastRoadNode.Neighbors.Contains(clickedIntersection))
-        {
-            GD.PrintErr("Cannot add node: Not a neighbor of the previous stop.");
-            return;
-        }
-
-        currentRoute.AppendNode(clickedIntersection);
-
-        if (RoutePreviewLine != null)
-        {
-            RoutePreviewLine.ClearPoints();
-            RoutePreviewLine.AddPoint(GlobalPosition);
-        }
+        // Cleanup and reset state
+        RoutePreviewLine?.QueueFree();
+        RoutePreviewLine = null;
+        CurrentRouteCreationStep = RouteCreationStep.NotCreating;
+        GD.Print("route created: " + currentRoute.PathToTravel.Count + " stops.");
     }
 }

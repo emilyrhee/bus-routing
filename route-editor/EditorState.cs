@@ -16,6 +16,7 @@ public enum EditorTool
 /// </summary>
 public enum RouteCreationStep
 {
+    NotCreating,
     AddingFirstStop,
     AddingSubsequentStops
 }
@@ -30,7 +31,7 @@ public partial class EditorState : Node
     /// </summary>
     public static Line2D RoutePreviewLine { get; set; }
 
-    private static RouteCreationStep? _currentRouteCreationStep = null;
+    private static RouteCreationStep? _currentRouteCreationStep = RouteCreationStep.NotCreating;
     public static RouteCreationStep? CurrentRouteCreationStep 
     { 
         get => _currentRouteCreationStep; 

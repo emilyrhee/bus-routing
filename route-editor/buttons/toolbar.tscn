@@ -1,20 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://censkicv071fe"]
+[gd_scene load_steps=2 format=3 uid="uid://censkicv071fe"]
 
-[ext_resource type="PackedScene" uid="uid://ck1xf4e8qrx3s" path="res://route-editor/buttons/new-route/new-route-button.tscn" id="1_nof2m"]
-[ext_resource type="ButtonGroup" uid="uid://c3roiluad2p6i" path="res://route-editor/buttons/ToolbarButtons.tres" id="2_rntkk"]
 [ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://route-editor/buttons/add-stops/add-stop.tscn" id="4_bidoq"]
 
 [node name="Toolbar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-
-[node name="NewRouteButton" parent="." instance=ExtResource("1_nof2m")]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 8.0
-offset_right = 160.0
-offset_bottom = 39.0
-button_group = ExtResource("2_rntkk")
 
 [node name="AddStop" parent="." instance=ExtResource("4_bidoq")]
 layout_mode = 1
