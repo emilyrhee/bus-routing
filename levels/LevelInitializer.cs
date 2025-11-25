@@ -36,8 +36,7 @@ public partial class LevelInitializer : Node2D
     }
     public override void _Ready()
     {
-        LevelState levelState = new LevelState();
-        AddChild(levelState); // unsure if this is necessary. check back later.
+        _ = new LevelState();
 
         DrawRoadEdges();
         int count = 0;
