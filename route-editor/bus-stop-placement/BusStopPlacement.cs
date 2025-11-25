@@ -18,7 +18,6 @@ public partial class BusStopPlacement : Control
         _previewBusStopScene = GD.Load<PackedScene>(Path.PreviewBusStopScene);
         _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
         _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
-        MouseFilter = MouseFilterEnum.Pass; // Allow mouse events to pass through to underlying nodes
     }
 
     public override void _Process(double delta)

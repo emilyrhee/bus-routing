@@ -3,7 +3,7 @@ using System;
 
 /// <summary>
 /// This script is to be attached to the root of each level.
-/// See also LevelState.cs for level state management.
+/// See also <seealso cref="LevelState"/> for level state management.
 /// </summary>
 public partial class LevelInitializer : Node2D
 {
