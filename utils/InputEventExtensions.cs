@@ -12,4 +12,11 @@ public static class InputEventExtensions
               && mouseEvent.Pressed
               && mouseEvent.ButtonIndex == MouseButton.Left;
     }
+
+    public static bool IsRightMouseClick(this InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseEvent
+              && mouseEvent.Pressed
+              && mouseEvent.ButtonIndex == MouseButton.Right;
+    }
 }
