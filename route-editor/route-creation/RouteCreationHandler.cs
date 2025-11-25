@@ -1,18 +1,19 @@
 using Godot;
-using static LineFactory;
 using static EditorState;
+using static LineFactory;
 
-public partial class BusStopClickableArea : Area2D
+public partial class RouteCreationHandler : Area2D
 {
     private Node2D _currentLevel;
+
     public override void _Ready()
     {
-        _currentLevel = GetTree().CurrentScene as Node2D ?? GetParent() as Node2D;
+        _currentLevel = GetTree().CurrentScene as Node2D ?? GetParent().GetParent() as Node2D;
     }
 
     public override void _Process(double delta)
     {
-        if (RoutePreviewLine == null)
+        if (RoutePreviewLine == null || CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
             return;
 
         if (RoutePreviewLine.GetPointCount() < 2)
@@ -23,12 +24,26 @@ public partial class BusStopClickableArea : Area2D
 
     private void _on_input_event(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (!@event.IsLeftMouseClick()
-            || ActiveTool != EditorTool.NewRoute)
+        if (!@event.IsLeftMouseClick() || ActiveTool != EditorTool.NewRoute)
+        {
             return;
+        }
 
+        var clickedRoadNode = GetParent<RoadNode>();
+
+        if (clickedRoadNode is BusStop)
+        {
+            HandleBusStopClick(clickedRoadNode);
+        }
+        else
+        {
+            HandleIntersectionClick(clickedRoadNode);
+        }
+    }
+
+    private void HandleBusStopClick(RoadNode clickedBusStop)
+    {
         var currentRoute = LevelState.Routes[^1];
-        var clickedBusStop = GetParent<RoadNode>();
 
         switch (CurrentRouteCreationStep)
         {
@@ -48,10 +63,7 @@ public partial class BusStopClickableArea : Area2D
                 var lastStop = currentRoute.PathToTravel[^1];
                 if (!lastStop.Neighbors.Contains(clickedBusStop))
                 {
-                    GD.PrintErr
-                    (
-                        "Cannot add stop: Not a neighbor of the previous stop."
-                    );
+                    GD.PrintErr("Cannot add stop: Not a neighbor of the previous stop.");
                     return;
                 }
 
@@ -68,6 +80,31 @@ public partial class BusStopClickableArea : Area2D
         if (LevelState.IsLevelComplete())
         {
             GD.Print("Level Complete!");
+        }
+    }
+
+    private void HandleIntersectionClick(RoadNode clickedIntersection)
+    {
+        if (CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
+        {
+            return;
+        }
+
+        var currentRoute = LevelState.Routes[^1];
+        var lastRoadNode = currentRoute.PathToTravel[^1];
+
+        if (!lastRoadNode.Neighbors.Contains(clickedIntersection))
+        {
+            GD.PrintErr("Cannot add node: Not a neighbor of the previous stop.");
+            return;
+        }
+
+        currentRoute.AppendNode(clickedIntersection);
+
+        if (RoutePreviewLine != null)
+        {
+            RoutePreviewLine.ClearPoints();
+            RoutePreviewLine.AddPoint(GlobalPosition);
         }
     }
 }

@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://sqsjlmlyneb6"]
+[gd_scene load_steps=4 format=3 uid="uid://sqsjlmlyneb6"]
 
 [ext_resource type="Script" uid="uid://dbyi4m20fj0om" path="res://road/intersection/IntersectionNode.cs" id="1_h1vvq"]
 [ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="1_yhkpg"]
-[ext_resource type="Script" uid="uid://cb3i7up6i8pso" path="res://road/intersection/IntersectionArea.cs" id="3_mpe73"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_bfra4"]
-radius = 6.0
+[ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://route-editor/route-creation/RouteCreationHandler.tscn" id="4_nen50"]
 
 [node name="IntersectionNode" type="Node2D"]
 script = ExtResource("1_h1vvq")
@@ -14,11 +11,4 @@ script = ExtResource("1_h1vvq")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_yhkpg")
 
-[node name="IntersectionArea" type="Area2D" parent="."]
-collision_mask = 0
-script = ExtResource("3_mpe73")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="IntersectionArea"]
-shape = SubResource("CircleShape2D_bfra4")
-
-[connection signal="input_event" from="IntersectionArea" to="IntersectionArea" method="_on_input_event"]
+[node name="RouteCreationHandler" parent="." instance=ExtResource("4_nen50")]

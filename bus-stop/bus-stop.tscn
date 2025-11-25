@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://pkmhht26hfvg"]
+[gd_scene load_steps=5 format=3 uid="uid://pkmhht26hfvg"]
 
 [ext_resource type="Script" uid="uid://b4aut18kx5u1u" path="res://bus-stop/BusStop.cs" id="1_0n3gx"]
 [ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="1_ey4ng"]
-[ext_resource type="Script" uid="uid://045wvv7dqwkw" path="res://bus-stop/BusStopClickableArea.cs" id="2_gslyg"]
+[ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://route-editor/route-creation/RouteCreationHandler.tscn" id="4_e0gyx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gslyg"]
 radius = 39.051247
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0n3gx"]
-radius = 11.0
 
 [node name="BusStop" type="Node2D"]
 script = ExtResource("1_0n3gx")
@@ -25,11 +22,4 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkRadius"]
 shape = SubResource("CircleShape2D_gslyg")
 
-[node name="ClickableArea" type="Area2D" parent="."]
-editor_description = "This area is what the player can click on in the route editor."
-script = ExtResource("2_gslyg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
-shape = SubResource("CircleShape2D_0n3gx")
-
-[connection signal="input_event" from="ClickableArea" to="ClickableArea" method="_on_input_event"]
+[node name="RouteCreationHandler" parent="." instance=ExtResource("4_e0gyx")]

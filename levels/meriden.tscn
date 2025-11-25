@@ -31,7 +31,7 @@ position = Vector2(376, 164)
 Neighbors = [NodePath("../RoadNode"), NodePath("../RoadNode3"), NodePath("../RoadNode4")]
 
 [node name="RoadNode3" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(513, 165)
+position = Vector2(513, 164)
 Neighbors = [NodePath("../RoadNode2")]
 
 [node name="RoadNode4" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
