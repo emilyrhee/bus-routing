@@ -2,22 +2,23 @@
 
 [ext_resource type="Script" uid="uid://dbyi4m20fj0om" path="res://road/intersection/IntersectionNode.cs" id="1_h1vvq"]
 [ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="1_yhkpg"]
-[ext_resource type="Script" uid="uid://cxp1xtpi1rnje" path="res://road/intersection/IntersectionClickableArea.cs" id="2_cktu1"]
+[ext_resource type="Script" uid="uid://cb3i7up6i8pso" path="res://road/intersection/IntersectionArea.cs" id="3_mpe73"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfra4"]
 radius = 6.0
 
-[node name="RoadNode" type="Node2D"]
+[node name="IntersectionNode" type="Node2D"]
 script = ExtResource("1_h1vvq")
-
-[node name="ClickableArea" type="Area2D" parent="."]
-script = ExtResource("2_cktu1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
-shape = SubResource("CircleShape2D_bfra4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_yhkpg")
 
-[connection signal="input_event" from="ClickableArea" to="ClickableArea" method="_on_input_event"]
+[node name="IntersectionArea" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("3_mpe73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IntersectionArea"]
+shape = SubResource("CircleShape2D_bfra4")
+
+[connection signal="input_event" from="IntersectionArea" to="IntersectionArea" method="_on_input_event"]

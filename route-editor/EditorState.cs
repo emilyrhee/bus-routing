@@ -29,7 +29,6 @@ public partial class EditorState : Node
     /// The temporary line segment that follows the cursor during route creation.
     /// </summary>
     public static Line2D RoutePreviewLine { get; set; }
-    
 
     private static RouteCreationStep? _currentRouteCreationStep = null;
     public static RouteCreationStep? CurrentRouteCreationStep 

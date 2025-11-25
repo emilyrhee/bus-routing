@@ -8,7 +8,7 @@ public partial class BusStopPlacement : Control
     private PackedScene _busStopScene;
     private PackedScene _roadEdgeScene;
 
-    private Node2D _previewBusStop;
+    private PreviewBusStop _previewBusStop;
     private Area2D _previewPlacementArea;
     private bool _isValidPlacement = false;
     private Node _currentLevel;
@@ -19,7 +19,7 @@ public partial class BusStopPlacement : Control
         _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
         _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
         _currentLevel = GetTree().CurrentScene as Node ?? GetParent();
-        MouseFilter = MouseFilterEnum.Pass;
+        MouseFilter = MouseFilterEnum.Pass; // Allow mouse events to pass through to underlying nodes
     }
 
     public override void _Process(double delta)
@@ -27,10 +27,10 @@ public partial class BusStopPlacement : Control
         if (_previewBusStop != null)
         {
             _previewBusStop.GlobalPosition = GetGlobalMousePosition();
-            _isValidPlacement = _previewPlacementArea.HasOverlappingAreas();
+            _isValidPlacement = _previewPlacementArea.HasOverlappingAreas()
+            && !_previewBusStop.IntersectionDetector.HasOverlappingAreas();
 
-            // Visual feedback: Green for valid, Red for invalid
-            var color = _isValidPlacement ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
+            var color = _isValidPlacement ? Colors.LightGreen : Colors.Red;
             _previewBusStop.Modulate = color;
         }
     }
@@ -41,7 +41,7 @@ public partial class BusStopPlacement : Control
         {
             if (_previewBusStop == null)
             {
-                _previewBusStop = _previewBusStopScene.Instantiate<Node2D>();
+                _previewBusStop = _previewBusStopScene.Instantiate<PreviewBusStop>();
                 _currentLevel.AddChild(_previewBusStop);
                 _previewPlacementArea = _previewBusStop.GetChild<Area2D>(1);
                 SetProcess(true);

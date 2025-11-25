@@ -20,7 +20,8 @@ project/assembly_name="bus-routing"
 
 [layer_names]
 
-2d_physics/layer_1="RouteEditor"
-2d_physics/layer_2="BusStop"
+2d_physics/layer_1="Intersection"
+2d_physics/layer_2="PreviewBusStopRoadDetector"
 2d_physics/layer_3="Road"
 2d_physics/layer_4="RoadNode"
+2d_physics/layer_5="PreviewBusStopIntersectionDetector"
