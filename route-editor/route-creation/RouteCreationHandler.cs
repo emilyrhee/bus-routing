@@ -1,16 +1,10 @@
 using Godot;
 using static EditorState;
 using static LineFactory;
+using static LevelState;
 
 public partial class RouteCreationHandler : Area2D
 {
-    private Node2D _currentLevel;
-
-    public override void _Ready()
-    {
-        _currentLevel = GetTree().CurrentScene as Node2D ?? GetParent().GetParent() as Node2D;
-    }
-
     public override void _Process(double delta)
     {
         if (RoutePreviewLine == null || CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
@@ -50,11 +44,11 @@ public partial class RouteCreationHandler : Area2D
             case RouteCreationStep.AddingFirstStop:
                 currentRoute.AppendNode(clickedBusStop);
                 currentRoute.PathVisual = CreateLineAt(clickedBusStop.GlobalPosition);
-                _currentLevel.AddChild(currentRoute.PathVisual);
+                CurrentLevel.AddChild(currentRoute.PathVisual);
 
                 RoutePreviewLine = CreateLineAt(clickedBusStop.GlobalPosition);
                 RoutePreviewLine.DefaultColor = currentRoute.Color;
-                _currentLevel.AddChild(RoutePreviewLine);
+                CurrentLevel.AddChild(RoutePreviewLine);
 
                 CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
                 break;

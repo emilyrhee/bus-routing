@@ -37,6 +37,7 @@ public partial class LevelInitializer : Node2D
     public override void _Ready()
     {
         _ = new LevelState();
+        LevelState.CurrentLevel = this;
 
         DrawRoadEdges();
         int count = 0;

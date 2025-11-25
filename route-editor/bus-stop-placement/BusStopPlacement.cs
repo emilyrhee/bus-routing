@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
+using static LevelState;
 
 public partial class BusStopPlacement : Control
 {
@@ -11,14 +12,12 @@ public partial class BusStopPlacement : Control
     private PreviewBusStop _previewBusStop;
     private Area2D _previewPlacementArea;
     private bool _isValidPlacement = false;
-    private Node _currentLevel;
 
     public override void _Ready()
     {
         _previewBusStopScene = GD.Load<PackedScene>(Path.PreviewBusStopScene);
         _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
         _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
-        _currentLevel = GetTree().CurrentScene as Node ?? GetParent();
         MouseFilter = MouseFilterEnum.Pass; // Allow mouse events to pass through to underlying nodes
     }
 
@@ -42,7 +41,7 @@ public partial class BusStopPlacement : Control
             if (_previewBusStop == null)
             {
                 _previewBusStop = _previewBusStopScene.Instantiate<PreviewBusStop>();
-                _currentLevel.AddChild(_previewBusStop);
+                CurrentLevel.AddChild(_previewBusStop);
                 _previewPlacementArea = _previewBusStop.GetChild<Area2D>(1);
                 SetProcess(true);
             }
@@ -81,8 +80,8 @@ public partial class BusStopPlacement : Control
     {
         var edge1 = _roadEdgeScene.Instantiate<RoadEdge>();
         var edge2 = _roadEdgeScene.Instantiate<RoadEdge>();
-        _currentLevel.AddChild(edge1);
-        _currentLevel.AddChild(edge2);
+        CurrentLevel.AddChild(edge1);
+        CurrentLevel.AddChild(edge2);
         edge1.SetEndpoints(roadEdge.NodeA, busStop);
         edge2.SetEndpoints(busStop, roadEdge.NodeB);
         roadEdge.QueueFree();
@@ -95,7 +94,7 @@ public partial class BusStopPlacement : Control
         Vector2 mousePosition = GetGlobalMousePosition();
         Vector2 projectedPoint = Geometry2D.GetClosestPointToSegment(mousePosition, p1, p2);
 
-        _currentLevel.AddChild(busStop);
+        CurrentLevel.AddChild(busStop);
         LevelState.AllBusStops.Add(busStop); 
         busStop.GlobalPosition = projectedPoint;
 

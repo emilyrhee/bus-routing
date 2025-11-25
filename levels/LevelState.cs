@@ -8,6 +8,7 @@ using System.Linq;
 /// </summary>
 public partial class LevelState : Node
 {
+    public static Node CurrentLevel { get; set; }
     public static List<Route> Routes { get; set; } = [];
     public static List<House> AllHouses { get; set; } = [];
     public static List<Destination> AllDestinations { get; set; } = [];

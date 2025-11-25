@@ -60,6 +60,11 @@ public partial class Route : Node
         PathToTravel.Add(node);
         PathVisual?.AddPoint(node.GlobalPosition);
     }
+    
+    public bool ContainsNode(RoadNode node)
+    {
+        return PathToTravel.Contains(node);
+    }
 
     /// <summary>
     /// Automatically assigns a unique ID initializes the path list, and
