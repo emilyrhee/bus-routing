@@ -13,7 +13,16 @@ public partial class IntersectionArea : Area2D
         }
 
         var currentRoute = LevelState.Routes[^1];
-        currentRoute.AppendNode(GetParent<RoadNode>());
+        var clickedIntersection = GetParent<RoadNode>();
+        var lastRoadNode = currentRoute.PathToTravel[^1];
+
+        if (!lastRoadNode.Neighbors.Contains(clickedIntersection))
+        {
+            GD.PrintErr("Cannot add node: Not a neighbor of the previous stop.");
+            return;
+        }
+
+        currentRoute.AppendNode(clickedIntersection);
 
         if (RoutePreviewLine != null)
         {
