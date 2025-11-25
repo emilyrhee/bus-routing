@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5dqou2q7scf7"]
+[gd_scene load_steps=5 format=3 uid="uid://c5dqou2q7scf7"]
 
 [ext_resource type="Texture2D" uid="uid://uhvh86snav6" path="res://assets/bus-stop.svg" id="1_bhde8"]
+[ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="2_upkri"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63k7h"]
 radius = 7.0
@@ -18,7 +19,7 @@ texture = ExtResource("1_bhde8")
 [node name="RoadPlacementArea" type="Area2D" parent="."]
 editor_description = "This area is responsible for validating the placement of a bus stop on a road. A bus stop placement is valid if the road's area is overlapping with this area, guaranteeing the bus stop is in contact with the road surface.
 
-This node is getting indexed in BusStopPlacementArea.cs (currently index 0). The index must be changed in the script if reordered in the editor."
+This node is getting indexed in BusStopPlacement.cs (currently index 1). The index must be changed in the script if reordered in the editor."
 collision_layer = 2
 collision_mask = 4
 
@@ -32,3 +33,8 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkRadius"]
 shape = SubResource("CircleShape2D_bhde8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="WalkRadius"]
+modulate = Color(0.35686275, 1, 1, 0.3529412)
+scale = Vector2(1.6458334, 1.6458334)
+texture = ExtResource("2_upkri")

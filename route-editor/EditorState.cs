@@ -8,7 +8,6 @@ using System.Collections.Generic;
 public enum EditorTool
 {
     None,
-    AddDeleteBusStop,
     NewRoute
 }
 

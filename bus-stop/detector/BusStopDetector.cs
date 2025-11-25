@@ -36,8 +36,7 @@ public partial class BusStopDetector : RayCast2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (ReachableBusStop != null
-        && EditorState.ActiveTool == EditorTool.AddDeleteBusStop)
+        if (ReachableBusStop != null)
         {
             _buildingSprite.Modulate = _originalColor * _darkenFactor;
         }
