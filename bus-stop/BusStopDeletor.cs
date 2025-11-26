@@ -14,5 +14,14 @@ public partial class BusStopDeletor : Area2D
 
         GD.Print("Bus stop deleted: " + busStop.Name);
         busStop.QueueFree();
+
+        foreach (var route in LevelState.Routes)
+        {
+
+            GD.Print($"Route: {route.ColorName}"); 
+            foreach (var roadNode in route.PathToTravel)
+                GD.Print($"  PathToTravel: {roadNode.Name}");
+
+        }
     }
 }

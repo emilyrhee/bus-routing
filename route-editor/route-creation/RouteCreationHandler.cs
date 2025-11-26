@@ -18,8 +18,10 @@ public partial class RouteCreationHandler : Area2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.Pressed && CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
+        if (@event.IsLeftMouseRelease()
+        && CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
         {
+            GD.Print("Finalizing route on mouse release.");
             FinalizeRoute();
         }
     }
@@ -28,16 +30,16 @@ public partial class RouteCreationHandler : Area2D
     {
         var clickedRoadNode = GetParent<RoadNode>();
 
-        if (@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.Pressed)
+        if (@event.IsLeftMouseClick())
         {
             if (clickedRoadNode is BusStop && CurrentRouteCreationStep == RouteCreationStep.NotCreating)
             {
+                GD.Print("Starting route creation.");
                 StartRouteCreation(clickedRoadNode);
             }
         }
         else if (@event is InputEventMouseMotion && CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
         {
-            GD.Print("Continuing route creation.");
             ContinueRoute(clickedRoadNode);
         }
     }
@@ -79,6 +81,7 @@ public partial class RouteCreationHandler : Area2D
         // Check if the route is valid (e.g., ends at a bus stop)
         if (currentRoute.PathToTravel.Count < 2 || !(lastNode is BusStop))
         {
+            // Invalid route, remove it
             GD.Print("Route must start and end at a bus stop.");
             currentRoute.PathVisual?.QueueFree();
             LevelState.Routes.Remove(currentRoute);

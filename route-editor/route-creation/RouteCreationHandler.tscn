@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://q0g3rlm8c0vh" path="res://route-editor/route-creation/RouteCreationHandler.cs" id="1_dkush"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ou3xf"]
-radius = 6.0827627
+radius = 8.062258
 
 [node name="RouteCreationHandler" type="Area2D"]
 editor_description = "This node is a component for BusStops and IntersectionNodes. It is a clickable area for connecting RoadNodes to create Routes."

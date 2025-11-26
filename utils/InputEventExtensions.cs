@@ -19,4 +19,11 @@ public static class InputEventExtensions
               && mouseEvent.Pressed
               && mouseEvent.ButtonIndex == MouseButton.Right;
     }
+
+    public static bool IsLeftMouseRelease(this InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseEvent
+              && !mouseEvent.Pressed
+              && mouseEvent.ButtonIndex == MouseButton.Left;
+    }
 }
