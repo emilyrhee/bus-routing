@@ -29,6 +29,21 @@ public partial class LevelState : Node
         return colorInfo;
     }
 
+    /// <summary>
+    /// Returns the last used route color back to the pool.
+    /// Needed when a route creation is cancelled e.g. only one stop added or
+    /// doesn't end at a bus stop.
+    /// 
+    /// Is this the best way to handle this? Probably not. But it works for now.
+    /// </summary>
+    public static void ReturnLastRouteColor()
+    {
+        if (_nextColorIndex > 0)
+        {
+            _nextColorIndex--;
+        }
+    }
+
     public static bool IsLevelComplete()
     {
         return AllHouses.All(house => house.IsChecked);

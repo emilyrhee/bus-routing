@@ -7,13 +7,17 @@ public partial class RouteCreationHandler : Area2D
 {
     public override void _Process(double delta)
     {
-        if (RoutePreviewLine == null || CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
+        if (RoutePreviewLine == null
+        || CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
             return;
 
         if (RoutePreviewLine.GetPointCount() < 2)
             RoutePreviewLine.AddPoint(GetGlobalMousePosition());
         else
-            RoutePreviewLine.SetPointPosition(RoutePreviewLine.GetPointCount() - 1, GetGlobalMousePosition());
+            RoutePreviewLine.SetPointPosition
+            (
+                RoutePreviewLine.GetPointCount() - 1, GetGlobalMousePosition()
+            );
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -85,6 +89,7 @@ public partial class RouteCreationHandler : Area2D
             GD.Print("Route must start and end at a bus stop.");
             currentRoute.PathVisual?.QueueFree();
             LevelState.Routes.Remove(currentRoute);
+            LevelState.ReturnLastRouteColor();
         }
         else
         {
@@ -102,6 +107,12 @@ public partial class RouteCreationHandler : Area2D
         RoutePreviewLine?.QueueFree();
         RoutePreviewLine = null;
         CurrentRouteCreationStep = RouteCreationStep.NotCreating;
-        GD.Print("route created: " + currentRoute.PathToTravel.Count + " stops.");
+        GD.Print("Current routes in level: " + LevelState.Routes.Count);
+        foreach (var route in LevelState.Routes)
+        {
+            GD.Print($"Route: {route.ColorName}"); 
+            foreach (var roadNode in route.PathToTravel)
+                GD.Print($"  PathToTravel: {roadNode.Name}");
+        }
     }
 }
