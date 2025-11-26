@@ -5,6 +5,12 @@ using static LevelState;
 
 public partial class RouteCreationHandler : Area2D
 {
+    /// <summary>
+    /// This exists so that we do not need to add a Route to LevelState until
+    /// it's fully created and valid.
+    /// </summary>
+    private static Route _tempRoute;
+
     public override void _Process(double delta)
     {
         if (RoutePreviewLine == null
@@ -25,7 +31,6 @@ public partial class RouteCreationHandler : Area2D
         if (@event.IsLeftMouseRelease()
         && CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
         {
-            GD.Print("Finalizing route on mouse release.");
             FinalizeRoute();
         }
     }
@@ -50,28 +55,27 @@ public partial class RouteCreationHandler : Area2D
 
     private void StartRouteCreation(RoadNode startNode)
     {
+        GD.Print("Route creation started at: " + startNode.Name);
         CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
 
-        var newRoute = new Route();
-        LevelState.Routes.Add(newRoute);
-        newRoute.AppendNode(startNode);
+        _tempRoute = new Route();
+        _tempRoute.AppendNode(startNode);
 
-        newRoute.PathVisual = CreateLineAt(startNode.GlobalPosition);
-        CurrentLevel.AddChild(newRoute.PathVisual);
+        _tempRoute.PathVisual = CreateLineAt(startNode.GlobalPosition);
+        CurrentLevel.AddChild(_tempRoute.PathVisual);
 
         RoutePreviewLine = CreateLineAt(startNode.GlobalPosition);
-        RoutePreviewLine.DefaultColor = newRoute.Color;
+        RoutePreviewLine.DefaultColor = _tempRoute.Color;
         CurrentLevel.AddChild(RoutePreviewLine);
     }
 
     private void ContinueRoute(RoadNode nextNode)
     {
-        var currentRoute = LevelState.Routes[^1];
-        var lastNode = currentRoute.PathToTravel[^1];
+        var lastNode = _tempRoute.PathToTravel[^1];
 
         if (nextNode != lastNode && lastNode.Neighbors.Contains(nextNode))
         {
-            currentRoute.AppendNode(nextNode);
+            _tempRoute.AppendNode(nextNode);
             RoutePreviewLine.SetPointPosition(RoutePreviewLine.GetPointCount() - 1, nextNode.GlobalPosition);
             RoutePreviewLine.AddPoint(nextNode.GlobalPosition);
         }
@@ -79,23 +83,21 @@ public partial class RouteCreationHandler : Area2D
 
     private void FinalizeRoute()
     {
-        var currentRoute = LevelState.Routes[^1];
-        var lastNode = currentRoute.PathToTravel[^1];
+        var lastNode = _tempRoute.PathToTravel[^1];
 
-        // Check if the route is valid (e.g., ends at a bus stop)
-        if (currentRoute.PathToTravel.Count < 2 || !(lastNode is BusStop))
+        // Check if the route is valid
+        if (_tempRoute.PathToTravel.Count < 2 || lastNode is not BusStop)
         {
-            // Invalid route, remove it
-            GD.Print("Route must start and end at a bus stop.");
-            currentRoute.PathVisual?.QueueFree();
-            LevelState.Routes.Remove(currentRoute);
+            GD.PrintErr("Route must start and end at a bus stop.");
+            _tempRoute.PathVisual?.QueueFree();
             LevelState.ReturnLastRouteColor();
         }
         else
         {
-            // Valid route, update visuals and state
+            // Valid route, add to LevelState and update visuals
+            LevelState.Routes.Add(_tempRoute);
             var routeList = GetTree().CurrentScene.GetNode<ItemList>(Path.RouteListNode);
-            routeList.AddItem(currentRoute.ColorName + " line");
+            routeList.AddItem(_tempRoute.ColorName + " line");
             LevelState.UpdateAllHouseStatuses();
             if (LevelState.IsLevelComplete())
             {
@@ -106,6 +108,7 @@ public partial class RouteCreationHandler : Area2D
         // Cleanup and reset state
         RoutePreviewLine?.QueueFree();
         RoutePreviewLine = null;
+        _tempRoute = null;
         CurrentRouteCreationStep = RouteCreationStep.NotCreating;
         GD.Print("Current routes in level: " + LevelState.Routes.Count);
         foreach (var route in LevelState.Routes)
