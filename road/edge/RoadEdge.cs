@@ -32,12 +32,22 @@ public partial class RoadEdge: Area2D
 
     /// <summary>
     /// Sets the endpoints of the road edge, both in terms of position and
-    /// associated nodes.
+    /// associated nodes. It also registers the edge with any bus stops it connects to.
     /// </summary>
     public void SetEndpoints(RoadNode nodeA, RoadNode nodeB)
     {
         NodeA = nodeA;
         NodeB = nodeB;
+
+        if (NodeA is BusStop busStopA)
+        {
+            busStopA.ConnectedEdges.Add(this);
+        }
+        if (NodeB is BusStop busStopB)
+        {
+            busStopB.ConnectedEdges.Add(this);
+        }
+
         A = nodeA.GlobalPosition;
         B = nodeB.GlobalPosition;
     }
@@ -46,5 +56,24 @@ public partial class RoadEdge: Area2D
     {
         _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         _segmentShape = _collisionShape.Shape as SegmentShape2D;
+        LevelState.AllRoadEdges.Add(this);
     }
+    
+    public override void _ExitTree()
+    {
+        LevelState.AllRoadEdges.Remove(this);
+    }
+
+    public override void _Process(double delta)
+    {
+        // foreach (var roadNode in LevelState.AllRoadNodes)
+        // {
+        //     GD.Print(roadNode.Name + "'s neighbors:");
+        //     foreach (var neighbor in roadNode.Neighbors)
+        //     {
+        //         GD.Print("\t" + neighbor.Name);
+        //     }
+        // }
+    }
+
 }

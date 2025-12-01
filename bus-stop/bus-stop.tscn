@@ -29,7 +29,6 @@ shape = SubResource("CircleShape2D_gslyg")
 
 [node name="Deletor" type="Area2D" parent="."]
 editor_description = "This node will delete the bus stop upon right click."
-visible = false
 script = ExtResource("4_6mx4d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Deletor"]

@@ -7,6 +7,24 @@ using System;
 /// </summary>
 public partial class LevelInitializer : Node2D
 {
+    public override void _Ready()
+    {
+        _ = new LevelState();
+        LevelState.CurrentLevel = this;
+
+        DrawRoadEdges();
+        int count = 0;
+        foreach (Node child in GetChildren())
+        {
+            if (child is RoadEdge edge)
+            {
+                count++;
+                GD.Print($"RoadEdge {count}: A={edge.NodeA.Name} B={edge.NodeB.Name}");
+            }
+        }
+        GD.Print($"Total RoadEdges: {count}");
+    }
+
     private void DrawRoadEdges()
     {
         var intersectionNodes = GetNode("IntersectionNodes").GetChildren();
@@ -34,21 +52,5 @@ public partial class LevelInitializer : Node2D
             }
         }
     }
-    public override void _Ready()
-    {
-        _ = new LevelState();
-        LevelState.CurrentLevel = this;
 
-        DrawRoadEdges();
-        int count = 0;
-        foreach (Node child in GetChildren())
-        {
-            if (child is RoadEdge edge)
-            {
-                count++;
-                GD.Print($"RoadEdge {count}: A={edge.NodeA.Name} B={edge.NodeB.Name}");
-            }
-        }
-        GD.Print($"Total RoadEdges: {count}");
-    }
 }

@@ -12,6 +12,7 @@
 script = ExtResource("1_udqdq")
 
 [node name="RoadLines" type="Node2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.17254902)
 
 [node name="Line2D" type="Line2D" parent="RoadLines"]
