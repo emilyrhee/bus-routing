@@ -25,3 +25,7 @@ project/assembly_name="bus-routing"
 2d_physics/layer_3="Road"
 2d_physics/layer_4="RoadNode"
 2d_physics/layer_5="PreviewBusStopIntersectionDetector"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.9372549, 0.9372549, 0.9411765, 1)

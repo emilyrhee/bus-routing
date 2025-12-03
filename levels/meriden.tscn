@@ -12,8 +12,8 @@
 script = ExtResource("1_udqdq")
 
 [node name="RoadLines" type="Node2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.17254902)
+modulate = Color(0.8342127, 0.83978754, 0.84536046, 1)
+self_modulate = Color(1, 1, 1, 0)
 
 [node name="Line2D" type="Line2D" parent="RoadLines"]
 points = PackedVector2Array(244, 161, 377, 163, 512, 164, 652, 164)

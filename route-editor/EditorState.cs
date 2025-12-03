@@ -62,4 +62,9 @@ public partial class EditorState : Node
             }
         }
     }
+
+    /// <summary>
+    /// The route currently selected in the editor for editing or inspection.
+    /// </summary>
+    public static Route SelectedRoute { get; set; }
 }

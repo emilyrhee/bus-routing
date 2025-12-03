@@ -44,8 +44,17 @@ public partial class Route : Node
         set
         {
             _pathVisual = value;
-            _pathVisual.Width = 8.0f;
+            _pathVisual.Width = 8.0f; // Default width
             _pathVisual.DefaultColor = Color;
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        // TODO: add some visual indication that this route is selected
+        if (EditorState.SelectedRoute == this)
+        {
+            GD.Print(EditorState.SelectedRoute.ColorName + " is selected.");
         }
     }
 
