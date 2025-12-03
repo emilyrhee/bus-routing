@@ -69,6 +69,27 @@ public partial class Route : Node
         PathToTravel.Add(node);
         PathVisual?.AddPoint(node.GlobalPosition);
     }
+
+    /// <summary>
+    /// Clears all nodes from the route's path and its visual line.
+    /// </summary>
+    public void ClearPath()
+    {
+        PathToTravel.Clear();
+        PathVisual?.ClearPoints();
+    }
+
+    /// <summary>
+    /// Sets the route's path to a new list of nodes, updating the visual line.
+    /// </summary>
+    public void SetPath(List<RoadNode> newPath)
+    {
+        ClearPath();
+        foreach (var node in newPath)
+        {
+            AppendNode(node);
+        }
+    }
     
     public bool ContainsNode(RoadNode node)
     {

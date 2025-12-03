@@ -18,7 +18,8 @@ public enum RouteCreationStep
 {
     NotCreating,
     AddingFirstStop,
-    AddingSubsequentStops
+    AddingSubsequentStops,
+    EditingRoute
 }
 
 /// <summary>
