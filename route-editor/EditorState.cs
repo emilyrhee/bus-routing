@@ -68,4 +68,6 @@ public partial class EditorState : Node
     /// The route currently selected in the editor for editing or inspection.
     /// </summary>
     public static Route SelectedRoute { get; set; }
+
+    public static bool IsEditingFromStart { get; set; }
 }

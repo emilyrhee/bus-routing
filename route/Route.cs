@@ -71,6 +71,18 @@ public partial class Route : Node
     }
 
     /// <summary>
+    /// Inserts a new node at the beginning of the route's path and visual line.
+    /// </summary>
+    /// <param name="node">The RoadNode to add to the path.</param>
+    public void PrependNode(RoadNode node)
+    {
+        if (node == null) return;
+
+        PathToTravel.Insert(0, node);
+        PathVisual?.AddPoint(node.GlobalPosition, 0);
+    }
+
+    /// <summary>
     /// Clears all nodes from the route's path and its visual line.
     /// </summary>
     public void ClearPath()

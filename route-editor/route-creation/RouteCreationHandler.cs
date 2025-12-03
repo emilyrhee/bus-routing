@@ -44,13 +44,14 @@ public partial class RouteCreationHandler : Area2D
 
         if (@event.IsLeftMouseClick())
         {
-            if (EditorState.SelectedRoute != null && clickedRoadNode is BusStop)
+            if (SelectedRoute != null && clickedRoadNode is BusStop)
             {
-                var selectedRoute = EditorState.SelectedRoute;
+                var selectedRoute = SelectedRoute;
+                GD.Print($"Clicked on a bus stop. Selected Route: {selectedRoute.ColorName}, Clicked Node: {clickedRoadNode.Name}");
                 if (selectedRoute.PathToTravel.First() == clickedRoadNode || selectedRoute.PathToTravel.Last() == clickedRoadNode)
                 {
                     StartRouteEdit(selectedRoute, clickedRoadNode);
-                    return; // Stop further processing
+                    return;
                 }
             }
 
@@ -60,7 +61,9 @@ public partial class RouteCreationHandler : Area2D
                 StartRouteCreation(clickedRoadNode);
             }
         }
-        else if (@event is InputEventMouseMotion && (CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops || CurrentRouteCreationStep == RouteCreationStep.EditingRoute))
+        else if (@event is InputEventMouseMotion
+        && (CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops
+        || CurrentRouteCreationStep == RouteCreationStep.EditingRoute))
         {
             ContinueRoute(clickedRoadNode);
         }
@@ -70,15 +73,11 @@ public partial class RouteCreationHandler : Area2D
     {
         GD.Print($"Starting to edit route: {route.ColorName}");
         CurrentRouteCreationStep = RouteCreationStep.EditingRoute;
-
-        // Back up the current path in case of invalid edit
         _routeBackup = new List<RoadNode>(route.PathToTravel);
 
-        // If starting from the beginning of the route, reverse it first
         if (route.PathToTravel.First() == startNode)
         {
-            route.PathToTravel.Reverse();
-            route.SetPath(route.PathToTravel); // Redraw visuals
+            IsEditingFromStart = true;
         }
 
         // Setup the preview line
@@ -105,14 +104,49 @@ public partial class RouteCreationHandler : Area2D
 
     private void ContinueRoute(RoadNode nextNode)
     {
-        Route routeToEdit = (CurrentRouteCreationStep == RouteCreationStep.EditingRoute) ? EditorState.SelectedRoute : _tempRoute;
+        Route routeToEdit = (CurrentRouteCreationStep == RouteCreationStep.EditingRoute) ? SelectedRoute : _tempRoute;
         
         if (routeToEdit == null) return;
 
-        var lastNode = routeToEdit.PathToTravel.LastOrDefault();
-
-        if (lastNode != null && nextNode != lastNode && lastNode.Neighbors.Contains(nextNode))
+        RoadNode lastNode;
+        if (IsEditingFromStart)
         {
+            GD.Print("Editing from start.");
+            lastNode = routeToEdit.PathToTravel.FirstOrDefault();
+        }
+        else
+        {
+            GD.Print("Editing from end.");
+            lastNode = routeToEdit.PathToTravel.LastOrDefault();
+        }
+        if (lastNode == null)
+        {
+            GD.PrintErr("ContinueRoute check failed: lastNode is null.");
+            return;
+        }
+
+        if (nextNode == lastNode)
+        {
+            GD.PrintErr("ContinueRoute check failed: nextNode is the same as lastNode.");
+            return;
+        }
+
+        if (!lastNode.Neighbors.Contains(nextNode))
+        {
+            GD.PrintErr($"ContinueRoute check failed: '{lastNode.Name}' is not a neighbor of '{nextNode.Name}'.");
+            return;
+        }
+
+        if (IsEditingFromStart)
+        {
+            GD.Print($"Continuing route. Prepending '{nextNode.Name}' before '{lastNode.Name}'.");
+            routeToEdit.PrependNode(nextNode);
+            RoutePreviewLine.SetPointPosition(0, nextNode.GlobalPosition);
+            RoutePreviewLine.AddPoint(nextNode.GlobalPosition, 0);
+        }
+        else
+        {
+            GD.Print($"Continuing route. Appending '{nextNode.Name}' after '{lastNode.Name}'.");
             routeToEdit.AppendNode(nextNode);
             RoutePreviewLine.SetPointPosition(RoutePreviewLine.GetPointCount() - 1, nextNode.GlobalPosition);
             RoutePreviewLine.AddPoint(nextNode.GlobalPosition);
@@ -153,18 +187,21 @@ public partial class RouteCreationHandler : Area2D
 
     private void FinalizeRouteEdit()
     {
-        var editedRoute = EditorState.SelectedRoute;
+        var editedRoute = SelectedRoute;
+        var firstNode = editedRoute.PathToTravel.First();
         var lastNode = editedRoute.PathToTravel.Last();
+        GD.Print("Final path: " + string.Join(" -> ", editedRoute.PathToTravel.Select(n => n.Name)));
 
-        if (editedRoute.PathToTravel.Count < 2 || lastNode is not BusStop)
+        if (editedRoute.PathToTravel.Count < 2 || firstNode is not BusStop || lastNode is not BusStop)
         {
             GD.PrintErr("Edited route is invalid. Reverting.");
+            GD.Print("Reverting to: " + string.Join(" -> ", _routeBackup.Select(n => n.Name)));
             editedRoute.SetPath(_routeBackup); // Revert to backup
         }
         else
         {
             GD.Print("Route edit successful.");
-            LevelState.UpdateAllHouseStatuses();
+            UpdateAllHouseStatuses();
         }
         _routeBackup = null;
         ResetState();
@@ -175,5 +212,6 @@ public partial class RouteCreationHandler : Area2D
         RoutePreviewLine?.QueueFree();
         RoutePreviewLine = null;
         CurrentRouteCreationStep = RouteCreationStep.NotCreating;
+        IsEditingFromStart = false;
     }
 }
