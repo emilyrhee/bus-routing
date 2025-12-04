@@ -56,7 +56,7 @@ public partial class RouteCreationHandler : Area2D
 
         if (@event.IsLeftMouseClick())
         {
-            if (SelectedRoute != null && clickedRoadNode is BusStop)
+            if (SelectedRoute != null)
             {
                 var selectedRoute = SelectedRoute;
                 GD.Print($"Clicked on a bus stop. Selected Route: {selectedRoute.ColorName}, Clicked Node: {clickedRoadNode.Name}");
@@ -67,16 +67,18 @@ public partial class RouteCreationHandler : Area2D
                 }
             }
 
-            if (clickedRoadNode is BusStop && CurrentRouteCreationStep == NotCreating)
+            if (CurrentRouteCreationStep == NotCreating)
             {
                 GD.Print("Starting route creation.");
                 StartRouteCreation(clickedRoadNode);
             }
         }
-        else if (@event is InputEventMouseMotion
-        && (CurrentRouteCreationStep == AddingSubsequentStops || CurrentRouteCreationStep == EditingRoute))
+        else if (@event is InputEventMouseMotion)
         {
-            ContinueRoute(clickedRoadNode);
+            if (CurrentRouteCreationStep == AddingSubsequentStops || CurrentRouteCreationStep == EditingRoute)
+            {
+                ContinueRoute(clickedRoadNode);
+            }
         }
     }
 
