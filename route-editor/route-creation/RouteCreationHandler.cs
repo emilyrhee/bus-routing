@@ -35,10 +35,11 @@ public partial class RouteCreationHandler : Area2D
 
     public override void _Process(double delta)
     {
-        if (CurrentRouteCreationStep != AddingSubsequentStops)
-            return;
-
-        DrawPreviewLine();
+        if (CurrentRouteCreationStep == AddingSubsequentStops
+         || CurrentRouteCreationStep == EditingRoute)
+        {
+            DrawPreviewLine();
+        }
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -61,6 +62,7 @@ public partial class RouteCreationHandler : Area2D
                 if (SelectedRoute.Path.First() == clickedRoadNode
                  || SelectedRoute.Path.Last() == clickedRoadNode)
                 {
+                    IsEditingFromStart = SelectedRoute.Path.First() == clickedRoadNode;
                     StartRouteEdit(SelectedRoute, clickedRoadNode);
                     return;
                 }
@@ -68,7 +70,6 @@ public partial class RouteCreationHandler : Area2D
 
             if (clickedRoadNode is BusStop && CurrentRouteCreationStep == NotCreating)
             {
-                GD.Print("Starting route creation.");
                 StartRouteCreation(clickedRoadNode);
             }
         }
@@ -81,19 +82,24 @@ public partial class RouteCreationHandler : Area2D
         }
     }
 
-    private void StartRouteEdit(Route route, RoadNode startNode)
+    /// <summary>
+    /// Begins editing an existing route from the specified start node.
+    /// </summary>
+    /// <param name="route">The route to edit.</param>
+    /// <param name="clickedNode">The node that was clicked </param>
+    private void StartRouteEdit(Route route, RoadNode clickedNode)
     {
         GD.Print($"Starting to edit route: {route.ColorName}");
         CurrentRouteCreationStep = EditingRoute;
-        _routeBackup = new List<RoadNode>(route.Path);
+        _routeBackup = [.. route.Path];
 
-        if (route.Path.First() == startNode)
+        if (route.Path.First() == clickedNode)
         {
             IsEditingFromStart = true;
         }
 
         // Setup the preview line
-        RoutePreviewLine = CreateLineAt(startNode.GlobalPosition);
+        RoutePreviewLine = CreateLineAt(clickedNode.GlobalPosition);
         RoutePreviewLine.DefaultColor = route.Color;
         CurrentLevel.AddChild(RoutePreviewLine);
     }
