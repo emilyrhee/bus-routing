@@ -58,12 +58,10 @@ public partial class RouteCreationHandler : Area2D
         {
             if (SelectedRoute != null)
             {
-                var selectedRoute = SelectedRoute;
-                GD.Print($"Clicked on a bus stop. Selected Route: {selectedRoute.ColorName}, Clicked Node: {clickedRoadNode.Name}");
-
-                if (selectedRoute.Path.First() == clickedRoadNode || selectedRoute.Path.Last() == clickedRoadNode)
+                if (SelectedRoute.Path.First() == clickedRoadNode
+                 || SelectedRoute.Path.Last() == clickedRoadNode)
                 {
-                    StartRouteEdit(selectedRoute, clickedRoadNode);
+                    StartRouteEdit(SelectedRoute, clickedRoadNode);
                     return;
                 }
             }
