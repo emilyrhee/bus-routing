@@ -4,6 +4,7 @@ using System.Linq;
 using static EditorState;
 using static LineFactory;
 using static LevelState;
+using static RouteCreationStep;
 
 public partial class RouteCreationHandler : Area2D
 {
@@ -12,12 +13,15 @@ public partial class RouteCreationHandler : Area2D
     /// it's fully created and valid.
     /// </summary>
     private static Route _tempRoute;
-    private static List<RoadNode> _routeBackup; // For reverting invalid edits
 
-    public override void _Process(double delta)
+    /// <summary>
+    /// Backup of the route's path for reverting invalid edits.
+    /// </summary>
+    private static List<RoadNode> _routeBackup;
+
+    private void DrawPreviewLine()
     {
-        if (RoutePreviewLine == null
-        || CurrentRouteCreationStep != RouteCreationStep.AddingSubsequentStops)
+        if (RoutePreviewLine == null)
             return;
 
         if (RoutePreviewLine.GetPointCount() < 2)
@@ -29,10 +33,18 @@ public partial class RouteCreationHandler : Area2D
             );
     }
 
+    public override void _Process(double delta)
+    {
+        if (CurrentRouteCreationStep != AddingSubsequentStops)
+            return;
+
+        DrawPreviewLine();
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsLeftMouseRelease()
-        && (CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops || CurrentRouteCreationStep == RouteCreationStep.EditingRoute))
+        && (CurrentRouteCreationStep == AddingSubsequentStops || CurrentRouteCreationStep == EditingRoute))
         {
             FinalizeRoute();
         }
@@ -55,15 +67,14 @@ public partial class RouteCreationHandler : Area2D
                 }
             }
 
-            if (clickedRoadNode is BusStop && CurrentRouteCreationStep == RouteCreationStep.NotCreating)
+            if (clickedRoadNode is BusStop && CurrentRouteCreationStep == NotCreating)
             {
                 GD.Print("Starting route creation.");
                 StartRouteCreation(clickedRoadNode);
             }
         }
         else if (@event is InputEventMouseMotion
-        && (CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops
-        || CurrentRouteCreationStep == RouteCreationStep.EditingRoute))
+        && (CurrentRouteCreationStep == AddingSubsequentStops || CurrentRouteCreationStep == EditingRoute))
         {
             ContinueRoute(clickedRoadNode);
         }
@@ -72,7 +83,7 @@ public partial class RouteCreationHandler : Area2D
     private void StartRouteEdit(Route route, RoadNode startNode)
     {
         GD.Print($"Starting to edit route: {route.ColorName}");
-        CurrentRouteCreationStep = RouteCreationStep.EditingRoute;
+        CurrentRouteCreationStep = EditingRoute;
         _routeBackup = new List<RoadNode>(route.PathToTravel);
 
         if (route.PathToTravel.First() == startNode)
@@ -89,7 +100,7 @@ public partial class RouteCreationHandler : Area2D
     private void StartRouteCreation(RoadNode startNode)
     {
         GD.Print("Route creation started at: " + startNode.Name);
-        CurrentRouteCreationStep = RouteCreationStep.AddingSubsequentStops;
+        CurrentRouteCreationStep = AddingSubsequentStops;
 
         _tempRoute = new Route();
         _tempRoute.AppendNode(startNode);
@@ -104,7 +115,7 @@ public partial class RouteCreationHandler : Area2D
 
     private void ContinueRoute(RoadNode nextNode)
     {
-        Route routeToEdit = (CurrentRouteCreationStep == RouteCreationStep.EditingRoute) ? SelectedRoute : _tempRoute;
+        Route routeToEdit = (CurrentRouteCreationStep == EditingRoute) ? SelectedRoute : _tempRoute;
         
         if (routeToEdit == null) return;
 
@@ -155,11 +166,11 @@ public partial class RouteCreationHandler : Area2D
 
     private void FinalizeRoute()
     {
-        if (CurrentRouteCreationStep == RouteCreationStep.EditingRoute)
+        if (CurrentRouteCreationStep == EditingRoute)
         {
             FinalizeRouteEdit();
         }
-        else if (CurrentRouteCreationStep == RouteCreationStep.AddingSubsequentStops)
+        else if (CurrentRouteCreationStep == AddingSubsequentStops)
         {
             FinalizeRouteCreation();
         }
@@ -211,7 +222,7 @@ public partial class RouteCreationHandler : Area2D
     {
         RoutePreviewLine?.QueueFree();
         RoutePreviewLine = null;
-        CurrentRouteCreationStep = RouteCreationStep.NotCreating;
+        CurrentRouteCreationStep = NotCreating;
         IsEditingFromStart = false;
     }
 }

@@ -50,5 +50,6 @@ public partial class BusStopDeletor : Area2D
                 GD.Print("\t" + neighbor.Name);
             }
         }
+        UpdateAllHouseStatuses();
     }
 }
