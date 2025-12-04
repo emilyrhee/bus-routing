@@ -67,7 +67,7 @@ public partial class RouteCreationHandler : Area2D
                 }
             }
 
-            if (CurrentRouteCreationStep == NotCreating)
+            if (clickedRoadNode is BusStop && CurrentRouteCreationStep == NotCreating)
             {
                 GD.Print("Starting route creation.");
                 StartRouteCreation(clickedRoadNode);
