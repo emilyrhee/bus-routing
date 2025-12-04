@@ -60,7 +60,8 @@ public partial class RouteCreationHandler : Area2D
             {
                 var selectedRoute = SelectedRoute;
                 GD.Print($"Clicked on a bus stop. Selected Route: {selectedRoute.ColorName}, Clicked Node: {clickedRoadNode.Name}");
-                if (selectedRoute.PathToTravel.First() == clickedRoadNode || selectedRoute.PathToTravel.Last() == clickedRoadNode)
+
+                if (selectedRoute.Path.First() == clickedRoadNode || selectedRoute.Path.Last() == clickedRoadNode)
                 {
                     StartRouteEdit(selectedRoute, clickedRoadNode);
                     return;
@@ -86,9 +87,9 @@ public partial class RouteCreationHandler : Area2D
     {
         GD.Print($"Starting to edit route: {route.ColorName}");
         CurrentRouteCreationStep = EditingRoute;
-        _routeBackup = new List<RoadNode>(route.PathToTravel);
+        _routeBackup = new List<RoadNode>(route.Path);
 
-        if (route.PathToTravel.First() == startNode)
+        if (route.Path.First() == startNode)
         {
             IsEditingFromStart = true;
         }
@@ -125,12 +126,12 @@ public partial class RouteCreationHandler : Area2D
         if (IsEditingFromStart)
         {
             GD.Print("Editing from start.");
-            lastNode = routeToEdit.PathToTravel.FirstOrDefault();
+            lastNode = routeToEdit.Path.FirstOrDefault();
         }
         else
         {
             GD.Print("Editing from end.");
-            lastNode = routeToEdit.PathToTravel.LastOrDefault();
+            lastNode = routeToEdit.Path.LastOrDefault();
         }
         if (lastNode == null)
         {
@@ -180,8 +181,8 @@ public partial class RouteCreationHandler : Area2D
 
     private void FinalizeRouteCreation()
     {
-        var lastNode = _tempRoute.PathToTravel[^1];
-        if (_tempRoute.PathToTravel.Count < 2 || lastNode is not BusStop)
+        var lastNode = _tempRoute.Path[^1];
+        if (_tempRoute.Path.Count < 2 || lastNode is not BusStop)
         {
             GD.PrintErr("Route must start and end at a bus stop.");
             _tempRoute.PathVisual?.QueueFree();
@@ -201,11 +202,11 @@ public partial class RouteCreationHandler : Area2D
     private void FinalizeRouteEdit()
     {
         var editedRoute = SelectedRoute;
-        var firstNode = editedRoute.PathToTravel.First();
-        var lastNode = editedRoute.PathToTravel.Last();
-        GD.Print("Final path: " + string.Join(" -> ", editedRoute.PathToTravel.Select(n => n.Name)));
+        var firstNode = editedRoute.Path.First();
+        var lastNode = editedRoute.Path.Last();
+        GD.Print("Final path: " + string.Join(" -> ", editedRoute.Path.Select(n => n.Name)));
 
-        if (editedRoute.PathToTravel.Count < 2 || firstNode is not BusStop || lastNode is not BusStop)
+        if (editedRoute.Path.Count < 2 || firstNode is not BusStop || lastNode is not BusStop)
         {
             GD.PrintErr("Edited route is invalid. Reverting.");
             GD.Print("Reverting to: " + string.Join(" -> ", _routeBackup.Select(n => n.Name)));

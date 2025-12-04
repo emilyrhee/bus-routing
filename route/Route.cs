@@ -20,9 +20,9 @@ public partial class Route : Node
     }
 
     /// <summary>
-    /// List of bus stops that make up the route.
+    /// List of bus stops and intersection nodes that make up the route.
     /// </summary>
-    public List<RoadNode> PathToTravel { get; set; }
+    public List<RoadNode> Path { get; set; }
 
     /// <summary>
     /// The name of the color assigned to this route opposed to the hex value.
@@ -66,7 +66,7 @@ public partial class Route : Node
     {
         if (node == null) return;
 
-        PathToTravel.Add(node);
+        Path.Add(node);
         PathVisual?.AddPoint(node.GlobalPosition);
     }
 
@@ -78,7 +78,7 @@ public partial class Route : Node
     {
         if (node == null) return;
 
-        PathToTravel.Insert(0, node);
+        Path.Insert(0, node);
         PathVisual?.AddPoint(node.GlobalPosition, 0);
     }
 
@@ -87,7 +87,7 @@ public partial class Route : Node
     /// </summary>
     public void ClearPath()
     {
-        PathToTravel.Clear();
+        Path.Clear();
         PathVisual?.ClearPoints();
     }
 
@@ -105,7 +105,7 @@ public partial class Route : Node
     
     public bool ContainsNode(RoadNode node)
     {
-        return PathToTravel.Contains(node);
+        return Path.Contains(node);
     }
 
     /// <summary>
@@ -115,7 +115,7 @@ public partial class Route : Node
     public Route()
     {
         ID = _nextID++;
-        PathToTravel = [];
+        Path = [];
         var colorInfo = LevelState.GetNextRouteColor();
         if (colorInfo.HasValue)
         {

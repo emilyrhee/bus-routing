@@ -61,8 +61,8 @@ public partial class House : Node2D
         }
 
         bool isSatisfied = LevelState.Routes.Any(route =>
-            route.PathToTravel.Contains(ReachableBusStop) &&
-            route.PathToTravel.Any(validDestinationStops.Contains)
+            route.Path.Contains(ReachableBusStop) &&
+            route.Path.Any(validDestinationStops.Contains)
         );
 
         IsChecked = isSatisfied;
