@@ -1,3 +1,4 @@
+using System.Threading;
 using Godot;
 using static LevelState;
 
@@ -12,14 +13,14 @@ public partial class BusStopDeletor : Area2D
 
         var busStop = GetParent<BusStop>();
 
-        foreach (var roadNode in LevelState.AllRoadNodes)
-        {
-            GD.Print(roadNode.Name + "'s neighbors:");
-            foreach (var neighbor in roadNode.Neighbors)
-            {
-                GD.Print("\t" + neighbor.Name);
-            }
-        }
+        // foreach (var roadNode in LevelState.AllRoadNodes)
+        // {
+        //     GD.Print(roadNode.Name + "'s neighbors:");
+        //     foreach (var neighbor in roadNode.Neighbors)
+        //     {
+        //         GD.Print("\t" + neighbor.Name);
+        //     }
+        // }
 
         LevelState.AllBusStops.Remove(busStop);
         LevelState.AllRoadNodes.Remove(busStop);
@@ -31,8 +32,11 @@ public partial class BusStopDeletor : Area2D
         
         A.RemoveNeighbor(busStop);
         B.RemoveNeighbor(busStop);
-
-        busStop.ConnectedEdges.ForEach(edge => edge.QueueFree());
+        
+        for (int i = busStop.ConnectedEdges.Count - 1; i >= 0; i--)
+        {
+            busStop.ConnectedEdges[i]?.QueueFree();
+        }
 
         busStop.QueueFree();
 
@@ -42,14 +46,14 @@ public partial class BusStopDeletor : Area2D
         edge.SetEndpoints(A, B);
         GD.Print(edge.Name + " created between " + A.GlobalPosition + " and " + B.GlobalPosition);
 
-        foreach (var roadNode in LevelState.AllRoadNodes)
-        {
-            GD.Print(roadNode.Name + "'s neighbors:");
-            foreach (var neighbor in roadNode.Neighbors)
-            {
-                GD.Print("\t" + neighbor.Name);
-            }
-        }
+        // foreach (var roadNode in LevelState.AllRoadNodes)
+        // {
+        //     GD.Print(roadNode.Name + "'s neighbors:");
+        //     foreach (var neighbor in roadNode.Neighbors)
+        //     {
+        //         GD.Print("\t" + neighbor.Name);
+        //     }
+        // }
         UpdateAllHouseStatuses();
     }
 }

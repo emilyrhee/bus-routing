@@ -12,6 +12,7 @@
 script = ExtResource("1_udqdq")
 
 [node name="RoadLines" type="Node2D" parent="."]
+visible = false
 modulate = Color(0.8342127, 0.83978754, 0.84536046, 1)
 self_modulate = Color(1, 1, 1, 0)
 
@@ -52,6 +53,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 
 [node name="RouteList" parent="EditorUI" instance=ExtResource("3_8iv2f")]
+anchors_preset = -1
 anchor_left = 0.82400006
 anchor_top = 0.19900002
 anchor_right = 0.882

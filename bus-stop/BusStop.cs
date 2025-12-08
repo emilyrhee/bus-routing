@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class BusStop : RoadNode
 {
-    public List<RoadEdge> ConnectedEdges = [];
+    [Export] public Godot.Collections.Array<RoadEdge> ConnectedEdges = [];
 
     public override void _Ready()
     {
