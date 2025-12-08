@@ -25,19 +25,19 @@ points = PackedVector2Array(376, 164, 375, 298)
 [node name="IntersectionNodes" type="Node" parent="."]
 
 [node name="RoadNode" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(242, 161)
+position = Vector2(159, 174)
 Neighbors = [NodePath("../RoadNode2")]
 
 [node name="RoadNode2" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(376, 164)
+position = Vector2(376, 170)
 Neighbors = [NodePath("../RoadNode"), NodePath("../RoadNode3"), NodePath("../RoadNode4")]
 
 [node name="RoadNode3" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(513, 164)
+position = Vector2(519, 168)
 Neighbors = [NodePath("../RoadNode2")]
 
 [node name="RoadNode4" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(376, 295)
+position = Vector2(386, 335)
 Neighbors = [NodePath("../RoadNode2")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
@@ -45,6 +45,7 @@ Neighbors = [NodePath("../RoadNode2")]
 [node name="BusStopPlacement" parent="EditorUI" instance=ExtResource("8_8iv2f")]
 offset_right = 1151.0
 offset_bottom = 649.0
+metadata/_edit_lock_ = true
 
 [node name="Toolbar" parent="EditorUI" instance=ExtResource("1_tdoqb")]
 offset_left = 10.0
@@ -66,20 +67,20 @@ offset_bottom = -94.02402
 [node name="Houses" type="Node" parent="."]
 
 [node name="House" parent="Houses" instance=ExtResource("3_udqdq")]
-modulate = Color(0.8862745, 0.52156866, 0.32941177, 1)
-position = Vector2(376, 125)
+modulate = Color(1.079, 0.583, 0.316, 1)
+position = Vector2(352, 125)
 
 [node name="BlueHouse" parent="Houses" instance=ExtResource("3_udqdq")]
-modulate = Color(0.28235295, 0.41568628, 0.95686275, 1)
+modulate = Color(0.348, 0.64, 1.079, 1)
 position = Vector2(490, 125)
 
 [node name="Destinations" type="Node" parent="."]
 
 [node name="Business1" parent="Destinations" instance=ExtResource("2_q4dte")]
-modulate = Color(0.28235295, 0.41568628, 0.95686275, 1)
-position = Vector2(265, 124)
+modulate = Color(0.348, 0.64, 1.079, 1)
+position = Vector2(201, 125)
 
 [node name="Business" parent="Destinations" instance=ExtResource("2_q4dte")]
-modulate = Color(0.8862745, 0.52156866, 0.32941177, 1)
-position = Vector2(414, 274)
+modulate = Color(1.079, 0.583, 0.316, 1)
+position = Vector2(433, 301)
 rotation = 1.5707964
