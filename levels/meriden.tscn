@@ -11,16 +11,19 @@
 [node name="Meriden" type="Node2D"]
 script = ExtResource("1_udqdq")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = -2.8501227
+
 [node name="RoadLines" type="Node2D" parent="."]
-visible = false
 modulate = Color(0.8342127, 0.83978754, 0.84536046, 1)
 self_modulate = Color(1, 1, 1, 0)
 
 [node name="Line2D" type="Line2D" parent="RoadLines"]
-points = PackedVector2Array(244, 161, 377, 163, 512, 164, 652, 164)
+position = Vector2(-60, 10)
+points = PackedVector2Array(219, 166, 437, 160, 578, 158)
 
 [node name="Line2D2" type="Line2D" parent="RoadLines"]
-points = PackedVector2Array(376, 164, 375, 298)
+points = PackedVector2Array(376, 171, 387, 334)
 
 [node name="IntersectionNodes" type="Node" parent="."]
 
