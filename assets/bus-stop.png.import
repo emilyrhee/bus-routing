@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfheeog81hdb1"
-path="res://.godot/imported/person.svg-d487e1a1d2dcb11fdc23e579c4d7a7f3.ctex"
+uid="uid://btvj3err7vmtr"
+path="res://.godot/imported/bus-stop.png-11c0fd3b7701f4414e3a6a401d7eaa8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/person.svg"
-dest_files=["res://.godot/imported/person.svg-d487e1a1d2dcb11fdc23e579c4d7a7f3.ctex"]
+source_file="res://assets/bus-stop.png"
+dest_files=["res://.godot/imported/bus-stop.png-11c0fd3b7701f4414e3a6a401d7eaa8f.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
