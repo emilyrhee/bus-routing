@@ -26,4 +26,18 @@ public static class InputEventExtensions
               && !mouseEvent.Pressed
               && mouseEvent.ButtonIndex == MouseButton.Left;
     }
+
+    public static bool IsMiddleMouseClick(this InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseEvent
+              && mouseEvent.Pressed
+              && mouseEvent.ButtonIndex == MouseButton.Middle;
+    }
+
+    public static bool IsMiddleMouseRelease(this InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseEvent
+              && !mouseEvent.Pressed
+              && mouseEvent.ButtonIndex == MouseButton.Middle;
+    }
 }

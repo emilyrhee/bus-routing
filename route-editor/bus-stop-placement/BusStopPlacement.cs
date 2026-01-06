@@ -12,19 +12,21 @@ public partial class BusStopPlacement : Control
     private PreviewBusStop _previewBusStop;
     private Area2D _previewPlacementArea;
     private bool _isValidPlacement = false;
+    private Camera2D _camera;
 
     public override void _Ready()
     {
         _previewBusStopScene = GD.Load<PackedScene>(Path.PreviewBusStopScene);
         _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
         _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
+        _camera = GetViewport().GetCamera2D();
     }
 
     public override void _Process(double delta)
     {
         if (_previewBusStop != null)
         {
-            _previewBusStop.GlobalPosition = GetGlobalMousePosition();
+            _previewBusStop.GlobalPosition = _camera.GetGlobalMousePosition();
             _isValidPlacement = _previewPlacementArea.HasOverlappingAreas()
             && !_previewBusStop.IntersectionDetector.HasOverlappingAreas();
 
@@ -90,7 +92,7 @@ public partial class BusStopPlacement : Control
     {
         Vector2 p1 = roadEdge.NodeA.GlobalPosition;
         Vector2 p2 = roadEdge.NodeB.GlobalPosition;
-        Vector2 mousePosition = GetGlobalMousePosition();
+        Vector2 mousePosition = _camera.GetGlobalMousePosition();
         Vector2 projectedPoint = Geometry2D.GetClosestPointToSegment(mousePosition, p1, p2);
 
         CurrentLevel.AddChild(busStop);
