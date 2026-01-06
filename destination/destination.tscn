@@ -10,17 +10,18 @@ diffuse_texture = ExtResource("2_5asxf")
 normal_texture = ExtResource("3_dhpfj")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dhpfj"]
-polygon = PackedVector2Array(-242, -217.5, -242, 171.5, -166, 171.5, -166, 217.5, -32, 217.5, -32, 171.5, 45.899994, 171.5, 47.899994, 132.5, 206, 132.5, 208, -26.5, 242, -26.5, 242, -217.5)
+polygon = PackedVector2Array(-239.99997, -214.99998, -239.99997, 164.99998, -159.99998, 164.99998, -159.99998, 214.99998, -39.999996, 214.99998, -39.999996, 164.99998, 39.999996, 164.99998, 39.999996, 124.999985, 199.99998, 124.999985, 199.99998, -34.999996, 239.99997, -34.999996, 239.99997, -214.99998)
 
 [node name="Business" type="Node2D"]
 script = ExtResource("1_5asxf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.2, 0.2)
 texture = SubResource("CanvasTexture_txwbo")
 
 [node name="BusStopDetector" parent="." instance=ExtResource("2_p3ua0")]
+position = Vector2(-20, 18)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.2, 0.2)
 occluder = SubResource("OccluderPolygon2D_dhpfj")

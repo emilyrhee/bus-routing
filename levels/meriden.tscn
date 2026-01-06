@@ -1,18 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=11 format=3 uid="uid://b57fjtbl22yus"]
 
 [ext_resource type="PackedScene" uid="uid://censkicv071fe" path="res://route-editor/buttons/toolbar.tscn" id="1_tdoqb"]
 [ext_resource type="Script" uid="uid://c555l6jijlp43" path="res://levels/LevelInitializer.cs" id="1_udqdq"]
+[ext_resource type="Shader" uid="uid://ybjfv0lje8x6" path="res://assets/shadow-shader.gdshader" id="2_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_q4dte"]
 [ext_resource type="PackedScene" uid="uid://bxwma46h0s4jq" path="res://route-editor/route-list/route-list.tscn" id="3_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
 [ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/intersection/intersection-node.tscn" id="6_q4dte"]
 [ext_resource type="PackedScene" uid="uid://dc2wfu8lyap4i" path="res://route-editor/bus-stop-placement/bus-stop-placement.tscn" id="8_8iv2f"]
+[ext_resource type="Texture2D" uid="uid://c4tx6cege7xq5" path="res://assets/gradient.tres" id="9_cbuuc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iv2f"]
+shader = ExtResource("2_8iv2f")
+shader_parameter/color = Color(0.09099999, 0.26801676, 0.65, 0.15686275)
+shader_parameter/angle = 124.9650059358375
+shader_parameter/max_dist = 20.00000095
+shader_parameter/gradientTexture = ExtResource("9_cbuuc")
 
 [node name="Meriden" type="Node2D"]
 script = ExtResource("1_udqdq")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(392, 166)
+scale = Vector2(-63.42596, -2.0827663)
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-rotation = -0.9372418
+rotation = -4.1887903
 color = Color(1, 1, 1, 0.78431374)
 energy = 0.5
 
@@ -23,9 +36,11 @@ self_modulate = Color(1, 1, 1, 0)
 [node name="Line2D" type="Line2D" parent="RoadLines"]
 position = Vector2(-60, 10)
 points = PackedVector2Array(219, 166, 437, 160, 578, 158)
+default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
 [node name="Line2D2" type="Line2D" parent="RoadLines"]
 points = PackedVector2Array(376, 171, 387, 334)
+default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
 [node name="IntersectionNodes" type="Node" parent="."]
 
@@ -83,9 +98,13 @@ position = Vector2(490, 125)
 
 [node name="Business1" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(0.348, 0.64, 1.079, 1)
-position = Vector2(206, 105)
+position = Vector2(206, 118)
 
 [node name="Business" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(1.079, 0.583, 0.316, 1)
-position = Vector2(453, 292)
+position = Vector2(438, 284)
 rotation = 1.5707964
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_8iv2f")
+polygon = PackedVector2Array(89, 37, 653, 58, 750, 424, 145, 428)

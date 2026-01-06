@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwiepcsny2a7m"]
+[gd_scene load_steps=8 format=3 uid="uid://cwiepcsny2a7m"]
 
 [ext_resource type="Script" uid="uid://byktl3yiod0js" path="res://house/House.cs" id="1_05tlr"]
 [ext_resource type="Texture2D" uid="uid://cqawfm0pi26ew" path="res://assets/house.png" id="2_nxes2"]
@@ -9,6 +9,9 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_mkffg"]
 diffuse_texture = ExtResource("2_nxes2")
 normal_texture = ExtResource("3_q8k63")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q8k63"]
+polygon = PackedVector2Array(-325, 180, 245, 180, 245, 98, 325, 98, 325, -98, 244, -98, 244, -180, -325, -180)
 
 [node name="House" type="Node2D"]
 script = ExtResource("1_05tlr")
@@ -25,3 +28,9 @@ texture = SubResource("CanvasTexture_mkffg")
 visible = false
 position = Vector2(18, 17)
 texture = ExtResource("4_nxes2")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-1.1920929e-07, 0)
+rotation = 1.5707964
+scale = Vector2(0.1, 0.1)
+occluder = SubResource("OccluderPolygon2D_q8k63")
