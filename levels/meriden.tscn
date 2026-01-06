@@ -12,7 +12,9 @@
 script = ExtResource("1_udqdq")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-rotation = -2.8501227
+rotation = -0.9372418
+color = Color(1, 1, 1, 0.78431374)
+energy = 0.5
 
 [node name="RoadLines" type="Node2D" parent="."]
 modulate = Color(0.8342127, 0.83978754, 0.84536046, 1)
@@ -28,7 +30,7 @@ points = PackedVector2Array(376, 171, 387, 334)
 [node name="IntersectionNodes" type="Node" parent="."]
 
 [node name="RoadNode" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(159, 174)
+position = Vector2(164, 176)
 Neighbors = [NodePath("../RoadNode2")]
 
 [node name="RoadNode2" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
@@ -81,9 +83,9 @@ position = Vector2(490, 125)
 
 [node name="Business1" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(0.348, 0.64, 1.079, 1)
-position = Vector2(201, 125)
+position = Vector2(206, 105)
 
 [node name="Business" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(1.079, 0.583, 0.316, 1)
-position = Vector2(433, 301)
+position = Vector2(453, 292)
 rotation = 1.5707964

@@ -1,20 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://7sg83f1kmn6m"]
+[gd_scene load_steps=7 format=3 uid="uid://7sg83f1kmn6m"]
 
 [ext_resource type="Script" uid="uid://cyb77mad3a4ns" path="res://destination/Destination.cs" id="1_5asxf"]
 [ext_resource type="Texture2D" uid="uid://bq2fkk3mnlbf0" path="res://assets/business.png" id="2_5asxf"]
 [ext_resource type="PackedScene" uid="uid://d3qg57hamhtvr" path="res://bus-stop/detector/bus-stop-detector.tscn" id="2_p3ua0"]
-[ext_resource type="Texture2D" uid="uid://bpib365nb2bn1" path="res://assets/businessoutline.png" id="3_dhpfj"]
+[ext_resource type="Texture2D" uid="uid://44rx2yml64r" path="res://assets/normal-maps/business-nm.png" id="3_dhpfj"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_txwbo"]
+diffuse_texture = ExtResource("2_5asxf")
+normal_texture = ExtResource("3_dhpfj")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dhpfj"]
+polygon = PackedVector2Array(-242, -217.5, -242, 171.5, -166, 171.5, -166, 217.5, -32, 217.5, -32, 171.5, 45.899994, 171.5, 47.899994, 132.5, 206, 132.5, 208, -26.5, 242, -26.5, 242, -217.5)
 
 [node name="Business" type="Node2D"]
 script = ExtResource("1_5asxf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.17, 0.17)
-texture = ExtResource("2_5asxf")
-
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(0, -35.294083)
-texture = ExtResource("3_dhpfj")
-region_enabled = true
+scale = Vector2(0.25, 0.25)
+texture = SubResource("CanvasTexture_txwbo")
 
 [node name="BusStopDetector" parent="." instance=ExtResource("2_p3ua0")]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(0.25, 0.25)
+occluder = SubResource("OccluderPolygon2D_dhpfj")

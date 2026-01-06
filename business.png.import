@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpib365nb2bn1"
-path="res://.godot/imported/businessoutline.png-39ebdbabefc80a31346c67e72e308f30.ctex"
+uid="uid://7ywyv7qip10t"
+path="res://.godot/imported/business.png-8766f3d109efc81d5cb4a6e7a006c73c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/businessoutline.png"
-dest_files=["res://.godot/imported/businessoutline.png-39ebdbabefc80a31346c67e72e308f30.ctex"]
+source_file="res://business.png"
+dest_files=["res://.godot/imported/business.png-8766f3d109efc81d5cb4a6e7a006c73c.ctex"]
 
 [params]
 
