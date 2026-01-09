@@ -40,4 +40,18 @@ public static class InputEventExtensions
               && !mouseEvent.Pressed
               && mouseEvent.ButtonIndex == MouseButton.Middle;
     }
+
+    public static bool IsMouseWheelUp(this InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseEvent
+                && mouseEvent.Pressed
+                && mouseEvent.ButtonIndex == MouseButton.WheelUp;
+    }
+
+    public static bool IsMouseWheelDown(this InputEvent @event)
+    {
+        return @event is InputEventMouseButton mouseEvent
+                && mouseEvent.Pressed
+                && mouseEvent.ButtonIndex == MouseButton.WheelDown;
+    }
 }

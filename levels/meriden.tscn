@@ -22,7 +22,7 @@ shader_parameter/gradientTexture = ExtResource("9_cbuuc")
 script = ExtResource("1_udqdq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(392, 166)
+position = Vector2(426.86, 166)
 scale = Vector2(-63.42596, -2.0827663)
 script = ExtResource("2_4kxre")
 

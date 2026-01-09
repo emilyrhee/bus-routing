@@ -24,5 +24,14 @@ public partial class Camera : Camera2D
             
             Position -= dragDelta * Zoom; // Adjust movement speed based on zoom level
         }
+
+        if (@event.IsMouseWheelUp())
+        {
+            Zoom = new Vector2(Math.Max(0.2f, Zoom.X - 0.1f), Math.Max(0.2f, Zoom.Y - 0.1f));
+        }
+        else if (@event.IsMouseWheelDown())
+        {
+            Zoom = new Vector2(Math.Min(5f, Zoom.X + 0.1f), Math.Min(5f, Zoom.Y + 0.1f));
+        }
     }
 }
