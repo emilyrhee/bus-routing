@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://pkmhht26hfvg"]
 
 [ext_resource type="Script" uid="uid://b4aut18kx5u1u" path="res://bus-stop/BusStop.cs" id="1_0n3gx"]
-[ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="1_ey4ng"]
+[ext_resource type="Texture2D" uid="uid://btvj3err7vmtr" path="res://assets/bus-stop.png" id="2_e0gyx"]
 [ext_resource type="Script" uid="uid://ffmnen4viup1" path="res://bus-stop/BusStopDeletor.cs" id="4_6mx4d"]
 [ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://route-editor/route-creation/RouteCreationHandler.tscn" id="4_e0gyx"]
 
@@ -15,7 +15,7 @@ script = ExtResource("1_0n3gx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_ey4ng")
+texture = ExtResource("2_e0gyx")
 
 [node name="WalkRadius" type="Area2D" parent="."]
 editor_description = "This area determines whether or not people will want to walk to a bus stop instance. It also determines how far bus stops can be away from each other."
