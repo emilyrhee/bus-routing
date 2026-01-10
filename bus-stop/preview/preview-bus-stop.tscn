@@ -14,6 +14,7 @@ radius = 39.051247
 
 [node name="PreviewBusStop" type="Node2D"]
 editor_description = "This node is for the player to see where a potential bus stop is going to go."
+z_index = 1
 script = ExtResource("1_p0ic7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
