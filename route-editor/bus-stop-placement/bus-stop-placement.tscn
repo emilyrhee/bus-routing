@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc2wfu8lyap4i"]
+[gd_scene load_steps=5 format=3 uid="uid://dc2wfu8lyap4i"]
 
 [ext_resource type="Script" uid="uid://cuau4qy5dcr7l" path="res://route-editor/bus-stop-placement/BusStopPlacement.cs" id="1_jkcl6"]
 [ext_resource type="Script" uid="uid://bgix2u8pqxx7u" path="res://route-editor/route-list/RouteList.cs" id="2_a4c7p"]
+[ext_resource type="Theme" uid="uid://bbd7hepk2p0vf" path="res://ui-theme.tres" id="3_21wtw"]
 [ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://route-editor/buttons/add-stops/add-stop.tscn" id="3_i8due"]
 
 [node name="BusStopPlacement" type="Control"]
@@ -14,14 +15,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_jkcl6")
 
-[node name="RouteList" type="ItemList" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.8
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource("2_a4c7p")
-
 [node name="AddStop" parent="." instance=ExtResource("3_i8due")]
 layout_mode = 0
 anchors_preset = 0
@@ -32,4 +25,51 @@ offset_top = 25.0
 offset_right = 25.0
 offset_bottom = 25.0
 
-[connection signal="item_selected" from="RouteList" to="RouteList" method="_on_item_selected"]
+[node name="BusLinesContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.842
+anchor_top = 0.025
+anchor_right = 0.987
+anchor_bottom = 0.602
+grow_horizontal = 0
+theme = ExtResource("3_21wtw")
+
+[node name="BusLinesHeader" type="Control" parent="BusLinesContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="ColorRect" type="ColorRect" parent="BusLinesContainer/BusLinesHeader"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.65, 0.65, 0.65, 0.78431374)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="BusLinesContainer/BusLinesHeader"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -11.5
+offset_right = 173.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+text = "Bus Lines"
+
+[node name="RouteList" type="ItemList" parent="BusLinesContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_21wtw")
+item_count = 2
+item_0/text = "Test item"
+item_1/text = "Gabagool"
+script = ExtResource("2_a4c7p")
+
+[connection signal="item_selected" from="BusLinesContainer/RouteList" to="BusLinesContainer/RouteList" method="_on_item_selected"]
