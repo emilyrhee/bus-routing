@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b57fjtbl22yus"]
+[gd_scene load_steps=10 format=3 uid="uid://b57fjtbl22yus"]
 
-[ext_resource type="PackedScene" uid="uid://censkicv071fe" path="res://route-editor/buttons/toolbar.tscn" id="1_tdoqb"]
 [ext_resource type="Script" uid="uid://c555l6jijlp43" path="res://levels/LevelInitializer.cs" id="1_udqdq"]
 [ext_resource type="Script" uid="uid://dcew74obwshpi" path="res://Camera.cs" id="2_4kxre"]
 [ext_resource type="Shader" uid="uid://ybjfv0lje8x6" path="res://assets/shadow-shader.gdshader" id="2_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_q4dte"]
-[ext_resource type="PackedScene" uid="uid://bxwma46h0s4jq" path="res://route-editor/route-list/route-list.tscn" id="3_8iv2f"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
 [ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/intersection/intersection-node.tscn" id="6_q4dte"]
 [ext_resource type="PackedScene" uid="uid://dc2wfu8lyap4i" path="res://route-editor/bus-stop-placement/bus-stop-placement.tscn" id="8_8iv2f"]
@@ -64,27 +62,7 @@ Neighbors = [NodePath("../RoadNode2")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
 
-[node name="BusStopPlacement" parent="EditorUI" instance=ExtResource("8_8iv2f")]
-offset_right = 1151.0
-offset_bottom = 649.0
-metadata/_edit_lock_ = true
-
-[node name="Toolbar" parent="EditorUI" instance=ExtResource("1_tdoqb")]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 10.0
-offset_bottom = 10.0
-
-[node name="RouteList" parent="EditorUI" instance=ExtResource("3_8iv2f")]
-anchors_preset = -1
-anchor_left = 0.82400006
-anchor_top = 0.19900002
-anchor_right = 0.882
-anchor_bottom = 0.33800003
-offset_left = -4.248047
-offset_top = -3.952011
-offset_right = -71.064026
-offset_bottom = -94.02402
+[node name="UserInterface" parent="EditorUI" instance=ExtResource("8_8iv2f")]
 
 [node name="Houses" type="Node" parent="."]
 

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc2wfu8lyap4i"]
+[gd_scene load_steps=4 format=3 uid="uid://dc2wfu8lyap4i"]
 
 [ext_resource type="Script" uid="uid://cuau4qy5dcr7l" path="res://route-editor/bus-stop-placement/BusStopPlacement.cs" id="1_jkcl6"]
+[ext_resource type="Script" uid="uid://bgix2u8pqxx7u" path="res://route-editor/route-list/RouteList.cs" id="2_a4c7p"]
+[ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://route-editor/buttons/add-stops/add-stop.tscn" id="3_i8due"]
 
 [node name="BusStopPlacement" type="Control"]
 layout_mode = 3
@@ -11,3 +13,23 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_jkcl6")
+
+[node name="RouteList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("2_a4c7p")
+
+[node name="AddStop" parent="." instance=ExtResource("3_i8due")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[connection signal="item_selected" from="RouteList" to="RouteList" method="_on_item_selected"]

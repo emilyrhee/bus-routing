@@ -129,42 +129,21 @@ public partial class RouteCreationHandler : Area2D
         RoadNode lastNode;
         if (IsEditingFromStart)
         {
-            GD.Print("Editing from start.");
             lastNode = routeToEdit.Path.FirstOrDefault();
         }
         else
         {
-            GD.Print("Editing from end.");
             lastNode = routeToEdit.Path.LastOrDefault();
-        }
-        if (lastNode == null)
-        {
-            GD.PrintErr("ContinueRoute check failed: lastNode is null.");
-            return;
-        }
-
-        if (nextNode == lastNode)
-        {
-            GD.PrintErr("ContinueRoute check failed: nextNode is the same as lastNode.");
-            return;
-        }
-
-        if (!lastNode.Neighbors.Contains(nextNode))
-        {
-            GD.PrintErr($"ContinueRoute check failed: '{lastNode.Name}' is not a neighbor of '{nextNode.Name}'.");
-            return;
         }
 
         if (IsEditingFromStart)
         {
-            GD.Print($"Continuing route. Prepending '{nextNode.Name}' before '{lastNode.Name}'.");
             routeToEdit.PrependNode(nextNode);
             RoutePreviewLine.SetPointPosition(0, nextNode.GlobalPosition);
             RoutePreviewLine.AddPoint(nextNode.GlobalPosition, 0);
         }
         else
         {
-            GD.Print($"Continuing route. Appending '{nextNode.Name}' after '{lastNode.Name}'.");
             routeToEdit.AppendNode(nextNode);
             RoutePreviewLine.SetPointPosition(RoutePreviewLine.GetPointCount() - 1, nextNode.GlobalPosition);
             RoutePreviewLine.AddPoint(nextNode.GlobalPosition);
@@ -208,11 +187,9 @@ public partial class RouteCreationHandler : Area2D
         var editedRoute = SelectedRoute;
         var firstNode = editedRoute.Path.First();
         var lastNode = editedRoute.Path.Last();
-        GD.Print("Final path: " + string.Join(" -> ", editedRoute.Path.Select(n => n.Name)));
 
         if (editedRoute.Path.Count < 2 || firstNode is not BusStop || lastNode is not BusStop)
         {
-            GD.PrintErr("Edited route is invalid. Reverting.");
             GD.Print("Reverting to: " + string.Join(" -> ", _routeBackup.Select(n => n.Name)));
             editedRoute.SetPath(_routeBackup); // Revert to backup
         }

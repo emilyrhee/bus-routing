@@ -11,5 +11,5 @@ public static class Path
     public const string PreviewBusStopScene = "res://bus-stop/preview/preview-bus-stop.tscn";
 
     // Nodes
-    public const string RouteListNode = "EditorUI/RouteList/RouteList";
+    public const string RouteListNode = "EditorUI/UserInterface/RouteList";
 }
