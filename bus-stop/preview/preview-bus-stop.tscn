@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5dqou2q7scf7"]
 
-[ext_resource type="Texture2D" uid="uid://uhvh86snav6" path="res://assets/bus-stop.svg" id="1_bhde8"]
 [ext_resource type="Script" uid="uid://htt2571rjh6r" path="res://bus-stop/preview/PreviewBusStop.cs" id="1_p0ic7"]
-[ext_resource type="Texture2D" uid="uid://dcxlhuxiecxo4" path="res://assets/circle.svg" id="2_upkri"]
+[ext_resource type="Texture2D" uid="uid://btvj3err7vmtr" path="res://assets/bus-stop.png" id="2_p0ic7"]
+[ext_resource type="Texture2D" uid="uid://ckneaxqxvrrsq" path="res://assets/circle.png" id="3_p0ic7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63k7h"]
 radius = 7.0
@@ -19,7 +19,7 @@ script = ExtResource("1_p0ic7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_bhde8")
+texture = ExtResource("2_p0ic7")
 
 [node name="RoadDetector" type="Area2D" parent="."]
 editor_description = "This area is responsible for validating the placement of a bus stop on a road. A bus stop placement is valid if the road's area is overlapping with this area, guaranteeing the bus stop is in contact with the road surface.
@@ -41,8 +41,8 @@ shape = SubResource("CircleShape2D_bhde8")
 
 [node name="WalkRadiusSprite" type="Sprite2D" parent="WalkRadius"]
 modulate = Color(0.35686275, 1, 1, 0.3529412)
-scale = Vector2(1.6458334, 1.6458334)
-texture = ExtResource("2_upkri")
+scale = Vector2(0.5963542, 0.5963542)
+texture = ExtResource("3_p0ic7")
 
 [node name="IntersectionDetector" type="Area2D" parent="."]
 collision_layer = 16
