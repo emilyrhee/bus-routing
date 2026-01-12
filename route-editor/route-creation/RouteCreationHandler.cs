@@ -136,6 +136,11 @@ public partial class RouteCreationHandler : Area2D
             lastNode = routeToEdit.Path.LastOrDefault();
         }
 
+        if (lastNode == nextNode) // Prevent adding the same node twice
+        {
+            return;
+        }
+
         if (IsEditingFromStart)
         {
             routeToEdit.PrependNode(nextNode);
@@ -173,7 +178,7 @@ public partial class RouteCreationHandler : Area2D
         }
         else
         {
-            LevelState.Routes.Add(_tempRoute);
+            LevelState.AllRoutes.Add(_tempRoute);
             var routeList = GetTree().CurrentScene.GetNode<ItemList>(Path.RouteListNode);
             routeList.AddItem(_tempRoute.ColorName + " line");
             LevelState.UpdateAllHouseStatuses();
