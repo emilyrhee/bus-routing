@@ -9,7 +9,7 @@ using System.Linq;
 public partial class LevelState : Node
 {
     public static Node CurrentLevel { get; set; }
-    public static List<Route> Routes { get; set; } = [];
+    public static List<Route> AllRoutes { get; set; } = [];
     public static List<House> AllHouses { get; set; } = [];
     public static List<Destination> AllDestinations { get; set; } = [];
     public static List<Node> AllBusStops { get; set; } = [];

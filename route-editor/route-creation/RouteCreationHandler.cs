@@ -183,6 +183,10 @@ public partial class RouteCreationHandler : Area2D
             routeList.AddItem(_tempRoute.ColorName + " line");
             LevelState.UpdateAllHouseStatuses();
         }
+        foreach (var route in LevelState.AllRoutes)
+        {
+            GD.Print($"Route {route.ColorName}: {string.Join(" -> ", route.Path.Select(n => n.Name))}");
+        }
         _tempRoute = null;
         ResetState();
     }

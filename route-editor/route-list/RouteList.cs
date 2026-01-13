@@ -17,14 +17,14 @@ public partial class RouteList : ItemList
     {
         GD.Print($"Deleting route: {route.ColorName}");
 
-        int itemIndex = LevelState.Routes.IndexOf(route);
+        int itemIndex = LevelState.AllRoutes.IndexOf(route);
         if (itemIndex != -1)
         {
             RemoveItem(itemIndex);
         }
 
         route.PathVisual.QueueFree();
-        LevelState.Routes.Remove(route);
+        LevelState.AllRoutes.Remove(route);
         route.QueueFree();
 
         EditorState.SelectedRoute = null;
@@ -33,9 +33,9 @@ public partial class RouteList : ItemList
 
     private void _on_item_selected(int index)
     {
-        if (index >= 0 && index < LevelState.Routes.Count)
+        if (index >= 0 && index < LevelState.AllRoutes.Count)
         {
-            EditorState.SelectedRoute = LevelState.Routes[index];
+            EditorState.SelectedRoute = LevelState.AllRoutes[index];
             GD.Print($"Selected route for editing: {EditorState.SelectedRoute.ColorName}");
         }
     }

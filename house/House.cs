@@ -60,7 +60,7 @@ public partial class House : Node2D
             return;
         }
 
-        bool isSatisfied = LevelState.Routes.Any(route =>
+        bool isSatisfied = LevelState.AllRoutes.Any(route =>
             route.Path.Contains(ReachableBusStop) &&
             route.Path.Any(validDestinationStops.Contains)
         );

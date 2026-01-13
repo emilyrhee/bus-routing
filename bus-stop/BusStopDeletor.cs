@@ -14,8 +14,12 @@ public partial class BusStopDeletor : Area2D
         var busStop = GetParent<BusStop>();
 
         LevelState.AllBusStops.Remove(busStop);
-        LevelState.AllRoadNodes.Remove(busStop);
+        foreach (var route in AllRoutes) // bit of a brute-force way to do this, consider optimizing
+        {
+            route.Path.Remove(busStop);
+        }
 
+        LevelState.AllRoadNodes.Remove(busStop);
         var A = busStop.Neighbors[0];
         var B = busStop.Neighbors[1];
         A.AddNeighbor(B);
