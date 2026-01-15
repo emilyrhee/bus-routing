@@ -35,29 +35,10 @@ public partial class Route : Node
     /// </summary>
     public Color Color { get; private set; }
 
-    private Line2D _pathVisual;
     /// <summary>
-    /// A single Line2D node that represents the entire visual path of the route.
+    /// The visual representation of this route.
     /// </summary>
-    public Line2D PathVisual
-    {
-        get => _pathVisual;
-        set
-        {
-            _pathVisual = value;
-            _pathVisual.Width = 8.0f; // Default width
-            _pathVisual.DefaultColor = Color;
-        }
-    }
-
-    public override void _Process(double delta)
-    {
-        // TODO: add some visual indication that this route is selected
-        if (EditorState.SelectedRoute == this)
-        {
-            GD.Print(EditorState.SelectedRoute.ColorName + " is selected.");
-        }
-    }
+    public RouteVisual Visual { get; set; }
 
     /// <summary>
     /// Appends a new node to the end of the route's path and visual line.
@@ -68,7 +49,7 @@ public partial class Route : Node
         if (node == null) return;
 
         Path.Add(node);
-        PathVisual?.AddPoint(node.GlobalPosition);
+        Visual?.AppendPoint(node.GlobalPosition);
     }
 
     /// <summary>
@@ -80,7 +61,7 @@ public partial class Route : Node
         if (node == null) return;
 
         Path.Insert(0, node);
-        PathVisual?.AddPoint(node.GlobalPosition, 0);
+        Visual?.PrependPoint(node.GlobalPosition);
     }
 
     /// <summary>
@@ -102,7 +83,7 @@ public partial class Route : Node
     public void ClearPath()
     {
         Path.Clear();
-        PathVisual?.ClearPoints();
+        Visual?.ClearPoints();
     }
 
     /// <summary>

@@ -23,7 +23,7 @@ public partial class RouteList : ItemList
             RemoveItem(itemIndex);
         }
 
-        route.PathVisual.QueueFree();
+        route.Visual?.QueueFree();
         LevelState.AllRoutes.Remove(route);
         route.QueueFree();
 

@@ -112,8 +112,8 @@ public partial class RouteCreationHandler : Area2D
         _tempRoute = new Route();
         _tempRoute.AppendNode(startNode);
 
-        _tempRoute.PathVisual = CreateLineAt(startNode.GlobalPosition);
-        CurrentLevel.AddChild(_tempRoute.PathVisual);
+        _tempRoute.Visual = new RouteVisual(_tempRoute);
+        CurrentLevel.AddChild(_tempRoute.Visual);
 
         RoutePreviewLine = CreateLineAt(startNode.GlobalPosition);
         RoutePreviewLine.DefaultColor = _tempRoute.Color;
@@ -173,7 +173,7 @@ public partial class RouteCreationHandler : Area2D
         if (_tempRoute.Path.Count < 2 || lastNode is not BusStop)
         {
             GD.PrintErr("Route must start and end at a bus stop.");
-            _tempRoute.PathVisual?.QueueFree();
+            _tempRoute.Visual?.QueueFree();
             LevelState.ReturnLastRouteColor();
         }
         else
