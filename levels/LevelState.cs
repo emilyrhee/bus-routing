@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Holds the state of the level, including all routes.
@@ -13,6 +14,11 @@ public partial class LevelState : Node
     public static List<House> AllHouses { get; set; } = [];
     public static List<Destination> AllDestinations { get; set; } = [];
     public static List<Node> AllBusStops { get; set; } = [];
+    
+    /// <summary>
+    /// All road nodes in the current level which includes bus stops and
+    /// intersections. This is mostly for debugging purposes.
+    /// </summary>
     public static List<RoadNode> AllRoadNodes { get; set; } = [];
     public static List<RoadEdge> AllRoadEdges { get; set; } = [];
 

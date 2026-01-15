@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Represents a route consisting of a sequence of bus stops and its visual
@@ -80,6 +81,19 @@ public partial class Route : Node
 
         Path.Insert(0, node);
         PathVisual?.AddPoint(node.GlobalPosition, 0);
+    }
+
+    /// <summary>
+    /// Removes a node from the route's path and updates the visual line.
+    /// </summary>
+    /// <param name="node">The RoadNode to remove from the path.</param>
+    public void RemoveNode(RoadNode node)
+    {
+        if (ContainsNode(node))
+        {
+            var newPath = Path.Where(n => n != node).ToList();
+            SetPath(newPath);
+        }
     }
 
     /// <summary>

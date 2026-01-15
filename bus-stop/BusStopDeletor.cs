@@ -1,6 +1,7 @@
 using System.Threading;
 using Godot;
 using static LevelState;
+using System.Linq;
 
 public partial class BusStopDeletor : Area2D
 {
@@ -14,9 +15,10 @@ public partial class BusStopDeletor : Area2D
         var busStop = GetParent<BusStop>();
 
         LevelState.AllBusStops.Remove(busStop);
-        foreach (var route in AllRoutes) // bit of a brute-force way to do this, consider optimizing
+
+        foreach (var route in AllRoutes.Where(route => route.ContainsNode(busStop)))
         {
-            route.Path.Remove(busStop);
+            route.RemoveNode(busStop);
         }
 
         LevelState.AllRoadNodes.Remove(busStop);
