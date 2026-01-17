@@ -20,7 +20,7 @@ public partial class BusStopDeletor : Area2D
         foreach (var route in AllRoutes.Where(route => route.ContainsNode(busStop)).ToList())
         {
             route.RemoveNode(busStop);
-            if (route.Path.Count <= 1)
+            if (route.Path.OfType<BusStop>().Count() <= 1)
             {
                 var routeList = GetTree().CurrentScene.GetNode<RouteList>(RouteListNode);
                 routeList.DeleteRoute(route);
