@@ -51,6 +51,19 @@ public partial class LevelState : Node
         }
     }
 
+    /// <summary>
+    /// Refreshes the visual representation of all routes.
+    /// Call this when routes are added, removed, or modified to ensure
+    /// proper offset calculations for shared road segments.
+    /// </summary>
+    public static void RefreshAllRouteVisuals()
+    {
+        foreach (var route in AllRoutes)
+        {
+            route.Visual?.UpdateVisual();
+        }
+    }
+
     public static bool IsLevelComplete()
     {
         return AllHouses.All(house => house.IsChecked);

@@ -36,10 +36,12 @@ self_modulate = Color(1, 1, 1, 0)
 [node name="Line2D" type="Line2D" parent="RoadLines"]
 position = Vector2(-60, 10)
 points = PackedVector2Array(219, 166, 437, 160, 578, 158)
+width = 20.0
 default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
 [node name="Line2D2" type="Line2D" parent="RoadLines"]
 points = PackedVector2Array(376, 171, 387, 334)
+width = 20.0
 default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
 [node name="IntersectionNodes" type="Node" parent="."]
@@ -68,24 +70,25 @@ Neighbors = [NodePath("../RoadNode2")]
 
 [node name="House" parent="Houses" instance=ExtResource("3_udqdq")]
 modulate = Color(1.079, 0.583, 0.316, 1)
-position = Vector2(352, 125)
+position = Vector2(351, 120)
 
 [node name="BlueHouse" parent="Houses" instance=ExtResource("3_udqdq")]
 modulate = Color(0.348, 0.64, 1.079, 1)
-position = Vector2(490, 125)
+position = Vector2(488, 119)
 
 [node name="Destinations" type="Node" parent="."]
 
 [node name="Business1" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(0.348, 0.64, 1.079, 1)
-position = Vector2(206, 118)
+position = Vector2(209, 113)
 
 [node name="Business" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(1.079, 0.583, 0.316, 1)
-position = Vector2(438, 284)
+position = Vector2(442, 275)
 rotation = 1.5707964
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="BuildingShadows" type="Polygon2D" parent="."]
 editor_description = "Shader: https://github.com/jess-hammer/2d-shadows-demo-godot"
 material = SubResource("ShaderMaterial_8iv2f")
 polygon = PackedVector2Array(89, 37, 653, 58, 750, 424, 145, 428)
+metadata/_edit_lock_ = true
