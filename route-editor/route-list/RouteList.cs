@@ -13,7 +13,7 @@ public partial class RouteList : ItemList
         }
     }
 
-    private void DeleteRoute(Route route)
+    public void DeleteRoute(Route route)
     {
         GD.Print($"Deleting route: {route.ColorName}");
 
