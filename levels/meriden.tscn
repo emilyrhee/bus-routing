@@ -69,21 +69,21 @@ Neighbors = [NodePath("../RoadNode2")]
 [node name="Houses" type="Node" parent="."]
 
 [node name="House" parent="Houses" instance=ExtResource("3_udqdq")]
-modulate = Color(1.079, 0.583, 0.316, 1)
+modulate = Color(0.69, 0.40744498, 0.25530002, 1)
 position = Vector2(351, 120)
 
 [node name="BlueHouse" parent="Houses" instance=ExtResource("3_udqdq")]
-modulate = Color(0.348, 0.64, 1.079, 1)
+modulate = Color(0.25490198, 0.35686275, 0.76862746, 1)
 position = Vector2(488, 119)
 
 [node name="Destinations" type="Node" parent="."]
 
 [node name="Business1" parent="Destinations" instance=ExtResource("2_q4dte")]
-modulate = Color(0.348, 0.64, 1.079, 1)
+modulate = Color(0.25490198, 0.35686275, 0.76862746, 1)
 position = Vector2(209, 113)
 
 [node name="Business" parent="Destinations" instance=ExtResource("2_q4dte")]
-modulate = Color(1.079, 0.583, 0.316, 1)
+modulate = Color(0.69, 0.40744498, 0.25530002, 1)
 position = Vector2(442, 275)
 rotation = 1.5707964
 

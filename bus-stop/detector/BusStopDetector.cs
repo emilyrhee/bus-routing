@@ -1,11 +1,17 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Detects whether a bus stop is in range of a bus stop.
+/// Changes color modulation of the parent building sprite accordingly.
+/// </summary>
 public partial class BusStopDetector : RayCast2D
 {
     private Sprite2D _buildingSprite;
     private Color _originalColor;
-    private readonly Color _darkenFactor = new(0.5f, 0.5f, 0.5f, 1.0f);
+    private Color _targetColor;
+    private readonly Color _lightenFactor = new(1.4f, 1.4f, 1.4f, 1.0f);
+    private float _lerpSpeed = 10f;
 
     /// <summary>
     /// Gets the bus stop node that this detector can reach.
@@ -21,8 +27,7 @@ public partial class BusStopDetector : RayCast2D
             {
                 var busStopArea = GetCollider() as Node;
                 var busStop = busStopArea.GetParent();
-                if (LevelState.AllBusStops.Contains(busStop)) // ensures preview bus stops are ignored
-                    return busStop;
+                return busStop;
             }
             return null;
         }
@@ -37,13 +42,9 @@ public partial class BusStopDetector : RayCast2D
     public override void _PhysicsProcess(double delta)
     {
         if (ReachableBusStop != null)
-        {
-            _buildingSprite.Modulate = _originalColor * _darkenFactor;
-        }
+            _targetColor = _originalColor * _lightenFactor;
         else
-        {
-            _buildingSprite.Modulate = _originalColor;
-        }
+            _targetColor = _originalColor;
+        _buildingSprite.Modulate = _buildingSprite.Modulate.Lerp(_targetColor, (float)(delta * _lerpSpeed));
     }
-
 }
