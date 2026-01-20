@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7sg83f1kmn6m" path="res://destination/destination.tscn" id="2_q4dte"]
 [ext_resource type="PackedScene" uid="uid://cwiepcsny2a7m" path="res://house/house.tscn" id="3_udqdq"]
 [ext_resource type="PackedScene" uid="uid://sqsjlmlyneb6" path="res://road/intersection/intersection-node.tscn" id="6_q4dte"]
-[ext_resource type="PackedScene" uid="uid://dc2wfu8lyap4i" path="res://route-editor/bus-stop-placement/bus-stop-placement.tscn" id="8_8iv2f"]
+[ext_resource type="PackedScene" uid="uid://dc2wfu8lyap4i" path="res://ui/bus-stop-placement/bus-stop-placement.tscn" id="8_8iv2f"]
 [ext_resource type="Texture2D" uid="uid://c4tx6cege7xq5" path="res://assets/gradient.tres" id="9_cbuuc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8iv2f"]

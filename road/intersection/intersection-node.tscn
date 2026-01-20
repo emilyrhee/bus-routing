@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbyi4m20fj0om" path="res://road/intersection/IntersectionNode.cs" id="1_h1vvq"]
 [ext_resource type="Texture2D" uid="uid://ckneaxqxvrrsq" path="res://assets/circle.png" id="2_mpe73"]
-[ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://route-editor/route-creation/RouteCreationHandler.tscn" id="4_nen50"]
+[ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://ui/route-creation/RouteCreationHandler.tscn" id="4_nen50"]
 
 [node name="IntersectionNode" type="Node2D"]
 script = ExtResource("1_h1vvq")

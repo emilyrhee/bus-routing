@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b4aut18kx5u1u" path="res://bus-stop/BusStop.cs" id="1_0n3gx"]
 [ext_resource type="Texture2D" uid="uid://btvj3err7vmtr" path="res://assets/bus-stop.png" id="2_e0gyx"]
 [ext_resource type="Script" uid="uid://ffmnen4viup1" path="res://bus-stop/BusStopDeletor.cs" id="4_6mx4d"]
-[ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://route-editor/route-creation/RouteCreationHandler.tscn" id="4_e0gyx"]
+[ext_resource type="PackedScene" uid="uid://blx7ra67cgl0e" path="res://ui/route-creation/RouteCreationHandler.tscn" id="4_e0gyx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gslyg"]
 radius = 39.051247

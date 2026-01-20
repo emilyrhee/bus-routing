@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc2wfu8lyap4i"]
+[gd_scene load_steps=6 format=3 uid="uid://dc2wfu8lyap4i"]
 
-[ext_resource type="Script" uid="uid://cuau4qy5dcr7l" path="res://route-editor/bus-stop-placement/BusStopPlacement.cs" id="1_jkcl6"]
-[ext_resource type="Script" uid="uid://bgix2u8pqxx7u" path="res://route-editor/route-list/RouteList.cs" id="2_a4c7p"]
+[ext_resource type="Script" uid="uid://cuau4qy5dcr7l" path="res://ui/bus-stop-placement/BusStopPlacement.cs" id="1_jkcl6"]
+[ext_resource type="Script" uid="uid://bgix2u8pqxx7u" path="res://ui/route-list/RouteList.cs" id="2_a4c7p"]
 [ext_resource type="Theme" uid="uid://bbd7hepk2p0vf" path="res://assets/ui-theme.tres" id="3_21wtw"]
-[ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://route-editor/buttons/add-stops/add-stop.tscn" id="3_i8due"]
+[ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://ui/buttons/add-stops/add-stop.tscn" id="3_i8due"]
+[ext_resource type="PackedScene" uid="uid://cqtxsdj4bg4xn" path="res://ui/error-message/error-message.tscn" id="5_femp0"]
 
 [node name="BusStopPlacement" type="Control"]
 layout_mode = 3
@@ -68,5 +69,15 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_21wtw")
 script = ExtResource("2_a4c7p")
+
+[node name="ErrorMessage" parent="." instance=ExtResource("5_femp0")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 10.0
+grow_horizontal = 2
 
 [connection signal="item_selected" from="BusLinesContainer/RouteList" to="BusLinesContainer/RouteList" method="_on_item_selected"]

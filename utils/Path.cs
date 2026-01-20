@@ -12,4 +12,5 @@ public static class Path
 
     // Nodes
     public const string RouteListNode = "EditorUI/UserInterface/BusLinesContainer/RouteList";
+    public const string ErrorMessageNode = "EditorUI/UserInterface/ErrorMessage";
 }

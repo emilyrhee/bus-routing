@@ -5,6 +5,7 @@ using static EditorState;
 using static LineFactory;
 using static LevelState;
 using static RouteCreationStep;
+using static Path;
 
 public partial class RouteCreationHandler : Area2D
 {
@@ -18,6 +19,15 @@ public partial class RouteCreationHandler : Area2D
     /// Backup of the route's path for reverting invalid edits.
     /// </summary>
     private static List<RoadNode> _routeBackup;
+    private ErrorMessage errorMessage;
+
+    public override void _Ready()
+    {
+        errorMessage = GetTree().CurrentScene.GetNode<ErrorMessage>
+        (
+            ErrorMessageNode
+        );
+    }
 
     private void DrawPreviewLine()
     {
@@ -172,7 +182,7 @@ public partial class RouteCreationHandler : Area2D
         var lastNode = _tempRoute.Path[^1];
         if (_tempRoute.Path.Count < 2 || lastNode is not BusStop)
         {
-            GD.PrintErr("Route must start and end at a bus stop.");
+            errorMessage.DisplayMessage("Route must start and end at a bus stop.");
             _tempRoute.Visual?.QueueFree();
             LevelState.ReturnLastRouteColor();
         }

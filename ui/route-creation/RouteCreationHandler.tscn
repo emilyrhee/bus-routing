@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://blx7ra67cgl0e"]
 
-[ext_resource type="Script" uid="uid://q0g3rlm8c0vh" path="res://route-editor/route-creation/RouteCreationHandler.cs" id="1_dkush"]
+[ext_resource type="Script" uid="uid://q0g3rlm8c0vh" path="res://ui/route-creation/RouteCreationHandler.cs" id="1_dkush"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ou3xf"]
 radius = 8.062258

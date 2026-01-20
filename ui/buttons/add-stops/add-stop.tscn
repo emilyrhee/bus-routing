@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dkglf58b8n1vu"]
 
-[ext_resource type="Script" uid="uid://7r3ra74yrcan" path="res://route-editor/buttons/add-stops/AddStop.cs" id="1_dmrtr"]
+[ext_resource type="Script" uid="uid://7r3ra74yrcan" path="res://ui/buttons/add-stops/AddStop.cs" id="1_dmrtr"]
 [ext_resource type="Texture2D" uid="uid://btvj3err7vmtr" path="res://assets/bus-stop.png" id="2_dmrtr"]
 
 [node name="AddStop" type="Control"]
