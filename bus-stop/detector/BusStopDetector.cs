@@ -12,6 +12,7 @@ public partial class BusStopDetector : RayCast2D
     private Color _originalColor;
     private Color _targetColor;
     private readonly Color _houseLightenFactor = new(1.4f, 1.4f, 1.4f, 1.0f);
+
     /// <summary>
     /// The lighten factor is higher for destination buildings because the
     /// sprites look darker due to how the normal maps are set up.
@@ -20,6 +21,7 @@ public partial class BusStopDetector : RayCast2D
     (
         1.7f, 1.7f, 1.7f, 1.0f
     );
+
     /// <summary>
     /// The current lighten factor being applied. Depends on whether the parent
     /// node is a destination or a house.

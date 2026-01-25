@@ -71,7 +71,6 @@ theme = ExtResource("3_21wtw")
 script = ExtResource("2_a4c7p")
 
 [node name="ErrorMessage" parent="." instance=ExtResource("5_femp0")]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
