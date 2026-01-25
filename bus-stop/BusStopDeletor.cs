@@ -3,6 +3,7 @@ using Godot;
 using static LevelState;
 using System.Linq;
 using static Path;
+using System.Collections.Generic;
 
 public partial class BusStopDeletor : Area2D
 {
@@ -26,6 +27,7 @@ public partial class BusStopDeletor : Area2D
                 var routeList = GetTree().CurrentScene.GetNode<RouteList>(RouteListNode);
                 routeList.DeleteRoute(route);
                 LevelState.AllRoutes.Remove(route);
+                LevelState.ReturnRouteColor(new KeyValuePair<string, Color>(route.ColorName, route.Color));
                 route.Visual.QueueFree();
                 route.QueueFree();
             }

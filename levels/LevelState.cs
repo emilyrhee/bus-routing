@@ -22,33 +22,31 @@ public partial class LevelState : Node
     public static List<RoadNode> AllRoadNodes { get; set; } = [];
     public static List<RoadEdge> AllRoadEdges { get; set; } = [];
 
-    private static int _nextColorIndex = 0;
+    private static List<KeyValuePair<string, Color>> _availableColors = new(RouteColors.ColorList);
 
     public static KeyValuePair<string, Color>? GetNextRouteColor()
     {
-        if (_nextColorIndex >= RouteColors.ColorList.Count)
+        if (_availableColors.Count == 0)
         {
             GD.PrintErr("All available route colors have been used.");
             return null;
         }
-        var colorInfo = RouteColors.ColorList[_nextColorIndex];
-        _nextColorIndex++;
+        var colorInfo = _availableColors[0];
+        _availableColors.RemoveAt(0);
         return colorInfo;
     }
 
     /// <summary>
-    /// Returns the last used route color back to the pool.
-    /// Needed when a route creation is cancelled e.g. only one stop added or
-    /// doesn't end at a bus stop.
-    /// 
-    /// Is this the best way to handle this? Probably not. But it works for now.
+    /// Returns a route color back to the pool of available colors.
+    /// Call this when a route is deleted.
     /// </summary>
-    public static void ReturnLastRouteColor()
+    public static void ReturnRouteColor(KeyValuePair<string, Color> colorInfo)
     {
-        if (_nextColorIndex > 0)
+        if (!RouteColors.ColorList.Contains(colorInfo) || _availableColors.Contains(colorInfo))
         {
-            _nextColorIndex--;
+            return;
         }
+        _availableColors.Add(colorInfo);
     }
 
     /// <summary>

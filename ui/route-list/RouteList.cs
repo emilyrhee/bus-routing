@@ -1,14 +1,17 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using static EditorState;
 
 public partial class RouteList : ItemList
 {
     public override void _UnhandledInput(InputEvent @event)
     {
         // Check if a route is selected and the delete key is pressed
-        if (EditorState.SelectedRoute != null && @event.IsActionPressed("ui_text_delete")) // "ui_cancel" is usually the Escape or Delete key
+        if (SelectedRoute != null && @event.IsActionPressed("ui_text_delete")) // "ui_cancel" is usually the Escape or Delete key
         {
-            DeleteRoute(EditorState.SelectedRoute);
+            DeleteRoute(SelectedRoute);
+            LevelState.ReturnRouteColor(new KeyValuePair<string, Color>(SelectedRoute.ColorName, SelectedRoute.Color));
             AcceptEvent(); 
         }
     }
@@ -27,7 +30,7 @@ public partial class RouteList : ItemList
         LevelState.AllRoutes.Remove(route);
         route.QueueFree();
 
-        EditorState.SelectedRoute = null;
+        SelectedRoute = null;
         LevelState.UpdateAllHouseStatuses();
     }
 

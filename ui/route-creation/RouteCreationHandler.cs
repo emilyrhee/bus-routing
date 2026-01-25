@@ -183,8 +183,8 @@ public partial class RouteCreationHandler : Area2D
         if (_tempRoute.Path.Count < 2 || lastNode is not BusStop)
         {
             errorMessage.DisplayMessage("Route must start and end at a bus stop.");
+            ReturnRouteColor(new KeyValuePair<string, Color>(_tempRoute.ColorName, _tempRoute.Color));
             _tempRoute.Visual?.QueueFree();
-            LevelState.ReturnLastRouteColor();
         }
         else
         {
