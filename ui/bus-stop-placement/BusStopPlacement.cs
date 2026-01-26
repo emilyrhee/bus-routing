@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 using static LevelState;
+using static Path;
 
 public partial class BusStopPlacement : Control
 {
@@ -13,6 +14,7 @@ public partial class BusStopPlacement : Control
     private Area2D _previewPlacementArea;
     private bool _isValidPlacement = false;
     private Camera2D _camera;
+    private ErrorMessage _errorMessage;
 
     public override void _Ready()
     {
@@ -20,6 +22,10 @@ public partial class BusStopPlacement : Control
         _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
         _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
         _camera = GetViewport().GetCamera2D();
+        _errorMessage = GetTree().CurrentScene.GetNode<ErrorMessage>
+        (
+            ErrorMessageNode
+        );
     }
 
     public override void _Process(double delta)
@@ -103,6 +109,12 @@ public partial class BusStopPlacement : Control
     /// </summary>
     private void CreateBusStopOnEdge(RoadEdge roadEdge, BusStop busStop)
     {   
+        if (Budget < Cost.BusStopPlacement)
+        {
+            _errorMessage.DisplayMessage("Insufficient budget to place bus stop.");
+            return;
+        }
+
         Budget -= Cost.BusStopPlacement;
 
         Vector2 p1 = roadEdge.NodeA.GlobalPosition;

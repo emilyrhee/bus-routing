@@ -15,7 +15,7 @@ public partial class LevelInitializer : Node2D
 
         DrawRoadEdges();
 
-        Budget = 100;
+        Budget = Cost.InitialBudget;
     }
 
     private void DrawRoadEdges()

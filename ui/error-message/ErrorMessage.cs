@@ -5,7 +5,6 @@ public partial class ErrorMessage : Control
 {
     public Label ErrorMessageTextLabel => GetChild<Label>(1);
 
-
     private Timer _messageTimeout;
     private float duration = 3.0f;
     private Color _targetColor;
