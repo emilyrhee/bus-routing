@@ -23,6 +23,7 @@ scale = Vector2(0.1, 0.1)
 texture = SubResource("CanvasTexture_mkffg")
 
 [node name="BusStopDetector" parent="." instance=ExtResource("3_t6m4b")]
+target_position = Vector2(0, 41)
 
 [node name="Check" type="Sprite2D" parent="."]
 visible = false

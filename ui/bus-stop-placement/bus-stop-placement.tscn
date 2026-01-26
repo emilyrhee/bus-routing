@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dc2wfu8lyap4i"]
+[gd_scene load_steps=7 format=3 uid="uid://dc2wfu8lyap4i"]
 
 [ext_resource type="Script" uid="uid://cuau4qy5dcr7l" path="res://ui/bus-stop-placement/BusStopPlacement.cs" id="1_jkcl6"]
 [ext_resource type="Script" uid="uid://bgix2u8pqxx7u" path="res://ui/route-list/RouteList.cs" id="2_a4c7p"]
 [ext_resource type="Theme" uid="uid://bbd7hepk2p0vf" path="res://assets/ui-theme.tres" id="3_21wtw"]
 [ext_resource type="PackedScene" uid="uid://dkglf58b8n1vu" path="res://ui/buttons/add-stops/add-stop.tscn" id="3_i8due"]
 [ext_resource type="PackedScene" uid="uid://cqtxsdj4bg4xn" path="res://ui/error-message/error-message.tscn" id="5_femp0"]
+[ext_resource type="Script" uid="uid://cm0i2ufxmquap" path="res://ui/bus-stop-placement/BudgetLabel.cs" id="6_0oslf"]
 
 [node name="BusStopPlacement" type="Control"]
 layout_mode = 3
@@ -78,5 +79,19 @@ anchor_right = 0.5
 offset_left = -180.0
 offset_top = 10.0
 grow_horizontal = 2
+
+[node name="BudgetLabel" type="Label" parent="."]
+modulate = Color(0.11858138, 0.11858138, 0.11858138, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -27.0
+offset_right = 48.0
+offset_bottom = -4.0
+grow_vertical = 0
+text = "$"
+script = ExtResource("6_0oslf")
 
 [connection signal="item_selected" from="BusLinesContainer/RouteList" to="BusLinesContainer/RouteList" method="_on_item_selected"]

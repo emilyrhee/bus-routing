@@ -21,6 +21,7 @@ public partial class LevelState : Node
     /// </summary>
     public static List<RoadNode> AllRoadNodes { get; set; } = [];
     public static List<RoadEdge> AllRoadEdges { get; set; } = [];
+    public static uint Budget { get; set; }
 
     private static List<KeyValuePair<string, Color>> _availableColors = new(RouteColors.ColorList);
 

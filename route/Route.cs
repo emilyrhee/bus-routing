@@ -103,6 +103,11 @@ public partial class Route : Node
         return Path.Contains(node);
     }
 
+    public void Destroy()
+    {
+        
+    }
+
     /// <summary>
     /// Automatically assigns a unique ID initializes the path list, and
     /// assigns a color.

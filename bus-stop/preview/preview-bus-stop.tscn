@@ -8,7 +8,7 @@
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhde8"]
-radius = 39.051247
+radius = 56.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p0ic7"]
 
@@ -25,6 +25,7 @@ texture = ExtResource("2_p0ic7")
 editor_description = "This area is responsible for validating the placement of a bus stop on a road. A bus stop placement is valid if the road's area is overlapping with this area, guaranteeing the bus stop is in contact with the road surface.
 
 This node is getting indexed in BusStopPlacement.cs (currently index 1). The index must be changed in the script if reordered in the editor."
+visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -41,10 +42,12 @@ shape = SubResource("CircleShape2D_bhde8")
 
 [node name="WalkRadiusSprite" type="Sprite2D" parent="WalkRadius"]
 modulate = Color(0.35686275, 1, 1, 0.3529412)
-scale = Vector2(0.5963542, 0.5963542)
+position = Vector2(1.9073486e-06, 1.9073486e-06)
+scale = Vector2(0.86067706, 0.86067706)
 texture = ExtResource("3_p0ic7")
 
 [node name="IntersectionDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IntersectionDetector"]

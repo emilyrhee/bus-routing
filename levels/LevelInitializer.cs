@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using static LevelState;
 
 /// <summary>
 /// This script is to be attached to the root of each level.
@@ -13,16 +14,8 @@ public partial class LevelInitializer : Node2D
         LevelState.CurrentLevel = this;
 
         DrawRoadEdges();
-        int count = 0;
-        foreach (Node child in GetChildren())
-        {
-            if (child is RoadEdge edge)
-            {
-                count++;
-                GD.Print($"RoadEdge {count}: A={edge.NodeA.Name} B={edge.NodeB.Name}");
-            }
-        }
-        GD.Print($"Total RoadEdges: {count}");
+
+        Budget = 100;
     }
 
     private void DrawRoadEdges()

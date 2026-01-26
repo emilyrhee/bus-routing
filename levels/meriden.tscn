@@ -40,7 +40,7 @@ width = 20.0
 default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
 [node name="Line2D2" type="Line2D" parent="RoadLines"]
-points = PackedVector2Array(376, 171, 387, 334)
+points = PackedVector2Array(376, 171, 383, 389, 167, 396, 165, 177)
 width = 20.0
 default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
@@ -48,7 +48,7 @@ default_color = Color(0.61200005, 0.6642, 0.72, 1)
 
 [node name="RoadNode" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(164, 176)
-Neighbors = [NodePath("../RoadNode2")]
+Neighbors = [NodePath("../RoadNode2"), NodePath("../IntersectionNode")]
 
 [node name="RoadNode2" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
 position = Vector2(376, 170)
@@ -59,8 +59,12 @@ position = Vector2(519, 168)
 Neighbors = [NodePath("../RoadNode2")]
 
 [node name="RoadNode4" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
-position = Vector2(386, 335)
-Neighbors = [NodePath("../RoadNode2")]
+position = Vector2(382, 387)
+Neighbors = [NodePath("../RoadNode2"), NodePath("../IntersectionNode")]
+
+[node name="IntersectionNode" parent="IntersectionNodes" node_paths=PackedStringArray("Neighbors") instance=ExtResource("6_q4dte")]
+position = Vector2(167, 396)
+Neighbors = [NodePath("../RoadNode4"), NodePath("../RoadNode")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
 
@@ -70,25 +74,35 @@ Neighbors = [NodePath("../RoadNode2")]
 
 [node name="House" parent="Houses" instance=ExtResource("3_udqdq")]
 modulate = Color(0.69, 0.40744498, 0.25530002, 1)
-position = Vector2(351, 120)
+position = Vector2(424, 120)
 
 [node name="BlueHouse" parent="Houses" instance=ExtResource("3_udqdq")]
 modulate = Color(0.25490198, 0.35686275, 0.76862746, 1)
 position = Vector2(488, 119)
 
+[node name="GreenHouse" parent="Houses" instance=ExtResource("3_udqdq")]
+modulate = Color(0.24784139, 0.4435571, 0.25603798, 1)
+position = Vector2(426, 220.99997)
+rotation = 3.117607
+
 [node name="Destinations" type="Node" parent="."]
 
 [node name="Business1" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(0.25490198, 0.35686275, 0.76862746, 1)
-position = Vector2(209, 113)
+position = Vector2(229, 111)
 
 [node name="Business" parent="Destinations" instance=ExtResource("2_q4dte")]
 modulate = Color(0.69, 0.40744498, 0.25530002, 1)
-position = Vector2(442, 275)
-rotation = 1.5707964
+position = Vector2(102.99999, 243)
+rotation = -1.5860153
+
+[node name="Business2" parent="Destinations" instance=ExtResource("2_q4dte")]
+modulate = Color(0.24784139, 0.4435571, 0.25603798, 1)
+position = Vector2(231, 250)
+rotation = 1.5711393
 
 [node name="BuildingShadows" type="Polygon2D" parent="."]
 editor_description = "Shader: https://github.com/jess-hammer/2d-shadows-demo-godot"
 material = SubResource("ShaderMaterial_8iv2f")
-polygon = PackedVector2Array(89, 37, 653, 58, 750, 424, 145, 428)
+polygon = PackedVector2Array(-9, -32, 653, 58, 750, 424, -24, 410)
 metadata/_edit_lock_ = true
