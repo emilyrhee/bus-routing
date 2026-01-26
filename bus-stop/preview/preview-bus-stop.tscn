@@ -25,7 +25,6 @@ texture = ExtResource("2_p0ic7")
 editor_description = "This area is responsible for validating the placement of a bus stop on a road. A bus stop placement is valid if the road's area is overlapping with this area, guaranteeing the bus stop is in contact with the road surface.
 
 This node is getting indexed in BusStopPlacement.cs (currently index 1). The index must be changed in the script if reordered in the editor."
-visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -47,7 +46,6 @@ scale = Vector2(0.86067706, 0.86067706)
 texture = ExtResource("3_p0ic7")
 
 [node name="IntersectionDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IntersectionDetector"]

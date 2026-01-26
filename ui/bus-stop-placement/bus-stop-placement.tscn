@@ -91,7 +91,6 @@ offset_top = -27.0
 offset_right = 48.0
 offset_bottom = -4.0
 grow_vertical = 0
-text = "$"
 script = ExtResource("6_0oslf")
 
 [connection signal="item_selected" from="BusLinesContainer/RouteList" to="BusLinesContainer/RouteList" method="_on_item_selected"]

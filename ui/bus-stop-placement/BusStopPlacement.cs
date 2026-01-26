@@ -35,6 +35,9 @@ public partial class BusStopPlacement : Control
         }
     }
 
+    /// <summary>
+    /// Determines if the dragged data can be dropped here.
+    /// </summary>
     public override bool _CanDropData(Vector2 atPosition, Variant data)
     {
         if (data.AsString() == "BusStop")
@@ -51,6 +54,9 @@ public partial class BusStopPlacement : Control
         return false;
     }
 
+    /// <summary>
+    /// Handles the drop of the bus stop onto a valid road edge.
+    /// </summary>
     public override void _DropData(Vector2 atPosition, Variant data)
     {
         if (_isValidPlacement)
@@ -77,6 +83,10 @@ public partial class BusStopPlacement : Control
         }
     }
 
+    /// <summary>
+    /// Splits the given road edge into two edges at the bus stop's position.
+    /// Used when creating a bus stop on an existing road edge.
+    /// </summary>
     private void SplitEdge(RoadEdge roadEdge, BusStop busStop)
     {
         var edge1 = _roadEdgeScene.Instantiate<RoadEdge>();
@@ -88,8 +98,13 @@ public partial class BusStopPlacement : Control
         roadEdge.QueueFree();
     }
 
+    /// <summary>
+    /// Creates a bus stop on the specified road edge at the mouse position.
+    /// </summary>
     private void CreateBusStopOnEdge(RoadEdge roadEdge, BusStop busStop)
-    {
+    {   
+        Budget -= Cost.BusStopPlacement;
+
         Vector2 p1 = roadEdge.NodeA.GlobalPosition;
         Vector2 p2 = roadEdge.NodeB.GlobalPosition;
         Vector2 mousePosition = _camera.GetGlobalMousePosition();

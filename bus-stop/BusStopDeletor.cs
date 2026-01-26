@@ -56,5 +56,7 @@ public partial class BusStopDeletor : Area2D
         edge.SetEndpoints(A, B);
 
         UpdateAllHouseStatuses();
+
+        Budget -= Cost.BusStopRemoval;
     }
 }

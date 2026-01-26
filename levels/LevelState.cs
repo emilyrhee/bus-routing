@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System;
 
 /// <summary>
 /// Holds the state of the level, including all routes.
@@ -21,7 +22,17 @@ public partial class LevelState : Node
     /// </summary>
     public static List<RoadNode> AllRoadNodes { get; set; } = [];
     public static List<RoadEdge> AllRoadEdges { get; set; } = [];
-    public static uint Budget { get; set; }
+    public static event Action<uint> OnBudgetChanged;
+    private static uint _budget;
+    public static uint Budget
+    {
+        get => _budget;
+        set
+        {
+            _budget = value;
+            OnBudgetChanged?.Invoke(_budget);
+        }
+    }
 
     private static List<KeyValuePair<string, Color>> _availableColors = new(RouteColors.ColorList);
 
