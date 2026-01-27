@@ -13,6 +13,15 @@ public partial class BusStopDeletor : Area2D
         {
             return;
         }
+        if (Budget < Cost.BusStopRemoval)
+        {
+            var errorMessage = GetTree().CurrentScene.GetNode<ErrorMessage>
+            (
+                ErrorMessageNode
+            );
+            errorMessage.DisplayMessage("Insufficient budget to remove bus stop.");
+            return;
+        }
 
         var busStop = GetParent<BusStop>();
 

@@ -69,6 +69,7 @@ Neighbors = [NodePath("../RoadNode4"), NodePath("../RoadNode")]
 [node name="EditorUI" type="CanvasLayer" parent="."]
 
 [node name="UserInterface" parent="EditorUI" instance=ExtResource("8_8iv2f")]
+metadata/_edit_lock_ = true
 
 [node name="Houses" type="Node" parent="."]
 

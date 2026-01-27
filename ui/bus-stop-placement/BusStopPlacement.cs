@@ -18,9 +18,9 @@ public partial class BusStopPlacement : Control
 
     public override void _Ready()
     {
-        _previewBusStopScene = GD.Load<PackedScene>(Path.PreviewBusStopScene);
-        _busStopScene = GD.Load<PackedScene>(Path.BusStopScene);
-        _roadEdgeScene = GD.Load<PackedScene>(Path.RoadEdgeScene);
+        _previewBusStopScene = GD.Load<PackedScene>(PreviewBusStopScene);
+        _busStopScene = GD.Load<PackedScene>(BusStopScene);
+        _roadEdgeScene = GD.Load<PackedScene>(RoadEdgeScene);
         _camera = GetViewport().GetCamera2D();
         _errorMessage = GetTree().CurrentScene.GetNode<ErrorMessage>
         (
