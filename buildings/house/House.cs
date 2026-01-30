@@ -1,18 +1,13 @@
 using Godot;
-using System;
 using System.Linq;
 
-public partial class House : Node2D
+public partial class House : Building
 {
-    private BusStopDetector _busStopDetector;
     private Sprite2D _checkSprite;
-
     private bool _isChecked;
-    /// <summary>
-    /// Indicates whether the house residents can be taken to at least one of
-    /// their destinations by at least one route.
-    /// The setter automatically updates the checkmark sprite's visibility.
-    /// </summary>
+
+    protected override Color HighlightFactor => new(1.4f, 1.4f, 1.4f, 1.0f);
+
     public bool IsChecked
     {
         get => _isChecked;
@@ -23,23 +18,13 @@ public partial class House : Node2D
         }
     }
 
-    /// <summary>
-    /// A convenience property to get the reachable bus stop from the detector
-    /// component. Just for readability!
-    /// </summary>
-    public Node ReachableBusStop => _busStopDetector?.ReachableBusStop;
-
     public override void _Ready()
     {
-        _busStopDetector = GetNode<BusStopDetector>("BusStopDetector");
+        base._Ready(); // Calls _Ready() of the base class, Building.
         _checkSprite = GetNode<Sprite2D>("Check");
         LevelState.AllHouses.Add(this);
     }
 
-    /// <summary>
-    /// Handles whether or not a house should be checked.
-    /// Modifies IsChecked property.
-    /// </summary>
     public void UpdateCheckStatus()
     {
         if (ReachableBusStop == null)
